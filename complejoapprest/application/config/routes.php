@@ -52,3 +52,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+/**el archivo de idiomas de rest server no olvidar y el archivo rest.php en config(sin esto causa problemas)
+ * Rutas para el proyecto NO OLVIDAR CONFIGURAR EL ARCHIVO HTACCESS, BASE DE DATOS Y RUTAS, AUTOLOAD PARA BD
+ */
+//Primer parametro => es la url
+//Segundo parametro => es el tipo de peticion(el verbo)
+//Le decimos que cuando la url sea books y el verbo get => nos redireccione 
+//a books/index(donde books es controlador y index un metodo)
+//$route['books']['get'] = "books/index";
+ 
+$route['login']['get'] = "loginController/index";
