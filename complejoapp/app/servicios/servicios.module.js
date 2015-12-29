@@ -1,4 +1,6 @@
 angular
 	.module('complejo.servicios', [
-		'ui.router'
-		])
+		'angular-jwt',
+		'angular-storage',
+		'ngResource'
+		]);

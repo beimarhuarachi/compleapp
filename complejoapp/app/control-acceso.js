@@ -2,23 +2,31 @@ angular
 	.module('complejo')
 	.run(ControlarAcceso);
 
-ControlarAcceso.$inject = ['$rootScope', '$state', '$log'];
+ControlarAcceso.$inject = ['$rootScope', '$state', '$log', 'autorizacionService'];
 
-function ControlarAcceso($rootScope, $state, $log) {
+function ControlarAcceso($rootScope, $state, $log, autorizacionService) {
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-			// if(toState.name == "app.visitante.inicio") {
-			// 	$log.debug("entrando al IF");
-			// 	return;
-			// }
+			// Cuando la ruta es  'app.admin.*'
+			if(toState.name && toState.name.match(/^app\.admin\./)) {
+				if(!autorizacionService.esAdmin() || !autorizacionService.tieneSesion()) {
+				    // Cancelar la transicion
+				    event.preventDefault();
+				    $log.debug("No eres Admin "+ toState.name);
+				    // Redireccionar a la pagina de inicio
+				    return $state.go('app.visitante.inicio');
+			 	}  
+			}
 
-			// if(toState.name == "app.admin.inicio") {
-			// 	event.preventDefault();
-			// 	$log.info("No tienes permiso");
-			// 	return $state.go("app.visitante.inicio");
-			// }
-		event.preventDefault();
+			if(toState.name && toState.name.match(/^app\.cliente\./)) {
+				if(!autorizacionService.esCliente() || !autorizacionService.tieneSesion()) {
+					event.preventDefault();
+					$log.debug("No eres cliente"+toState.name);
+					return $state.go('app.visitante.inicio');
+				}
+			}
+
+			$log.debug('Estas en la zona libre');
 		
-		$log.debug("Esto es el estado"+toState.name);
 	});
 }	
