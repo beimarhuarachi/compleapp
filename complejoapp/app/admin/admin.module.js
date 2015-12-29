@@ -1,2 +1,4 @@
 angular
-	.module('complejo.admin', []);
+	.module('complejo.admin', [
+			'ui.router'
+		]);

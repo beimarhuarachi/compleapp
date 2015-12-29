@@ -1,2 +1,4 @@
 angular
-	.module('complejo.servicios', [])
+	.module('complejo.servicios', [
+		'ui.router'
+		])

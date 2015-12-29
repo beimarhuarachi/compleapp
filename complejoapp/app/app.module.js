@@ -3,5 +3,7 @@ angular
 		'complejo.admin', 
 		'complejo.cliente', 
 		'complejo.visitante',
-		'complejo.servicios'
+		'complejo.servicios',
+		'ui.router'
 		]);
+

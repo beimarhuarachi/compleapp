@@ -41,27 +41,36 @@
 
 </head>
 <body>
-	
 
+	<!-- VISTA PARA LAS RUTAS PRINCIPALES -->
+	<div ui-view></div>
+	<a ui-sref="app.admin.inicio">inicio admin</a>
+	<a ui-sref="app.cliente.inicio">inicio cliente</a>
+	<a ui-sref="app.visitante.inicio">inicio visitante</a>
 
 	<!-- SCRIPTS DE LA APLICACION -->
 	<script src="app/app.module.js"></script>
+	<script src="app/app.config.js"></script>
+	<script src="app/control-acceso.js"></script>
 
 	<!-- SCRIPTS MODULO ADMIN -->
 	<script src="app/admin/admin.module.js"></script>
+	<script src="app/admin/admin.routes.js"></script>
 
 	<!-- SCRIPTS MODULO VISITANTES -->
 	<script src="app/visitante/visitante.module.js"></script>
+	<script src="app/visitante/visitante.routes.js"></script>
 	
 	<!-- SCRIPTS MODULO CLIENTE -->
 	<script src="app/cliente/cliente.module.js"></script>
+	<script src="app/cliente/cliente.routes.js"></script>
 
 	<!-- SCRIPTS MODULO SERVICIOS -->
 	<script src="app/servicios/servicios.module.js"></script>
 
 	<!-- SCRIPTS DE LA APLICACION -->
 
-	
+
 
 	<!-- SCRIPTS PARA BOOTSTRAP -->
 	<!-- JQUERY  -->

@@ -1,2 +1,4 @@
 angular
-	.module('complejo.visitante', []);
+	.module('complejo.visitante', [
+			'ui.router'
+		]);
