@@ -11,6 +11,11 @@
 	<link rel="stylesheet" href="lib/bootstrap-3.3.6/css/bootstrap.min.css">
 	<!-- <link rel="stylesheet" href="lib/bootstrap-3.3.6/css/bootstrap-theme.min.css"> -->
 
+	<!-- ESTILOS PARA EL ADMINISTRADOR (NECESITA LOS FONTS) -->
+	<link rel="stylesheet" href="css/sb-admin.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" href="css/morris.css"> -->
+
 	<!-- ANGULAR JS NATIVE -->
 	<script src="lib/angular/angular1.4.7.min.js"></script>
 
@@ -44,9 +49,9 @@
 
 	<!-- VISTA PARA LAS RUTAS PRINCIPALES -->
 	<div ui-view></div>
-	<a ui-sref="app.admin.inicio">inicio admin</a>
+	<!-- <a ui-sref="app.admin.inicio">inicio admin</a>
 	<a ui-sref="app.cliente.inicio">inicio cliente</a>
-	<a ui-sref="app.visitante.inicio">inicio visitante</a>
+	<a ui-sref="app.visitante.inicio">inicio visitante</a> -->
 
 	<!-- SCRIPTS DE LA APLICACION -->
 	<script src="app/app.module.js"></script>
@@ -60,6 +65,7 @@
 	<!-- SCRIPTS MODULO VISITANTES -->
 	<script src="app/visitante/visitante.module.js"></script>
 	<script src="app/visitante/visitante.routes.js"></script>
+	<script src="app/visitante/login/login.controller.js"></script>
 	
 	<!-- SCRIPTS MODULO CLIENTE -->
 	<script src="app/cliente/cliente.module.js"></script>

@@ -42,7 +42,7 @@ function autorizacionService(jwtHelper, store, $http, $q) {
 
 	function esAdmin() {
 		//verificar si es administrador el usuario
-		return false;
+		return true;
 	}
 
 	function esCliente() {

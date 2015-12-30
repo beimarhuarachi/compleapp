@@ -14,6 +14,10 @@ class LoginController extends REST_Controller {
 	}
 
 	public function index_get() {
+		echo "fsda";
+	}
+
+	public function muestra() {
 		$clave = "beimarhuarachi";
 		$user = array(
 			'nombre' => 'beimar',

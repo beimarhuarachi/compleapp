@@ -2,9 +2,9 @@ angular
 	.module('complejo')
 	.config(ConfiguracionRutas);
 
-ConfiguracionRutas.$inject = ['$stateProvider','$urlRouterProvider'];
+ConfiguracionRutas.$inject = ['$stateProvider','$urlRouterProvider', 'jwtInterceptorProvider', '$httpProvider'];
 
-function ConfiguracionRutas($stateProvider, $urlRouterProvider) {
+function ConfiguracionRutas($stateProvider, $urlRouterProvider, jwtInterceptorProvider, $httpProvider) {
 	//Esta causando error con el evento onStateChangeStart()
 	//$urlRouterProvider.otherwise('/inicio');
 	//==solucion===
@@ -21,4 +21,14 @@ function ConfiguracionRutas($stateProvider, $urlRouterProvider) {
 			abstract : true,
 			template : '<ui-view/>'
 		})
+
+	/**
+	 * Interceptor para enviar el token en cada peticion, para el control de acceso
+	 */
+	jwtInterceptorProvider.tokenGetter = function() {
+		return localStorage.getItem('token');
+	}
+
+	$httpProvider.interceptors.push('jwtInterceptor');
+
 }
