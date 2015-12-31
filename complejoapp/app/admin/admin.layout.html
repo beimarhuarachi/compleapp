@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">{{usuario.rol | uppercase}}</a>
+                <a class="navbar-brand" href="">{{usuario.rol | uppercase}}</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -58,16 +58,16 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a ui-sref="app.admin.inicio"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
+                        <a ui-sref="app.admin.inicio" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-fw fa-bar-chart-o"></i> Reportes</a>
+                        <a href="" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-bar-chart-o"></i> Reportes</a>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-fw fa-table"></i> Tablas</a>
+                        <a href="" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-table"></i> Tablas</a>
                     </li>
                     <li>
-                        <a ui-sref="app.admin.registrar-campo"><i class="fa fa-fw fa-edit"></i> Registrar Campo</a>
+                        <a ui-sref="app.admin.registrar-campo" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-edit"></i> Registrar Campo</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Reservas <i class="fa fa-fw fa-caret-down"></i></a>
