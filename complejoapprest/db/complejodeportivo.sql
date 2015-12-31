@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2015-12-28 13:52:06
+Date: 2015-12-31 15:21:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -84,6 +84,7 @@ CREATE TABLE `complejo` (
   `Ciudad` varchar(255) DEFAULT NULL,
   `ComoLlegar` varchar(255) DEFAULT NULL,
   `FotoPortada` varchar(255) DEFAULT NULL,
+  `NombreComplejo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`IdComplejo`),
   UNIQUE KEY `IdUsuario_FKComplejo` (`IdUsuario`) USING BTREE,
   CONSTRAINT `IdUsuario_FKComplejo` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`) ON DELETE NO ACTION ON UPDATE CASCADE
@@ -92,8 +93,8 @@ CREATE TABLE `complejo` (
 -- ----------------------------
 -- Records of complejo
 -- ----------------------------
-INSERT INTO `complejo` VALUES ('1', '1', 'calle quebracho', '4567891', 'Beimar', 'Huarachi Mamani', '8674461', 'Cochabamba', 'Linea 03', 'fotos/hola.png');
-INSERT INTO `complejo` VALUES ('4', '2', 'Avenida Oquendo', '4562134', 'Jorge', 'Huarachi Mamani', '46578125', 'La Paz', 'Linea 01', 'fotos/quetal.png');
+INSERT INTO `complejo` VALUES ('1', '1', 'calle quebracho', '4567891', 'Beimar', 'Huarachi Mamani', '8674461', 'Cochabamba', 'Linea 03', 'fotos/hola.png', 'San Simon');
+INSERT INTO `complejo` VALUES ('4', '2', 'Avenida Oquendo', '4562134', 'Jorge', 'Huarachi Mamani', '46578125', 'La Paz', 'Linea 01', 'fotos/quetal.png', 'Chaski');
 
 -- ----------------------------
 -- Table structure for disciplina
@@ -173,7 +174,7 @@ CREATE TABLE `horario` (
   PRIMARY KEY (`IdHorario`),
   KEY `IdCampo_FK_Horario` (`IdCampo`),
   CONSTRAINT `IdCampo_FK_Horario` FOREIGN KEY (`IdCampo`) REFERENCES `campo` (`IdCampoDeportivo`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of horario
@@ -210,7 +211,7 @@ CREATE TABLE `reserva` (
   CONSTRAINT `IdTipoReserva_FKReserva` FOREIGN KEY (`IdTipoReserva`) REFERENCES `tiporeserva` (`IdTipo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`IdCliente`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`IdFactura`) REFERENCES `factura` (`NumeroFactura`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of reserva
