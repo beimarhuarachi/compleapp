@@ -81,3 +81,10 @@ $route['disciplinas']['get'] = 'disciplinaController/index';
  * rutas para el servicio de superficies
  */
 $route['superficies']['get'] = 'superficieController/index';
+
+/**
+ * rutas para el servicio de complejos
+ */
+
+$route['complejos']['get'] = 'complejoService/index';
+$route['complejos/(:num)']['get'] = 'complejoService/retornarComplejo/$1';

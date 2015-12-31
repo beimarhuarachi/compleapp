@@ -13,7 +13,8 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 			abstract : true,
 			url : '/admin',
 			//template : '<ui-view/>'
-			templateUrl : 'app/admin/admin.layout.html'
+			templateUrl : 'app/admin/admin.layout.html',
+			controller : 'AdminLayoutController'
 		})
 		/**
 		 * Pagina de Inicio del Administrador

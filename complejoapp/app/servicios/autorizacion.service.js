@@ -25,9 +25,7 @@ function autorizacionService(jwtHelper, store, $http, $q, REST_API) {
 		if(token) {
 			usuarioActual = {};
 			var decodificado = jwtHelper.decodeToken(token);
-			usuarioActual.nombreusuario = decodificado.nombreusuario;
-			usuarioActual.correo = decodificado.correo;
-			usuarioActual.rol = decodificado.rol;
+			usuarioActual = decodificado;
 			return usuarioActual;
 		}
 
@@ -78,7 +76,7 @@ function autorizacionService(jwtHelper, store, $http, $q, REST_API) {
 		//no token pasado y existe el token y usuario
 		//TODO verificar si el token ha expirado
 		var token = store.get('token');
-
+		
 		return token ? true : false;
 	}
 
