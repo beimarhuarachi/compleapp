@@ -23,11 +23,17 @@ function ConfiguracionRutas($stateProvider, $urlRouterProvider, jwtInterceptorPr
 		})
 
 	/**
-	 * Interceptor para enviar el token en cada peticion, para el control de acceso
+	 * Interceptor para enviar el token en cada peticion, pero no enviara el token cuando 
+	 * se realize peticiones de plantillas
 	 */
-	jwtInterceptorProvider.tokenGetter = function() {
-		return localStorage.getItem('token');
-	}
+	jwtInterceptorProvider.tokenGetter = ['config', function(config) {
+    	// saltar la autorizacion si la url de la peticion termina con .html
+    	if (config.url.substr(config.url.length - 5) == '.html') {
+    		return null;
+    	}
+
+    	return localStorage.getItem('token');
+	}];
 
 	$httpProvider.interceptors.push('jwtInterceptor');
 

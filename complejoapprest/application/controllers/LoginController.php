@@ -9,15 +9,65 @@ require APPPATH . "/libraries/Carbon.php";
 
 class LoginController extends REST_Controller {
 
+	/**
+	 * Clave de la aplicacion
+	 * @var [string]
+	 */
+	private $clave;
+
+	/**
+	 * Tiempo otorgado para la duracion de la sesion
+	 * @var [int]
+	 */
+	private $tiempoDuracion;
+
 	public function __construct() {
 		parent::__construct();
+		$this->clave = "complejodeportivo";
+		$this->tiempoDuracion = 300;
+
+		$this->load->library("encrypt");
+		$this->load->model("loginModel");
+	}
+
+	public function login_post() {
+		$nombreusuario = $this->post("nombreusuario");
+		$contrasena = $this->post("contrasena");
+
+		if(is_null($nombreusuario) && is_null($contrasena)) {
+			$this->response(array("error"=>"Existe un error en la peticion"), 400);
+		}
+
+		$usuario = $this->loginModel->esUsuario($nombreusuario, $contrasena);
+
+		if($usuario === false) {
+			$this->response(array("error"=>"Ese usuario no existe"), 401);
+		}
+
+		$usuario->iat = time();
+		$usuario->exp = time() + $this->tiempoDuracion;
+		
+		$jwt = JWT::encode($usuario, $this->clave, 'HS256');
+
+		$this->response(array("token"=>$jwt), 200);
 	}
 
 	public function index_get() {
-		echo "fsda";
+
+		$password = "huarachi";
+		$llave = "beimar";
+
+
+
+		//Para hacer control de password encriptado
+		$encriptado = sha1($password);
+
+		echo $encriptado;
 	}
 
 	public function muestra() {
+		//$decoded =  JWT::decode($jwt, $this->clave, 'HS256');
+
 		$clave = "beimarhuarachi";
 		$user = array(
 			'nombre' => 'beimar',
@@ -45,6 +95,11 @@ class LoginController extends REST_Controller {
 		echo $Y2K;
 		echo "<br>";
 		echo Carbon::parse('2015-02-12 12:00:12');
+
+		//Es para obtener los datos de cualquier peticion(EL CLIENTE TIENE QUE ENVIAR LOS DATOS EN FORMATO JSON)
+		//SI NOS ENVIA EN FORMATO DE FORMULARIO EL ACCESO SERIA DIRECTO
+		//$entityBody = file_get_contents('php://input');	
+		//$objeto = json_decode($entityBody);
 	}
 
 }

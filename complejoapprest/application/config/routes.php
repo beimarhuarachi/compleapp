@@ -64,3 +64,5 @@ $route['translate_uri_dashes'] = FALSE;
 //$route['books']['get'] = "books/index";
  
 $route['login']['get'] = "loginController/index";
+
+$route['login']['post'] = "loginController/login";

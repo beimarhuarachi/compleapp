@@ -12,7 +12,7 @@ function ControlarAcceso($rootScope, $state, $log, autorizacionService) {
 				if(!autorizacionService.esAdmin() || !autorizacionService.tieneSesion()) {
 				    // Cancelar la transicion
 				    event.preventDefault();
-				    $log.debug("No eres Admin "+ toState.name);
+				    $log.debug("ui-router : No eres Admin "+ toState.name);
 				    // Redireccionar a la pagina de inicio
 				    return $state.go('app.visitante.inicio');
 			 	}  
@@ -21,12 +21,12 @@ function ControlarAcceso($rootScope, $state, $log, autorizacionService) {
 			if(toState.name && toState.name.match(/^app\.cliente\./)) {
 				if(!autorizacionService.esCliente() || !autorizacionService.tieneSesion()) {
 					event.preventDefault();
-					$log.debug("No eres cliente"+toState.name);
+					$log.debug("ui-router : No eres cliente"+toState.name);
 					return $state.go('app.visitante.inicio');
 				}
 			}
 
-			$log.debug('Estas en la zona libre');
+			$log.debug('UI-Router : Tienes autorizacion para esta zona');
 		
 	});
 }	
