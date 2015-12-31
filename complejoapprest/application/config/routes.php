@@ -63,6 +63,16 @@ $route['translate_uri_dashes'] = FALSE;
 //a books/index(donde books es controlador y index un metodo)
 //$route['books']['get'] = "books/index";
  
+
+/**
+ * rutas para login
+ */
 $route['login']['get'] = "loginController/index";
 
 $route['login']['post'] = "loginController/login";
+
+
+/**
+ * rutas para el servicio de disciplinas
+ */
+$route['disciplinas']['get'] = 'disciplinaController/index';

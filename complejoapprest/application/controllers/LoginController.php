@@ -30,6 +30,10 @@ class LoginController extends REST_Controller {
 		$this->load->model("loginModel");
 	}
 
+	/**
+	 * Funcion que verifica si existe el usuario, si existe retorna el token
+	 * @return [json] [retorna la respuesta, sea satisfactoria o mala]
+	 */
 	public function login_post() {
 		$nombreusuario = $this->post("nombreusuario");
 		$contrasena = $this->post("contrasena");
