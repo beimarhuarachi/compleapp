@@ -14,10 +14,21 @@ function autorizacionService(jwtHelper, store, $http, $q, REST_API) {
 		esCliente : esCliente,
 		tieneSesion : tieneSesion,
 		getToken : getToken,
-		registrarSesion :  registrarSesion
+		registrarSesion :  registrarSesion,
+		getIdUsuario : getIdUsuario
 	};
 
 	return servicio;
+
+	function getIdUsuario () {
+		var token = store.get('token');
+		if(token) {
+			var decodificado = jwtHelper.decodeToken(token);
+			return decodificado.idusuario;
+		}
+
+		return null;
+	}
 
 	function getUsuarioActual() {
 		var usuarioActual;
