@@ -76,3 +76,8 @@ $route['login']['post'] = "loginController/login";
  * rutas para el servicio de disciplinas
  */
 $route['disciplinas']['get'] = 'disciplinaController/index';
+
+/*
+ * rutas para el servicio de superficies
+ */
+$route['superficies']['get'] = 'superficieController/index';

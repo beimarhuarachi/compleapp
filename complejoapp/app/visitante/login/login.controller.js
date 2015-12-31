@@ -2,9 +2,9 @@ angular
 	.module('complejo.visitante')
 	.controller('LoginController', LoginController);
 
-LoginController.$inject = ['$scope', '$log', '$state', 'autorizacionService', 'disciplinaService'];
+LoginController.$inject = ['$scope', '$log', '$state', 'autorizacionService', 'superficieService'];
 
-function LoginController($scope, $log, $state, autorizacionService, disciplinaService) {
+function LoginController($scope, $log, $state, autorizacionService, superficieService) {
 	$log.info("Login Controller : inicio de controlador");
 
 	$scope.user = {};
@@ -12,7 +12,7 @@ function LoginController($scope, $log, $state, autorizacionService, disciplinaSe
 	$scope.submitLogin = submitLogin;
 
 	$scope.salir = function() {
-		disciplinaService.query(function(data) {
+		superficieService.query(function(data) {
 			$log.debug(data);
 		}, function(error) {
 			$log.debug(error);
