@@ -11,6 +11,10 @@ function LoginController($scope, $log, $state, autorizacionService) {
 
 	$scope.submitLogin = submitLogin;
 
+	$scope.salir = function() {
+		autorizacionService.logout();
+	}
+
 	/**
 	 * Envio de peticion de login al servidor
 	 * @param  {object} user the user to login in 

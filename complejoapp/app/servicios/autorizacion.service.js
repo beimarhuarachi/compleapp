@@ -67,7 +67,7 @@ function autorizacionService(jwtHelper, store, $http, $q, REST_API) {
 
 	function logout() {
 		//set null al usuario, borrar el token
-		
+		store.remove('token');
 	}
 	//eliminar este metodo
 	function getToken() {
@@ -95,6 +95,12 @@ function autorizacionService(jwtHelper, store, $http, $q, REST_API) {
 
 	function esCliente() {
 		//verificar si en cliente el administrador
-		return true;
+		var token = store.get('token');
+		if(!token) {
+			return false;
+		}
+		var usuario = jwtHelper.decodeToken(token);
+
+		return usuario.rol == "Cliente" ? true : false;
 	}
 }
