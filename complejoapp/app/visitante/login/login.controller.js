@@ -10,7 +10,11 @@ function LoginController($scope, $log, $state, autorizacionService, superficieSe
 	$scope.user = {};
 
 	$scope.submitLogin = submitLogin;
-
+	
+	/**
+	 * Esta funcion es de prueba
+	 * @return {[type]} [description]
+	 */
 	$scope.salir = function() {
 		superficieService.query(function(data) {
 			$log.debug(data);

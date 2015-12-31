@@ -4,6 +4,7 @@ angular
 		'complejo.cliente', 
 		'complejo.visitante',
 		'complejo.servicios',
+		'complejo.common',
 		'ui.router'
 		]);
 
