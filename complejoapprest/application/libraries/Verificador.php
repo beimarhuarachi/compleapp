@@ -36,6 +36,4 @@ class Verificador {
 
 		return $usuario;
 	}
-
-
 }

@@ -11,7 +11,7 @@ function campoService($resource, REST_API) {
 		save : {
 			method : 'POST',
 			params : {com : "@_com"},
-			//skipAuthorization :true
+			//skipAuthorization :true,
 			transformRequest: angular.identity,
 			//El content type lo seteamos porque por defecto envia datos json
 			//(con undefined podemos enviar en formato de FormData)

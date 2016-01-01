@@ -5,6 +5,7 @@ angular
 		'complejo.visitante',
 		'complejo.servicios',
 		'complejo.common',
-		'ui.router'
+		'ui.router',
+		'ui-notification'
 		]);
 

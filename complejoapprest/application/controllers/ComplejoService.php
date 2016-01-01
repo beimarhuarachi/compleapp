@@ -14,6 +14,7 @@ class ComplejoService extends REST_Controller {
 		$this->response(array("response"=> "complejos varios"), 200);
 	}
 
+	//id del usuario
 	public function retornarComplejo_get($id) {
 		if(is_null($id)) {
 			$this->response(array("response"=>"La peticion tiene errores"), 400);

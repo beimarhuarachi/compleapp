@@ -4,10 +4,10 @@ angular
 
 RegistroCampoController.$inject = ['$scope', '$log', '$state', 
 					'autorizacionService', 'complejoService', 
-					'campoService', 'superficieService', 'disciplinaService'];
+					'campoService', 'superficieService', 'disciplinaService', 'Notification'];
 
 function RegistroCampoController($scope, $log, $state, autorizacionService, 
-	complejoService, campoService, superficieService, disciplinaService) {
+	complejoService, campoService, superficieService, disciplinaService, Notification) {
 	$log.info("RegistroCampoController : inicio de controlador");
 	
 	$scope.datospagina = $state.current.data;
@@ -34,9 +34,14 @@ function RegistroCampoController($scope, $log, $state, autorizacionService,
 		formData.append('superficie', campo.superficie);
 		formData.append('imagen', campo.imagen);
 
-		campoService.save({com : 1}, formData , function(res) {
-		$log.debug(res.response);
+		campoService.save({com : $scope.complejo.idcomplejo}, formData , function(res) {
+			$scope.campo = {};
+			$scope.campoform.$setPristine();
+			Notification.success({title: "Registro de Campo", message : "Se ha registrado el campo Correctamente"});
+			autorizacionService.registrarSesion(res.response.token);
+			$log.debug(res.response);
 		}, function(error) {
+			Notification.error({title: "Registro de Campo", message : "Ha ocurrido un error"});
 			$log.debug(error);
 		});
 		$log.debug(formData);
@@ -47,15 +52,4 @@ function RegistroCampoController($scope, $log, $state, autorizacionService,
 	}, function(error) {
 		$log.error("RegistroCampoController : complejo service error");
 	});
-
-	var formulario = new FormData();
-	formulario.append('nombre', 'Beimar');
-	formulario.append('apellido', 'Huarachi mamani');
-	var objeto = {nombre: "beimar", apellido : "haurachi jfdklas"}
-
-	// campoService.save({com : 1}, objeto , function(res) {
-	// 	$log.debug(res.response);
-	// }, function(error) {
-	// 	$log.debug(error);
-	// });
 }

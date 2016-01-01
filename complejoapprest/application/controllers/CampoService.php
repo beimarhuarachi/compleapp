@@ -47,20 +47,28 @@ class CampoService extends REST_Controller {
 		$config['file_name']           = $nombre;
 
 		$this->load->library('upload', $config);
-		
+		$nombrearchivo = "uploads/imagen001.jpg";
+
 		if ( !$this->upload->do_upload('imagen')) {
 			$error = array('error' => $this->upload->display_errors());
 		} else {
-			$data = array('upload_data' => $this->upload->data());
+			$datos = $this->upload->data();
+			$nombrearchivo = "uploads/".$datos['file_name'];
 		}
 
-		$datos = $this->upload->data();
+		$campoId = $this->campoModel->guardarCampoDeComplejo($usuario->idusuario, $idcomplejo, $nombre, $precio, $nombrearchivo, $disciplina, $superficie);
 
-		$this->campoModel->guardarCampoDeComplejo($usuario->idusuario, $idcomplejo, $nombre, $precio, $datos['file_name'], $disciplina, $superficie);
+		$usuario->iat = time();
+		$usuario->exp = time() + 300;
+		
+		$jwt = JWT::encode($usuario, "complejodeportivo", 'HS256');
 
+		if(is_null($campoId)) {
+			$this->response(array("response" => "No se pudo crear"), 404);			
+		} else {
+			$this->response(array("response" => $usuario, "token"=> $jwt), 200);
+		}
 
-
-		$this->response(array("response" => $datos), 200);
 	}
 
 

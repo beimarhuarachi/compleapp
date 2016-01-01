@@ -2,9 +2,9 @@ angular
 	.module('complejo')
 	.config(ConfiguracionRutas);
 
-ConfiguracionRutas.$inject = ['$stateProvider','$urlRouterProvider', 'jwtInterceptorProvider', '$httpProvider'];
+ConfiguracionRutas.$inject = ['$stateProvider','$urlRouterProvider', 'jwtInterceptorProvider', '$httpProvider', 'NotificationProvider'];
 
-function ConfiguracionRutas($stateProvider, $urlRouterProvider, jwtInterceptorProvider, $httpProvider) {
+function ConfiguracionRutas($stateProvider, $urlRouterProvider, jwtInterceptorProvider, $httpProvider, NotificationProvider) {
 	//Esta causando error con el evento onStateChangeStart()
 	//$urlRouterProvider.otherwise('/inicio');
 	//==solucion===
@@ -36,5 +36,18 @@ function ConfiguracionRutas($stateProvider, $urlRouterProvider, jwtInterceptorPr
 	}];
 
 	$httpProvider.interceptors.push('jwtInterceptor');
+
+	/**
+	 * notifications
+	 */
+	NotificationProvider.setOptions({
+            delay: 10000,
+            startTop: 20,
+            startRight: 10,
+            verticalSpacing: 20,
+            horizontalSpacing: 20,
+            positionX: 'right',
+            positionY: 'top'
+        });
 
 }

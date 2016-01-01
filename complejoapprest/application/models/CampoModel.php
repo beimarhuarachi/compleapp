@@ -36,7 +36,11 @@ class CampoModel extends CI_Model {
 
 		$this->db->insert("campo", $datos);
 
-		return $this->db->affected_rows() === 1;
+		if($this->db->affected_rows() === 1) {
+			return $this->db->insert_id();
+		}
+
+		return NULL;
 	}
 }
 
