@@ -38,7 +38,7 @@ function RegistroCampoController($scope, $log, $state, autorizacionService,
 			$scope.campo = {};
 			$scope.campoform.$setPristine();
 			Notification.success({title: "Registro de Campo", message : "Se ha registrado el campo Correctamente"});
-			autorizacionService.registrarSesion(res.response.token);
+			autorizacionService.registrarSesion(res.token);
 			$log.debug(res.response);
 		}, function(error) {
 			Notification.error({title: "Registro de Campo", message : "Ha ocurrido un error"});
