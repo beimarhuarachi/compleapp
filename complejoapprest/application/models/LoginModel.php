@@ -20,6 +20,15 @@ class LoginModel extends CI_Model {
 		return false;
 	}
 
+	public function verificarUsuario($idusuario, $correo) {
+		$consulta = $this->db->select("*")
+							 ->from("usuario")
+							 ->where("IdUsuario = ". $idusuario . " AND Correo = '". $correo."'")
+							 ->get();
+
+		return $consulta->num_rows() === 1;
+	}
+
 	/**
 	 * No utilizado
 	 */

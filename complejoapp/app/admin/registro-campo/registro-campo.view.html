@@ -1,3 +1,55 @@
-<!-- Cabecera de pagina -->
-<cd-cabecera-pagina nombrecomplejo="{{complejo.nombre}}" datospagina="datospagina"><cd-cabecera-pagina/>
 
+	<cd-cabecera-pagina nombrecomplejo="{{complejo.nombre}}" datospagina="datospagina"></cd-cabecera-pagina>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-green">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-fw fa-edit"></i>Registro de Campo Deportivo</h3>
+				</div>
+				<div class="row">
+					<div class="panel-body">
+						<div class="col-lg-6">
+							<form novalidate name="campoform" ng-submit="registrar(campo)">
+
+								<div class="form-group" ng-class="{'has-error': campoform.nombre.$invalid && !campoform.nombre.$pristine, 'has-success' : campoform.nombre.$valid}">
+									<label class="control-label">Nombre Campo</label>
+									<input type="text" class="form-control" ng-model="campo.nombre" name="nombre" required placeholder="Nombre Campo">
+									<p class="help-block" ng-show="campoform.nombre.$error.required && !campoform.nombre.$pristine">El nombre es requerido</p>
+								</div>
+
+								<div class="form-group" ng-class="{'has-error': campoform.precio.$invalid && !campoform.precio.$pristine, 'has-success' : campoform.precio.$valid}">
+									<label class="control-label">Precio por Hora</label>
+									<input type="number" class="form-control" ng-model="campo.precio" name="precio" required placeholder="Precio por hora" min="10" max="300">
+									<p class="help-block" ng-show="campoform.precio.$error.required && !campoform.precio.$pristine">El precio es requerido</p>
+
+								</div>
+
+								<div class="form-group" ng-class="{'has-success': campoform.disciplina.$valid}">
+									<label class="control-label"> Disciplina Deportiva </label>
+								    <select class="form-control" name="disciplina" required ng-model="campo.disciplina">
+								      <option ng-repeat="disciplina in disciplinas" value="{{disciplina.id}}">{{disciplina.nombre}}</option>
+								    </select>
+								</div>
+								
+								<div class="form-group" ng-class="{'has-success': campoform.superficie.$valid}">
+									<label class="control-label"> Superficie </label>
+							    	<select class="form-control" name="superficie" required ng-model="campo.superficie">
+							      		<option ng-repeat="superficie in superficies" value="{{superficie.id}}">{{superficie.nombre}}</option>
+							    	</select>
+								</div>
+							
+								<button ng-disabled="campoform.$invalid" class="btn btn-success">Registrar Campo</button>
+							</form>
+						</div>
+						<div class="col-lg-6">
+							{{campo}}
+							<cd-subir-archivo></cs-subir-archivo>
+						</div>
+					</div>	
+				</div>	
+				
+			</div>	
+		</div>
+
+	</div>

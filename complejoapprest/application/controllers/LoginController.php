@@ -45,7 +45,7 @@ class LoginController extends REST_Controller {
 		$usuario = $this->loginModel->esUsuario($nombreusuario, $contrasena);
 
 		if($usuario === false) {
-			$this->response(array("error"=>"Ese usuario no existe"), 401);
+			$this->response(array("error"=>"Ese usuario no existe"), 404);
 		}
 
 		$usuario->iat = time();
