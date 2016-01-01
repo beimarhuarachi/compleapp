@@ -39,4 +39,16 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 				icono : 'fa fa-fw fa-edit'
 			}
 		})
+		/**
+		 * Estado para reservas
+		 */
+		.state('app.admin.reserva', {
+			url : '/reservar',
+			templateUrl : 'app/admin/reserva/reserva.view.html',
+			controller : 'ReservaController',
+			data : {
+				nombrepagina : 'Realizar Reserva',
+				icono : 'fa fa-fw fa-table'
+			}
+		})
 }

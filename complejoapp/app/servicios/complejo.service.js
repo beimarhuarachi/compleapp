@@ -1,10 +1,10 @@
 angular
 	.module('complejo.servicios')
-	.factory('complejoService', compolejoService);
+	.factory('complejoService', complejoService);
 
-compolejoService.$inject = ['$resource', 'REST_API'];
+complejoService.$inject = ['$resource', 'REST_API'];
 
-function compolejoService($resource, REST_API) {
+function complejoService($resource, REST_API) {
 	var nombreServicio = 'complejos';
 
 	var servicio = $resource(REST_API + nombreServicio + '/:id', {id : '@_id'}, {
