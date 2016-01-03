@@ -94,3 +94,18 @@ $route['complejos/(:num)']['get'] = 'complejoService/retornarComplejo/$1';
  */
 $route['complejos/(:num)/campos']['get'] = 'campoService/index/$1';
 $route['complejos/(:num)/campos']['post'] = 'campoService/guardar/$1';
+
+/**
+ * rutas para el servicio de clientes => para un complejo
+ */
+$route['clientes']['get'] = 'clienteService/index';
+
+/**
+ * rutas para el servicio de reservas
+ * recibe dos parametro mas aparte de num, uno es inicio y el otro fin
+ */
+$route['campos/(:num)/reservas']['get'] = 'reservaService/index/$1';
+
+
+
+
