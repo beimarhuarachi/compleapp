@@ -4,13 +4,13 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<select class="form-control" ng-model="campo"
-        ng-change="actualizarReservas(campo)" 
+		<select class="form-control" ng-model="campoSeleccionado"
+        ng-change="actualizarReservas(campoSeleccionado)" 
         ng-options="campo as campo.nombre for campo in  campos">
         </select>
 
 		<div ng-if="mostrar">
-			<cd-calendario reservas="reservas" prueba="prueba"></cd-calendario>	
+			<cd-calendario reservas="reservas"></cd-calendario>	
 		</div>
 	</div>
 </div>

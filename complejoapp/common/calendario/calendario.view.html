@@ -1,7 +1,13 @@
-<div class="rho">
+<div class="ho">
 
 	<div class="row">
 		<div class="col-md-12">
+
+			<select class="form-control" ng-model="campoSeleccionado"
+	        ng-change="actualizarReservas(campoSeleccionado)" 
+	        ng-options="campo as campo.nombre for campo in  campos">
+	        </select>
+	        
 			<div class="btn-group btn-group-justified" role="group" aria-label="...">
 				<div class="btn-group" role="group">
 				<button type="button" class="btn btn-default" id="anterior">Anterior</button>

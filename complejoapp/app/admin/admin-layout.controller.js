@@ -9,13 +9,6 @@ function AdminLayoutController($scope, $log, autorizacionService, $state, comple
 	
 	$scope.usuario = autorizacionService.getUsuarioActual();
 
-	$scope.complejo = {};
-
-	complejoService.query({id : autorizacionService.getIdUsuario()}, function(res) {
-		//$log.debug("Layout comtroller complejo service call : " + res.response.nombre);
-		$scope.complejo = res.response;
-	});
-
 	$scope.cerrarSesion = cerrarSesion;
 
 	function cerrarSesion() {
