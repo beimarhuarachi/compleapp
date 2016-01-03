@@ -21,10 +21,23 @@ function cdCalendario($log) {
 
 	function controller($scope) {
 		$log.log("Calendario directive controller : inicializado");
+		
 	}
 
 	function link(scope, element, attrs) {
-		$log.debug("directiva con logs");
+		$log.debug("Calendario directive :  linking");
+
+		$('#anterior').click(function(event) {
+			$log.debug("hola anterio");
+		});
+
+		$('#actual').click(function(event) {
+			$log.debug("hola acutal");
+		});
+
+		$('#siguiente').click(function(event) {
+			$log.debug("hola siguiente");
+		});
 
 		var fechaInicio = moment().format("YYYY-MM-DD");
 
