@@ -40,7 +40,7 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 
 		function actualizarReservas(campo) {
 			//$log.debug(campo);
-			crearCalendarioSemanal(campo, $scope.inicioSemana, $scope.finSemana, $scope);
+			$scope.crearCalendarioSemanal(campo, $scope.inicioSemana, $scope.finSemana);
 		}
 	}
 
@@ -49,6 +49,8 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 		$scope.claseSemanal = '.calendarioSemanal';
 
 		var formatoLargo = 'YYYY-MM-DD HH:mm:ss';
+
+		$scope.crearCalendarioSemanal = crearCalendarioSemanal;
 
 		$log.debug("Calendario directive :  linking");
 
@@ -60,18 +62,18 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 										.endOf('isoweek').format(formatoLargo);
 
 
-			crearCalendarioSemanal($scope.campoSeleccionado, $scope.inicioSemana, $scope.finSemana, $scope);
+			crearCalendarioSemanal($scope.campoSeleccionado, $scope.inicioSemana, $scope.finSemana);
 			
-			$log.debug("Calendario Directive :boton anterior");
+			//$log.debug("Calendario Directive :boton anterior");
 		});
 
 		$('#actual').click(function(event) {
 			$scope.inicioSemana = moment().startOf("isoweek").format(formatoLargo); 
 			$scope.finSemana =  moment().endOf("isoweek").format(formatoLargo);
 
-			crearCalendarioSemanal($scope.campoSeleccionado, $scope.inicioSemana, $scope.finSemana, $scope);
+			crearCalendarioSemanal($scope.campoSeleccionado, $scope.inicioSemana, $scope.finSemana);
 
-			$log.debug("Calendario Directive : hola acutal");
+			//$log.debug("Calendario Directive : hola acutal");
 		});
 
 		$('#siguiente').click(function(event) {
@@ -81,66 +83,77 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 			$scope.finSemana = moment($scope.finSemana, formatoLargo).add(1, 'weeks')
 										.endOf('isoweek').format(formatoLargo);
 
-			crearCalendarioSemanal($scope.campoSeleccionado, $scope.inicioSemana, $scope.finSemana, $scope);
-			$log.debug("Calendario directive : hola siguiente");
+			crearCalendarioSemanal($scope.campoSeleccionado, $scope.inicioSemana, $scope.finSemana);
+			//$log.debug("Calendario directive : hola siguiente");
 		});
-	}
 
-	function  crearCalendarioSemanal(campo, inicio, fin, $scope) {
-		if(!campo) {
-			return;
+		function  crearCalendarioSemanal(campo, inicio, fin) {
+			if(!campo) {
+				return;
+			}
+			// console.log(campo);
+			reservaService.get({id : campo.idcampo, inicio: inicio, fin: fin} ,function(res) {
+				//$log.debug(res.response);
+				$scope.reservas = [];
+				for (var i = 0; i < res.response.length; i++) {
+					var evento = {
+							id : res.response[i].id,
+							title : res.response[i].nombretipo,
+							start : res.response[i].inicio,
+							end : res.response[i].fin,
+							backgroundColor: '#34B5A7',
+							textColor : '#FFF'
+					}
+
+					$scope.reservas.push(evento);
+				}; 
+
+				renderizarCalendario($scope.reservas);
+
+			}, function(error) {
+				$log.debug("Directiva Calendario Error: reservaService peticion");
+			});
 		}
-		// console.log(campo);
-		reservaService.get({id : campo.idcampo, inicio: inicio, fin: fin} ,function(res) {
-			//$log.debug(res.response);
-			$scope.reservas = [];
-			for (var i = 0; i < res.response.length; i++) {
-				var evento = {
-						id : res.response[i].id,
-						title : res.response[i].nombretipo,
-						start : res.response[i].inicio,
-						end : res.response[i].fin,
-						backgroundColor: '#34B5A7',
-						textColor : '#FFF'
-				}
 
-				$scope.reservas.push(evento);
-			}; 
+		function renderizarCalendario(reservas) {
+			$($scope.claseSemanal).remove();
+			$($scope.clasePadre).append('<div class="calendarioSemanal" style="width:100%;"></div>');
 
-			renderizarCalendario($scope.reservas, $scope);
+			var fechaInicio = moment($scope.inicioSemana).format('YYYY-MM-DD');
 
-		}, function(error) {
-			$log.debug("Directiva Calendario Error: reservaService peticion");
-		});
-	}
+			$($scope.claseSemanal).easycal({
+				startDate : fechaInicio, // OR 2014/10/31
+				timeFormat : 'HH:mm',
+				columnDateFormat : 'dddd, DD MMM',
+				minTime : '08:00:00',
+				maxTime : '21:00:00',
+				slotDuration : 60,
+				timeGranularity : 60,
+				
+				dayClick : function(el, startTime){
+					var fecha = el[0].parentNode.attributes['data-date'].value;
+					var fechaInicio = moment(fecha + ' ' + startTime).format('YYYY-MM-DD HH:mm:ss');
 
-	function renderizarCalendario(reservas, $scope) {
-		$($scope.claseSemanal).remove();
-		$($scope.clasePadre).append('<div class="calendarioSemanal" style="width:100%;"></div>');
+					var fechaFin = moment(fechaInicio, 'YYYY-MM-DD HH:mm:ss').add(1,'hours')
+												.format('YYYY-MM-DD HH:mm:ss');
 
-		var fechaInicio = moment($scope.inicioSemana).format('YYYY-MM-DD');
+					$rootScope.$broadcast('clickCelda', {
+						inicio : fechaInicio,
+						fin : fechaFin
+					});	
 
-		$($scope.claseSemanal).easycal({
-			startDate : fechaInicio, // OR 2014/10/31
-			timeFormat : 'HH:mm',
-			columnDateFormat : 'dddd, DD MMM',
-			minTime : '08:00:00',
-			maxTime : '22:00:00',
-			slotDuration : 60,
-			timeGranularity : 60,
-			
-			dayClick : function(el, startTime){
-				console.log(el);
-			},
-			eventClick : function(eventId){
-				console.log('Event was clicked with id: ' + eventId);
-			},
+					console.log(fechaInicio + "===" + fechaFin);
+				},
+				eventClick : function(eventId){
+					$rootScope.$broadcast('clickReserva', eventId);
+				},
 
-			events : reservas,
-			
-			overlapColor : '#FF0',
-			overlapTextColor : '#000',
-			overlapTitle : 'Multiple'
-		});
+				events : reservas,
+				
+				overlapColor : '#FF0',
+				overlapTextColor : '#000',
+				overlapTitle : 'Multiple'
+			});
+		}
 	}
 }

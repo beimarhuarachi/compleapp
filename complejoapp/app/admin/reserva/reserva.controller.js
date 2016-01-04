@@ -14,6 +14,14 @@ function ReservaController($scope, $log, reservaService, complejoService, $state
 	$scope.complejo = {};
 	$scope.listo = false;
 	
+	$scope.$on('clickCelda', function(event, data) {
+		$log.debug(data);
+	});
+
+	$scope.$on('clickReserva', function(event, data) {
+		$log.debug(data);
+	});
+
 	complejoService.query({id : autorizacionService.getIdUsuario()}, function(res) {
 		$scope.nombre = res.response.nombre;
 		$scope.complejo = res.response;
