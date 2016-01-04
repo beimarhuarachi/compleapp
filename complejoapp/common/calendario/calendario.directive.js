@@ -18,11 +18,14 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 
 	return directiva;
 
-	function controller($scope) {
+	function controller($scope) { 
 		//$log.log("Calendario directive controller : inicializado");
 		//lanzar el cambio de reservas desde aqui
 		$scope.campoSeleccionado = null;
 		$scope.campos = [];
+
+		$scope.horaMinima = '08:00:00';
+		$scope.horaMaxima = '21:00:00';
 
 		$scope.reservas = [];
 
@@ -94,7 +97,9 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 			// console.log(campo);
 			reservaService.get({id : campo.idcampo, inicio: inicio, fin: fin} ,function(res) {
 				//$log.debug(res.response);
-				$scope.reservas = [];
+				$scope.reservas = res.response;
+
+				var eventos = [];
 				for (var i = 0; i < res.response.length; i++) {
 					var evento = {
 							id : res.response[i].id,
@@ -105,17 +110,17 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 							textColor : '#FFF'
 					}
 
-					$scope.reservas.push(evento);
+					eventos.push(evento);
 				}; 
 
-				renderizarCalendario($scope.reservas);
+				renderizarCalendario(eventos);
 
 			}, function(error) {
 				$log.debug("Directiva Calendario Error: reservaService peticion");
 			});
 		}
 
-		function renderizarCalendario(reservas) {
+		function renderizarCalendario(eventos) {
 			$($scope.claseSemanal).remove();
 			$($scope.clasePadre).append('<div class="calendarioSemanal" style="width:100%;"></div>');
 
@@ -125,35 +130,84 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 				startDate : fechaInicio, // OR 2014/10/31
 				timeFormat : 'HH:mm',
 				columnDateFormat : 'dddd, DD MMM',
-				minTime : '08:00:00',
-				maxTime : '21:00:00',
+				minTime : $scope.horaMinima,
+				maxTime : $scope.horaMaxima,
 				slotDuration : 60,
 				timeGranularity : 60,
 				
 				dayClick : function(el, startTime){
 					var fecha = el[0].parentNode.attributes['data-date'].value;
-					var fechaInicio = moment(fecha + ' ' + startTime).format('YYYY-MM-DD HH:mm:ss');
+					var fechaInicio = moment(fecha + ' ' + startTime).format(formatoLargo);
 
-					var fechaFin = moment(fechaInicio, 'YYYY-MM-DD HH:mm:ss').add(1,'hours')
-												.format('YYYY-MM-DD HH:mm:ss');
+					var fechaFin = moment(fechaInicio, formatoLargo).add(1,'hours')
+												.format(formatoLargo);
+
+					var fechasValidas = retornarHorasValidas($scope.reservas, fechaFin);
 
 					$rootScope.$broadcast('clickCelda', {
 						inicio : fechaInicio,
-						fin : fechaFin
+						fin : fechaFin,
+						fechasValidas : fechasValidas
 					});	
 
 					console.log(fechaInicio + "===" + fechaFin);
 				},
 				eventClick : function(eventId){
-					$rootScope.$broadcast('clickReserva', eventId);
+					var reserva = _.findWhere($scope.reservas, {id : eventId});
+					$rootScope.$broadcast('clickReserva', reserva);
 				},
 
-				events : reservas,
+				events : eventos,
 				
 				overlapColor : '#FF0',
 				overlapTextColor : '#000',
 				overlapTitle : 'Multiple'
 			});
+		}
+
+		//horas finales validas para la reserva
+		function retornarHorasValidas(reservas, fechaFin) {
+			var reservasHoy = _.filter(reservas, function(value, i, list) {
+				var fechaActual = moment(fechaFin, 'YYYY-MM-DD');
+
+				var fechaComparar = moment(moment(value.inicio).format('YYYY-MM-DD'));
+
+				console.log(fechaActual.format('YYYY-MM-DD') + "-----" + fechaComparar.format('YYYY-MM-DD'));
+
+				//mismo dia y que el inicio sea mayor a fechaFin
+				return fechaComparar.isSame(fechaActual) && 
+								(moment(value.inicio).isAfter(fechaFin) || moment(value.inicio).isSame(fechaFin));
+			
+			});
+			
+			var primero;
+			if(reservasHoy.length > 0) {
+				primero = reservasHoy[0];
+
+				_.each(reservasHoy, function(value, key, list) {
+					var fecha = moment(value.fin, formatoLargo);
+
+					if(fecha.isBefore(moment(primero.fin))) {
+						primero = value;
+					}
+
+				});
+
+				primero = moment(primero.inicio);
+			} else {
+				primero = moment(moment(fechaFin).format("YYYY-MM-DD") + " " + $scope.horaMaxima);
+			}
+
+			var horasValidas = [];
+			horasValidas.push(fechaFin);
+
+			while(moment(fechaFin).isBefore(primero)) {
+				fechaFin = moment(fechaFin).add(1, 'hours').format(formatoLargo);
+				horasValidas.push(fechaFin);
+			}
+
+			//console.log("Primero : " + primero.fin);
+			return horasValidas;
 		}
 	}
 }

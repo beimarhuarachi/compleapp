@@ -16,6 +16,8 @@ function ReservaController($scope, $log, reservaService, complejoService, $state
 	
 	$scope.$on('clickCelda', function(event, data) {
 		$log.debug(data);
+		// $scope.listo = false;
+		// $scope.$apply();
 	});
 
 	$scope.$on('clickReserva', function(event, data) {
