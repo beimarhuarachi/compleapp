@@ -105,6 +105,7 @@ $route['clientes']['get'] = 'clienteService/index';
  * recibe dos parametro mas aparte de num, uno es inicio y el otro fin
  */
 $route['campos/(:num)/reservas']['get'] = 'reservaService/index/$1';
+$route['campos/(:num)/reservas']['post'] = 'reservaService/guardar/$1';
 
 
 
