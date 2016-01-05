@@ -31,6 +31,8 @@ function ReservaController($scope, $log, reservaService, complejoService, $state
 		$log.debug(data);
 	});
 
+	$scope.cancelar = cancelar;
+
 	$scope.clienteSeleccionado = undefined;
 	$scope.clientes = [{nombre: "Alejandra", apellido : "Hua"},{nombre: "Beimar", apellido : "Huarachi"},
 	{nombre: "Enrique", apellido : "antezana"}];
@@ -52,4 +54,8 @@ function ReservaController($scope, $log, reservaService, complejoService, $state
 	}, function(error) {
 		$log.debug(error);
 	});
+
+	function cancelar() {
+		$scope.listo = !$scope.listo;
+	}
 }

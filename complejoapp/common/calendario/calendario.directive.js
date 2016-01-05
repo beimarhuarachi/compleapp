@@ -2,9 +2,9 @@ angular
 	.module('complejo.common')
 	.directive('cdCalendario', cdCalendario);
 
-cdCalendario.$inject = ['$log', '$rootScope', 'campoService', 'reservaService'];
+cdCalendario.$inject = ['$log', '$rootScope', 'campoService', 'reservaService', 'calendarioService'];
 
-function cdCalendario($log, $rootScope, campoService, reservaService) {
+function cdCalendario($log, $rootScope, campoService, reservaService, calendarioService) {
 	var directiva = {
 		restrict : 'EA',
 		replace : true,
@@ -19,6 +19,7 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 	return directiva;
 
 	function controller($scope) { 
+		calendarioService.inicializarMoment();
 		//$log.log("Calendario directive controller : inicializado");
 		//lanzar el cambio de reservas desde aqui
 		$scope.campoSeleccionado = null;
@@ -137,7 +138,13 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 				
 				dayClick : function(el, startTime){
 					var fecha = el[0].parentNode.attributes['data-date'].value;
+					
 					var fechaInicio = moment(fecha + ' ' + startTime).format(formatoLargo);
+
+					if(moment(fechaInicio).isBefore(moment())) {
+						console.log("Esta hora esta antes del Actual, No puede hacer una reserva pasada");
+						return;
+					}
 
 					var fechaFin = moment(fechaInicio, formatoLargo).add(1,'hours')
 												.format(formatoLargo);

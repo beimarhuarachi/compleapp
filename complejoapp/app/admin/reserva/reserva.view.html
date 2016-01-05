@@ -18,10 +18,10 @@
 						
 							<form novalidate name="reservaform" ng-submit="reservar(campo)">
 								<div class="col-lg-6">
-								<div class="form-group">
-										<label class="control-label">Imagen Campo</label>
+									<div class="form-group">
 										<img class="img-rounded" alt="Cinque Terre" width="100%" height="120" ng-src="http://localhost/compleapp/complejoapprest/{{campo.foto}}">
 									</div>
+
 									<div class="form-group">
 									<label class="control-label">Cliente</label>
 									<input type="text" ng-model="clienteSeleccionado" uib-typeahead="cliente as cliente.Nombres for cliente in clientes | filter:$viewValue | limitTo:8" class="form-control">
@@ -64,6 +64,7 @@
 									</div>
 
 									<button ng-disabled="reservaform.$invalid" class="btn btn-primary">Realizar Reserva</button>
+									<button class="btn btn-danger" ng-click="cancelar()">Cancelar</button>
 								</div>
 								
 							</form>
