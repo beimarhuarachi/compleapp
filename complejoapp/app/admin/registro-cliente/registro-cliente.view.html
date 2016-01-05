@@ -1,0 +1,65 @@
+
+<cd-cabecera-pagina nombrecomplejo="{{vm.complejo.nombre}}" datospagina="vm.datospagina"></cd-cabecera-pagina>
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-green">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-fw fa-edit"></i>Formulario Cliente</h3>
+			</div>
+			<div class="row">
+				<div class="panel-body">
+						<form novalidate name="clienteform" ng-submit="vm.submit(vm.cliente)">
+							<div class="col-lg-6">
+							<div class="form-group" ng-class="{'has-error' : clienteform.nombres.$invalid && !clienteform.nombres.$pristine, 'has-success': clienteform.nombres.$valid && !clienteform.nombres.$pristine}">
+								<label class="control-label">Nombres</label>
+								<input type="text" name="nombres" ng-model="vm.cliente.nombres" class="form-control" required pattern="^[a-zA-Z]{0,30}\s?[a-zA-Z]{2,30}$" placeholder="Nombres">
+
+								<p class="help-block" ng-show="clienteform.nombres.$error.required && !clienteform.nombres.$pristine">Este campo es requerido</p>
+								<p class="help-block" ng-show="clienteform.nombres.$error.pattern && !clienteform.nombres.$pristine">Patron no complido</p>
+							</div>
+							
+							<div class="form-group" ng-class="{'has-error' : clienteform.apellidos.$invalid && !clienteform.apellidos.$pristine, 'has-success': clienteform.apellidos.$valid && !clienteform.apellidos.$pristine}">
+								<label class="control-label">Apellidos</label>
+								<input type="text" name="apellidos" ng-model="vm.cliente.apellidos" class="form-control" required pattern="^[a-zA-Z]{0,30}\s?[a-zA-Z]{2,30}$" placeholder="Apellidos">
+
+								<p class="help-block" ng-show="clienteform.apellidos.$error.required && !clienteform.apellidos.$pristine">Este campo es requerido</p>
+								<p class="help-block" ng-show="clienteform.apellidos.$error.pattern && !clienteform.apellidos.$pristine">Patron no complido</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error' : clienteform.ci.$invalid && !clienteform.ci.$pristine, 'has-success': clienteform.ci.$valid && !clienteform.ci.$pristine}">
+								<label class="control-label">Numero CI</label>
+								<input type="number" name="ci" min="10" ng-model="vm.cliente.ci" class="form-control" required  placeholder="Numero de CI">
+
+								<p class="help-block" ng-show="clienteform.ci.$error.required && !clienteform.ci.$pristine">Este campo es requerido</p>
+							</div>
+							</div>
+
+							<div class="col-lg-6">
+							<div class="form-group" ng-class="{'has-error' : clienteform.email.$invalid && !clienteform.email.$pristine, 'has-success': clienteform.email.$valid && !clienteform.email.$pristine}">
+								<label class="control-label">Correo Electronico</label>
+								<input type="email" name="email" min="10" ng-model="vm.cliente.email" class="form-control" required  placeholder="Numero de CI">
+
+								<p class="help-block" ng-show="clienteform.email.$error.required && !clienteform.email.$pristine">Este campo es requerido</p>
+								<p class="help-block" ng-show="clienteform.email.$error.email && !clienteform.email.$pristine">Error formato email</p>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error' : clienteform.telefono.$invalid && !clienteform.telefono.$pristine, 'has-success': clienteform.telefono.$valid && !clienteform.telefono.$pristine}">
+								<label class="control-label">Telefono</label>
+								<input type="text" name="telefono" min="10" ng-model="vm.cliente.telefono" class="form-control" required pattern="^[3|2|4|6|7][0-9]{6,7}$" placeholder="Telefono">
+
+								<p class="help-block" ng-show="clienteform.telefono.$error.required && !clienteform.telefono.$pristine">Este campo es requerido</p>
+								<p class="help-block" ng-show="clienteform.telefono.$error.pattern && !clienteform.telefono.$pristine">Error formato telefono</p>
+							</div>
+
+							<button class="btn btn-success" ng-disabled="clienteform.$invalid">Registrar Cliente</button>
+							</div>
+						</form>
+					
+					
+				</div>	
+			</div>	
+
+		</div>
+	</div>
+</div>

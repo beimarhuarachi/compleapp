@@ -51,4 +51,17 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 				icono : 'fa fa-fw fa-table'
 			}
 		})
+		/**
+		 * Estado para registro de clientes
+		 */
+		.state('app.admin.registrar-cliente', {
+			url : '/registrarCliente',
+			templateUrl : 'app/admin/registro-cliente/registro-cliente.view.html',
+			controller : 'RegistroClienteController',
+			controllerAs : 'vm',
+			data : {
+				nombrepagina : 'Registro Clientes',
+				icono : 'fa fa-fw fa-users'
+			}
+		})
 }

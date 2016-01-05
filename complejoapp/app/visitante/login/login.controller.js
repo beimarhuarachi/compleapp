@@ -29,7 +29,7 @@ function LoginController($scope, $log, $state, autorizacionService, superficieSe
 	 * @return {void}  no retorna valores
 	 */
 	function submitLogin(user) {
-		
+		$log.debug($scope.user);
 		autorizacionService.login(user).then(function(res) {
 			if(res.data && res.status === 200) {
 				$log.debug("Login Controller : esta retornando un token bueno");
