@@ -147,14 +147,18 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 					$rootScope.$broadcast('clickCelda', {
 						inicio : fechaInicio,
 						fin : fechaFin,
+						campo : $scope.campoSeleccionado,
 						fechasValidas : fechasValidas
 					});	
 
-					console.log(fechaInicio + "===" + fechaFin);
+					//console.log(fechaInicio + "===" + fechaFin);
 				},
 				eventClick : function(eventId){
 					var reserva = _.findWhere($scope.reservas, {id : eventId});
-					$rootScope.$broadcast('clickReserva', reserva);
+					$rootScope.$broadcast('clickReserva',{
+						campo : $scope.campoSeleccionado,
+						reserva : reserva
+					});
 				},
 
 				events : eventos,
@@ -172,7 +176,7 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 
 				var fechaComparar = moment(moment(value.inicio).format('YYYY-MM-DD'));
 
-				console.log(fechaActual.format('YYYY-MM-DD') + "-----" + fechaComparar.format('YYYY-MM-DD'));
+				//console.log(fechaActual.format('YYYY-MM-DD') + "-----" + fechaComparar.format('YYYY-MM-DD'));
 
 				//mismo dia y que el inicio sea mayor a fechaFin
 				return fechaComparar.isSame(fechaActual) && 

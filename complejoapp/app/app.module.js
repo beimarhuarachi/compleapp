@@ -6,6 +6,7 @@ angular
 		'complejo.servicios',
 		'complejo.common',
 		'ui.router',
-		'ui-notification'
+		'ui-notification',
+		'ui.bootstrap'
 		]);
 

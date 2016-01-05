@@ -4,6 +4,73 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<cd-calendario ng-if="listo" complejo="complejo"></cd-calendario>	
+		<cd-calendario ng-if="listo" complejo="complejo"></cd-calendario>	    
+	</div>
+
+	<div ng-if="!listo" class="col-lg-12">
+	    <div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-fw fa-edit"></i>Realizar Reserva</h3>
+				</div>
+
+				<div class="row">
+					<div class="panel-body">
+						
+							<form novalidate name="reservaform" ng-submit="reservar(campo)">
+								<div class="col-lg-6">
+								<div class="form-group">
+										<label class="control-label">Imagen Campo</label>
+										<img class="img-rounded" alt="Cinque Terre" width="100%" height="120" ng-src="http://localhost/compleapp/complejoapprest/{{campo.foto}}">
+									</div>
+									<div class="form-group">
+									<label class="control-label">Cliente</label>
+									<input type="text" ng-model="clienteSeleccionado" uib-typeahead="cliente as cliente.Nombres for cliente in clientes | filter:$viewValue | limitTo:8" class="form-control">
+									</div>
+
+									<div class="form-group">
+										<label class="control-label">Apellidos</label>
+										<input ng-disabled="true" type="text" ng-model="clienteSeleccionado.Apellidos" class="form-control">
+									</div>
+
+									<div class="form-group">
+										<label class="control-label">CI Cliente</label>
+										<input ng-disabled="true" type="text" ng-model="clienteSeleccionado.NumeroCI" class="form-control">
+									</div>
+
+									<div class="form-group">
+										<label class="control-label">Campo Deportivo</label>
+										<input ng-disabled="true" type="text" ng-model="campo.nombre" class="form-control">
+									</div>
+
+								</div>
+								
+								<div class="col-lg-6">
+
+									<div class="form-group">
+									<label class="control-label">Fecha</label>
+									<input ng-disabled="true" type="text" ng-model="fecha" class="form-control">
+									</div>
+
+									<div class="form-group">
+										<label class="control-label">Hora Inicio Reserva</label>
+										<input ng-disabled="true" type="text" ng-model="inicio" class="form-control">
+									</div>
+
+									<div class="form-group">
+										<label class="control-label"> Hora Fin Reserva </label>
+								    	<select class="form-control" name="superficie" required ng-model="horaFin">
+								      		<option ng-repeat="horaValida in horasValidas">{{horaValida | horaFilter}}</option>
+								    	</select>
+									</div>
+
+									<button ng-disabled="reservaform.$invalid" class="btn btn-primary">Realizar Reserva</button>
+								</div>
+								
+							</form>
+					
+					</div>	
+				</div>	
+				
+		</div>	
 	</div>
 </div>
