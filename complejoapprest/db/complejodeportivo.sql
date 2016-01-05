@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2015-12-31 15:21:30
+Date: 2016-01-04 22:47:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,23 +27,34 @@ CREATE TABLE `campo` (
   `RutaFotoCampo` varchar(255) DEFAULT NULL,
   `IdDisciplina` int(11) NOT NULL,
   `IdSuperficie` int(11) NOT NULL,
+  `IdHorario` int(11) DEFAULT NULL,
   PRIMARY KEY (`IdCampoDeportivo`),
   KEY `IdComplejo_FKCampo` (`IdComplejo`),
   KEY `IdSuperficie_FKCampo` (`IdSuperficie`),
   KEY `IdDisciplina_FKCampo` (`IdDisciplina`),
+  KEY `IdHorario_FkCampo` (`IdHorario`),
   CONSTRAINT `IdComplejo_FKCampo` FOREIGN KEY (`IdComplejo`) REFERENCES `complejo` (`IdComplejo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `IdDisciplina_FKCampo` FOREIGN KEY (`IdDisciplina`) REFERENCES `disciplina` (`IdDisciplina`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `IdHorario_FkCampo` FOREIGN KEY (`IdHorario`) REFERENCES `horario` (`IdHorario`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `IdSuperficie_FKCampo` FOREIGN KEY (`IdSuperficie`) REFERENCES `superficie` (`IdSuperficie`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of campo
 -- ----------------------------
-INSERT INTO `campo` VALUES ('1', '1', 'CanchaFutbol1', '100', 'fotos/hola.png', '1', '3');
-INSERT INTO `campo` VALUES ('2', '4', 'CanchaHockey', '120', 'fotos/holacmo.png', '4', '3');
-INSERT INTO `campo` VALUES ('4', '1', 'CanchaBacket', '80', 'fotos/vol.png', '5', '2');
-INSERT INTO `campo` VALUES ('5', '4', 'SalaEsgrima', '80', 'fotos/foto.png', '9', '6');
-INSERT INTO `campo` VALUES ('6', '1', 'Cancha1Fronton', '140', 'fotos/hofds.png', '6', '1');
+INSERT INTO `campo` VALUES ('1', '1', 'CanchaFutbol1', '100', 'uploads/imagen001.jpg', '1', '3', '1');
+INSERT INTO `campo` VALUES ('2', '4', 'CanchaHockey', '120', 'uploads/imagen001.jpg', '4', '3', '1');
+INSERT INTO `campo` VALUES ('4', '1', 'CanchaBacket', '80', 'uploads/imagen001.jpg', '5', '2', '1');
+INSERT INTO `campo` VALUES ('5', '4', 'SalaEsgrima', '80', 'uploads/imagen001.jpg', '9', '6', '2');
+INSERT INTO `campo` VALUES ('6', '1', 'Cancha1Fronton', '140', 'uploads/imagen001.jpg', '6', '1', '4');
+INSERT INTO `campo` VALUES ('7', '1', 'beimarhuarachi', '193', 'uploads/imagen001.jpg', '1', '1', '2');
+INSERT INTO `campo` VALUES ('17', '4', 'beimartesla', '100', 'uploads/imagen001.jpg', '6', '5', '6');
+INSERT INTO `campo` VALUES ('18', '4', 'CanchaBascket5', '120', 'uploads/CanchaBascket5.png', '5', '2', '4');
+INSERT INTO `campo` VALUES ('19', '4', 'jklfdsa', '45', 'uploads/jklfdsa.png', '1', '3', '6');
+INSERT INTO `campo` VALUES ('20', '4', 'fdsa', '12', 'uploads/imagen001.jpg', '1', '1', '6');
+INSERT INTO `campo` VALUES ('21', '4', 'fdsa', '12', 'uploads/imagen001.jpg', '2', '4', '7');
+INSERT INTO `campo` VALUES ('22', '4', 'fas', '22', 'uploads/imagen001.jpg', '4', '5', '4');
+INSERT INTO `campo` VALUES ('23', '1', 'ConHorario', '200', 'uploads/imagen001.jpg', '8', '7', '1');
 
 -- ----------------------------
 -- Table structure for cliente
@@ -62,12 +73,13 @@ CREATE TABLE `cliente` (
   KEY `IdComplejo` (`IdComplejo`),
   CONSTRAINT `IdUsuario_FK` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`IdComplejo`) REFERENCES `complejo` (`IdComplejo`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of cliente
 -- ----------------------------
 INSERT INTO `cliente` VALUES ('1', '1', '3', 'Ely', 'Mamani Quispe', '7894561', '4567891');
+INSERT INTO `cliente` VALUES ('2', '1', '4', 'Alvaro Tomas', 'Torrez Garcia', '4567812', '4567891');
 
 -- ----------------------------
 -- Table structure for complejo
@@ -169,21 +181,17 @@ CREATE TABLE `horario` (
   `IdHorario` int(11) NOT NULL AUTO_INCREMENT,
   `HoraInicio` time NOT NULL,
   `HoraFin` time NOT NULL,
-  `IdCampo` int(11) NOT NULL,
-  `Dia` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`IdHorario`),
-  KEY `IdCampo_FK_Horario` (`IdCampo`),
-  CONSTRAINT `IdCampo_FK_Horario` FOREIGN KEY (`IdCampo`) REFERENCES `campo` (`IdCampoDeportivo`) ON DELETE NO ACTION ON UPDATE CASCADE
+  PRIMARY KEY (`IdHorario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of horario
 -- ----------------------------
-INSERT INTO `horario` VALUES ('1', '08:00:00', '20:00:00', '1', '');
-INSERT INTO `horario` VALUES ('2', '08:00:00', '20:00:00', '2', null);
-INSERT INTO `horario` VALUES ('4', '08:00:00', '20:00:00', '4', null);
-INSERT INTO `horario` VALUES ('6', '08:00:00', '20:00:00', '5', null);
-INSERT INTO `horario` VALUES ('7', '08:00:00', '20:00:00', '6', null);
+INSERT INTO `horario` VALUES ('1', '08:00:00', '21:00:00');
+INSERT INTO `horario` VALUES ('2', '06:00:00', '18:00:00');
+INSERT INTO `horario` VALUES ('4', '08:00:00', '22:00:00');
+INSERT INTO `horario` VALUES ('6', '13:00:00', '18:00:00');
+INSERT INTO `horario` VALUES ('7', '08:00:00', '20:00:00');
 
 -- ----------------------------
 -- Table structure for reserva
@@ -211,13 +219,17 @@ CREATE TABLE `reserva` (
   CONSTRAINT `IdTipoReserva_FKReserva` FOREIGN KEY (`IdTipoReserva`) REFERENCES `tiporeserva` (`IdTipo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`IdCliente`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`IdFactura`) REFERENCES `factura` (`NumeroFactura`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of reserva
 -- ----------------------------
 INSERT INTO `reserva` VALUES ('1', '2015-12-28', '1', '1', '2015-12-28 14:00:00', '2015-12-28 16:00:00', '1', '0', '1', '0000-00-00 00:00:00', '100', '1');
 INSERT INTO `reserva` VALUES ('2', '2015-12-28', '1', '1', '2015-12-28 17:00:00', '2015-12-28 19:00:00', '2', '0', '1', null, '100', '1');
+INSERT INTO `reserva` VALUES ('5', '2016-01-02', '1', '1', '2015-12-28 12:00:00', '2015-12-28 14:00:00', '2', '0', '1', null, '500', '1');
+INSERT INTO `reserva` VALUES ('6', '2016-01-02', '1', '1', '2015-12-28 19:00:00', '2015-12-28 21:00:00', '2', '0', '1', null, '100', '1');
+INSERT INTO `reserva` VALUES ('7', '2016-01-01', '1', '1', '2016-01-01 08:00:00', '2016-01-01 10:00:00', '1', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('8', '2016-01-02', '2', '1', '2016-01-01 08:00:00', '2016-01-01 10:00:00', '1', '0', '1', null, '100', '1');
 
 -- ----------------------------
 -- Table structure for rol
@@ -324,7 +336,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`IdUsuario`),
   KEY `IdRol_FK_Usuario` (`IdRol`),
   CONSTRAINT `IdRol_FK_Usuario` FOREIGN KEY (`IdRol`) REFERENCES `rol` (`IdRol`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of usuario
@@ -332,3 +344,4 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` VALUES ('1', 'beimar020@gmail.com', 'beimarhuarachi', '1', 'beimarhuarachi');
 INSERT INTO `usuario` VALUES ('2', 'jorge@gmail.com', 'jorgehuarachi', '1', 'jorgehuarachi');
 INSERT INTO `usuario` VALUES ('3', 'ely@hotmail.com', 'elymamani', '2', 'elymamani');
+INSERT INTO `usuario` VALUES ('4', 'alvaro@gmail.com', 'alvaro', '2', 'alvaro');

@@ -44,7 +44,7 @@ function ReservaController($scope, $log, reservaService, complejoService, $state
 	}).$promise.then(function(res) {
 		//$log.debug(res);
 		return clienteService.get(function(res) {
-			$log.debug(res.response);
+			//$log.debug(res.response);
 			$scope.clientes = res.response;
 		}).$promise;
 	}, function(error) {

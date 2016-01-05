@@ -44,6 +44,8 @@ function cdCalendario($log, $rootScope, campoService, reservaService, calendario
 
 		function actualizarReservas(campo) {
 			//$log.debug(campo);
+			$scope.horaMinima = campo.inicio;
+			$scope.horaMaxima = campo.fin;
 			$scope.crearCalendarioSemanal(campo, $scope.inicioSemana, $scope.finSemana);
 		}
 	}
