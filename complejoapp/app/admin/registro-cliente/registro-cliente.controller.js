@@ -2,9 +2,11 @@ angular
 	.module('complejo.admin')
 	.controller('RegistroClienteController', RegistroClienteController);
 
-RegistroClienteController.$inject = ['$state', 'autorizacionService', 'complejoService', '$log'];
+RegistroClienteController.$inject = ['$state', 'autorizacionService', 'complejoService', 
+									'$log', 'clienteService', 'Notification', '$scope'];
 
-function RegistroClienteController($state, autorizacionService, complejoService, $log) {
+function RegistroClienteController($state, autorizacionService, complejoService, 
+								$log, clienteService, Notification, $scope) {
 	var vm = this;
 
 	/**
@@ -29,6 +31,21 @@ function RegistroClienteController($state, autorizacionService, complejoService,
 	 * @return {void}         No retorna nada
 	 */
 	function submit(cliente) {
-		$log.debug(cliente);
+		cliente.idcomplejo = vm.complejo.idcomplejo;
+
+		//$log.debug(cliente);
+
+		clienteService.save({}, {cliente: cliente})
+			.$promise
+			.then(function(res) {
+				//$log.debug(res.response);
+				vm.cliente = {};
+				$scope.clienteform.$setPristine();
+
+				Notification.success({title: "Registro de Cliente", message : "Se ha registrado el al cliente Correctamente"});
+			}, function(res) {
+				$log.debug(res);
+				Notification.error({title: "Error : Registro de Cliente", message : res.data.response});
+			});
 	}
 }

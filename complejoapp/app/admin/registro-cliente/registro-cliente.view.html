@@ -38,7 +38,7 @@
 							<div class="col-lg-6">
 							<div class="form-group" ng-class="{'has-error' : clienteform.email.$invalid && !clienteform.email.$pristine, 'has-success': clienteform.email.$valid && !clienteform.email.$pristine}">
 								<label class="control-label">Correo Electronico</label>
-								<input type="email" name="email" min="10" ng-model="vm.cliente.email" class="form-control" required  placeholder="Numero de CI">
+								<input type="email" name="email" min="10" ng-model="vm.cliente.email" class="form-control" required  placeholder="Correo Electronico">
 
 								<p class="help-block" ng-show="clienteform.email.$error.required && !clienteform.email.$pristine">Este campo es requerido</p>
 								<p class="help-block" ng-show="clienteform.email.$error.email && !clienteform.email.$pristine">Error formato email</p>

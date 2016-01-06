@@ -99,6 +99,7 @@ $route['complejos/(:num)/campos']['post'] = 'campoService/guardar/$1';
  * rutas para el servicio de clientes => para un complejo
  */
 $route['clientes']['get'] = 'clienteService/index';
+$route['clientes']['post'] = 'clienteService/guardar';
 
 /**
  * rutas para el servicio de reservas

@@ -72,7 +72,7 @@ class CampoService extends REST_Controller {
 		if(is_null($campoId)) {
 			$this->response(array("response" => "No se pudo crear"), 404);			
 		} else {
-			$this->response(array("response" => $usuario, "token"=> $jwt), 200);
+			$this->response(array("response" => $campoId, "token"=> $jwt), 201);
 		}
 
 	}

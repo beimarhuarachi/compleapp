@@ -51,7 +51,7 @@ class ReservaService extends REST_Controller {
 			$this->response(array("response"=>"Error en los datos"), 400);
 		}
 
-		$this->response(array("response"=>$idreserva));
+		$this->response(array("response"=>$idreserva), 201);
 	}
 
 }
