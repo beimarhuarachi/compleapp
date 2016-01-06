@@ -23,7 +23,7 @@ class ComplejoService extends REST_Controller {
 		$complejo = $this->complejoModel->obtenerComplejoPublico($id);
 
 		if($complejo == false) {
-			$this->response(array("response"=>"El complejo no existe"), 401);
+			$this->response(array("response"=>"El complejo no existe"), 404);
 		}
 		
 		$this->response(array("response"=>$complejo), 200);

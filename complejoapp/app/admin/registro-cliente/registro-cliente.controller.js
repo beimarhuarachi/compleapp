@@ -2,11 +2,9 @@ angular
 	.module('complejo.admin')
 	.controller('RegistroClienteController', RegistroClienteController);
 
-RegistroClienteController.$inject = ['$state', 'autorizacionService', 'complejoService', 
-									'$log', 'clienteService', 'Notification', '$scope'];
+RegistroClienteController.$inject = ['$state', '$log', 'clienteService', 'Notification', '$scope'];
 
-function RegistroClienteController($state, autorizacionService, complejoService, 
-								$log, clienteService, Notification, $scope) {
+function RegistroClienteController($state, $log, clienteService, Notification, $scope) {
 	var vm = this;
 
 	/**
@@ -19,11 +17,7 @@ function RegistroClienteController($state, autorizacionService, complejoService,
 
 	vm.submit = submit;
 
-	complejoService.query({id : autorizacionService.getIdUsuario()}, function(res) {
-		vm.complejo = res.response;
-	}, function(error) {
-		$log.error("RegistroCampoController : complejo service error");
-	});
+	vm.complejo = $scope.complejo;
 
 	/**
 	 * Funcion que envia la peticion para registro

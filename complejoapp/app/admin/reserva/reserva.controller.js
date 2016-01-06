@@ -2,17 +2,17 @@ angular
 	.module('complejo.admin')
 	.controller('ReservaController', ReservaController);
 
-ReservaController.$inject = ['$scope', '$log', 'reservaService', 'complejoService', 
-							 '$state', 'autorizacionService', 'clienteService', '$filter', 'Notification'];
+ReservaController.$inject = ['$scope', '$log', 'reservaService', 
+							 '$state', 'clienteService', '$filter', 'Notification'];
 
-function ReservaController($scope, $log, reservaService, complejoService, $state, 
-							autorizacionService, clienteService, $filter, Notification) {
+function ReservaController($scope, $log, reservaService, $state, 
+							clienteService, $filter, Notification) {
 	$log.debug('ReservaController : inicializado');
 	$scope.datospagina = $state.current.data;
 
 	//Datos que necesita la directiva del calendario
-	$scope.complejo = {};
-	$scope.listo = false;
+	$scope.complejo = $scope.complejo;
+	$scope.listo = true;
 	
 	$scope.$on('clickCelda', function(event, data) {
 		//$log.debug(data);
@@ -37,23 +37,9 @@ function ReservaController($scope, $log, reservaService, complejoService, $state
 	$scope.cancelar = cancelar;
 	$scope.reservar = reservar;
 
-	complejoService.query({id : autorizacionService.getIdUsuario()}, function(res) {
+	clienteService.get(function(res) {
 		//$log.debug(res.response);
-		$scope.nombre = res.response.nombre;
-		$scope.complejo = res.response;
-		$scope.listo = true;
-	}).$promise.then(function(res) {
-		//$log.debug(res);
-		return clienteService.get(function(res) {
-			//$log.debug(res.response);
-			$scope.clientes = res.response;
-		}).$promise;
-	}, function(error) {
-		$log.debug(error);
-	}).then(function(res) {
-		//$log.debug(res);
-	}, function(error) {
-		$log.debug(error);
+		$scope.clientes = res.response;
 	});
 
 	function cancelar() {

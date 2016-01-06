@@ -14,7 +14,23 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 			url : '/admin',
 			//template : '<ui-view/>'
 			templateUrl : 'app/admin/admin.layout.html',
-			controller : 'AdminLayoutController'
+			controller : 'AdminLayoutController',
+			resolve : {
+				complejo : ['$log', 'complejoService', 'autorizacionService', '$state','$q' ,
+				function($log, complejoService, autorizacionService, $state, $q) {
+					var defered = $q.defer();
+					complejoService.query({id : autorizacionService.getIdUsuario()}).$promise.then(function(res) {
+						$log.debug('UI-router: Resolve ->admin : exito');
+						defered.resolve(res.response);
+					}, function(error) {
+						$log.debug('UI-router: Resolve ->admin :Error');
+						defered.reject(error);
+						$state.go('app.admin.inicio');
+					});
+
+					return defered.promise;
+				}]
+			}
 		})
 		/**
 		 * Pagina de Inicio del Administrador
@@ -62,6 +78,19 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 			data : {
 				nombrepagina : 'Registro Clientes',
 				icono : 'fa fa-fw fa-users'
+			}
+		})
+		/**
+		 * Estado para reservas especiales
+		 */
+		.state('app.admin.reserva-especial', {
+			url :'/reservaEspecial',
+			templateUrl : 'app/admin/reserva-especial/reserva-especial.view.html',
+			controller : 'ReservaEspecialController',
+			controllerAs : 'vm',
+			data : {
+				nombrepagina : 'Reserva Especial',
+				icono : 'fa fa-fw fa-tablet'
 			}
 		})
 }
