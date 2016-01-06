@@ -108,6 +108,11 @@ $route['clientes']['post'] = 'clienteService/guardar';
 $route['campos/(:num)/reservas']['get'] = 'reservaService/index/$1';
 $route['campos/(:num)/reservas']['post'] = 'reservaService/guardar/$1';
 
+/**
+ * rutas para el servico de reservas especiales
+ */
+$route['campos/(:num)/reservasEspeciales']['post'] = 'reservaEspecialService/guardar/$1';
+
 
 
 

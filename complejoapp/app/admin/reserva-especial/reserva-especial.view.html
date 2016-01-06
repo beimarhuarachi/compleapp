@@ -1,4 +1,12 @@
 
 <cd-cabecera-pagina nombrecomplejo="{{vm.complejo.nombre}}" datospagina="vm.datospagina"></cd-cabecera-pagina>
 
-<div>Reserva especial  {{vm.complejo}}</div>
+<div class="row">
+	<div class="col-lg-12">
+			<cd-calendario ng-if="vm.listo" complejo="vm.complejo"></cd-calendario>	    
+	</div>
+	
+	<div ng-if="!vm.listo" class="col-lg-12">
+		
+	</div>
+</div>

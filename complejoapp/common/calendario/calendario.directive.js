@@ -109,7 +109,7 @@ function cdCalendario($log, $rootScope, campoService, reservaService, calendario
 							title : res.response[i].nombretipo,
 							start : res.response[i].inicio,
 							end : res.response[i].fin,
-							backgroundColor: '#34B5A7',
+							backgroundColor: background(res.response[i].nombretipo),
 							textColor : '#FFF'
 					}
 
@@ -121,6 +121,26 @@ function cdCalendario($log, $rootScope, campoService, reservaService, calendario
 			}, function(error) {
 				$log.debug("Directiva Calendario Error: reservaService peticion");
 			});
+		}
+
+		function background(tiporeserva) {
+			var color = "";
+			switch(tiporeserva){
+				case "Normal" : 
+					color = "#34B5A7";
+					break;
+				case "Especial" : 
+					color = "#284269";
+					break;
+				case "Evento" :
+					color = "#B6B21F";
+					break;
+				case "Prereserva" :
+					color = "#7A458B";
+					break;
+			} 
+
+			return color;
 		}
 
 		function renderizarCalendario(eventos) {
