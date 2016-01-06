@@ -2,9 +2,9 @@ angular
 	.module('complejo.admin')
 	.controller('ReservaEspecialController', ReservaEspecialController);
 
-ReservaEspecialController.$inject = ['$log', '$state', '$scope', 'reservaEspecialService'];
+ReservaEspecialController.$inject = ['$log', '$state', '$scope', 'reservaEspecialService', '$filter', 'Notification'];
 
-function ReservaEspecialController($log, $state, $scope, reservaEspecialService) {
+function ReservaEspecialController($log, $state, $scope, reservaEspecialService, $filter, Notification) {
 	$log.debug('ReservaEspecialController : inicializado');
 	var vm = this;
 
@@ -29,6 +29,7 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService)
 	 */
 	vm.ocultarCalendario = ocultarCalendario;
 	vm.registrarReservaEspecial = registrarReservaEspecial;
+	vm.cancelar = cancelar;
 
 	/**
 	 * Eventos de la directiva calendario
@@ -40,13 +41,28 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService)
 	 * Funcion para registrar reserva especial
 	 */
 	function registrarReservaEspecial(reservaEspecial) {
-		reservaEspecialService.save({id: 12}, {reserva : "fdshakfkdjs"}).$promise
+		$log.debug(reservaEspecial);
+		var texto = moment(reservaEspecial.inicio).format('YYYY-MM-DD');
+		reservaEspecial.fin = moment(texto + " " + reservaEspecial.fin).format('YYYY-MM-DD HH:mm:ss');
+
+		if(!moment(reservaEspecial.fin).isValid()) {
+			console.log("La fecha fin no es valida");
+			return;
+		}
+
+		reservaEspecialService.save({id: 12}, {reserva : reservaEspecial}).$promise
 			.then(function(res) {
-				$log.debug("ReservaEspecialController : enviado peticion registro reserva especial");
+				Notification.success({title: "Reserva Especial", message : "Se ha registrado la Reserva Correctamente"});
+				vm.cancelar();
 				$log.debug(res.response);
 			}, function(error) {
 				$log.debug(error);
+				Notification.error({title: "Reserva Especial", message : "Ha ocurrido un error en el proceso"});
 			});
+	}
+
+	function cancelar() {
+		vm.listo = !vm.listo;
 	}
 
 	/**
@@ -54,8 +70,22 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService)
 	 * data contiene el inicio, fin, campo y un array de fechaValidas de finalizacion de la Reserva
 	 */
 	function onclickCelda(event, data) {
-		//$log.debug(data);
+		$log.debug(data);
 		vm.ocultarCalendario();
+		vm.data = data;
+		vm.inicio = $filter('horaFilter')(data.inicio);
+		vm.fecha = moment(data.inicio).format("dddd, DD MMM");
+
+		vm.reservaEspecial = {
+			fecha : moment().format('YYYY-MM-DD'),
+			idcampo : data.campo.idcampo,
+			inicio : data.inicio,
+			fin: data.fin,
+			reservaespecial : 1,
+			confirmado : 1,
+			precio : 0, 
+			idtiporeserva : 2
+		}
 	}
 
 	/**

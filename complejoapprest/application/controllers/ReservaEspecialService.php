@@ -7,13 +7,26 @@ require APPPATH . "/libraries/Verificador.php";
 class ReservaEspecialService extends REST_Controller {
 
 	public function __construct() {
-		parent::__construct();		
+		parent::__construct();
+		$this->load->model('reservaModel');		
 	}
 
 	public function guardar_post($idcampo) {
 		$usuario = Verificador::verificacionCompleta($this);
 
 		$reserva = $this->post("reserva");
+
+		if(!$reserva) {
+			$this->response(array("response"=> "Debe enviarse una reserva"), 400);
+		}
+
+		$existeReserva = $this->reservaModel->verificarReservaExistente($reserva);
+
+		if($existeReserva) {
+			$this->response(array('response'=>'Existe una reserva en estas horas'), 400);
+		} 
+
+		
 
 		$this->response(array("response" => $reserva));
 	}
