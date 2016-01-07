@@ -1,8 +1,10 @@
 <?php
+use Carbon\Carbon;
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require APPPATH . "/libraries/REST_Controller.php";
 require APPPATH . "/libraries/Verificador.php";
+require APPPATH . "/libraries/VerificadorReservas.php";
 
 class ReservaEspecialService extends REST_Controller {
 
@@ -20,20 +22,22 @@ class ReservaEspecialService extends REST_Controller {
 		if(!$reserva) {
 			$this->response(array("response"=> "Debe enviarse una reserva"), 400);
 		}
+		
+		$reservas = VerificadorReservas::verificarYRetornarReservas($this, $reserva);
 
-		$existeReserva = $this->reservaModel->verificarReservaExistente($reserva);
+		$reservasids = array(); 
+		foreach ($reservas as $reserva) {
+			$idreserva = $this->reservaEspecialModel->registrarReservaEspecial($reserva);
 
-		if($existeReserva) {
-			$this->response(array('response'=>'Existe una reserva en estas horas'), 412);
-		} 
+			if(is_null($idreserva)) {
+				$this->response(array("response"=>"Error en los datos, no se pudo insertar"), 400);
+			}
 
-		$idreserva = $this->reservaEspecialModel->registrarReservaEspecial($reserva);
-
-		if(is_null($idreserva)) {
-			$this->response(array("response"=>"Error en los datos"), 400);
+			array_push($reservasids, $idreserva);
 		}
 
-		$this->response(array("response" => $idreserva), 201);
+		$this->response(array("response" => $reservasids), 201);
+
 	}
 
 }

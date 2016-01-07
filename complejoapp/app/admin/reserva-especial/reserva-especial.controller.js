@@ -9,9 +9,13 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService,
 	var vm = this;
 
 	/**
-	 * Campo de VM
+	 * Campos de VM
 	 */
 	vm.reservaEspecial = {};
+	vm.reservaPeriodica = false;
+	vm.veces = 1;
+	vm.tipos = ['Diario', 'Semanal'];
+	vm.tipoperiodico = vm.tipos[0];
 	
 	/**
 	 * Datos para la directiva calendario
@@ -30,6 +34,10 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService,
 	vm.ocultarCalendario = ocultarCalendario;
 	vm.registrarReservaEspecial = registrarReservaEspecial;
 	vm.cancelar = cancelar;
+	vm.cambioEstado = function() {
+		vm.tipoperiodico = vm.tipos[0];
+		vm.veces = 1;
+	}
 
 	/**
 	 * Eventos de la directiva calendario
@@ -41,9 +49,11 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService,
 	 * Funcion para registrar reserva especial
 	 */
 	function registrarReservaEspecial(reservaEspecial) {
-		$log.debug(reservaEspecial);
+		//$log.debug(reservaEspecial);
 		var texto = moment(reservaEspecial.inicio).format('YYYY-MM-DD');
 		reservaEspecial.fin = moment(texto + " " + reservaEspecial.fin).format('YYYY-MM-DD HH:mm:ss');
+		reservaEspecial.periodico = vm.tipoperiodico;
+		reservaEspecial.veces = vm.veces;
 
 		if(!moment(reservaEspecial.fin).isValid()) {
 			console.log("La fecha fin no es valida");
@@ -57,11 +67,15 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService,
 				$log.debug(res.response);
 			}, function(error) {
 				$log.debug(error);
-				Notification.error({title: "Reserva Especial", message : "Ha ocurrido un error en el proceso"});
+				Notification.error({title: "Reserva Especial", message : error.data.response});
 			});
 	}
 
 	function cancelar() {
+		vm.reservaPeriodica = false;
+		vm.tipoperiodico = vm.tipos[0];
+		vm.veces = 1;
+
 		vm.listo = !vm.listo;
 	}
 
@@ -70,7 +84,7 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService,
 	 * data contiene el inicio, fin, campo y un array de fechaValidas de finalizacion de la Reserva
 	 */
 	function onclickCelda(event, data) {
-		$log.debug(data);
+		//$log.debug(data);
 		vm.ocultarCalendario();
 		vm.data = data;
 		vm.inicio = $filter('horaFilter')(data.inicio);
@@ -84,7 +98,9 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService,
 			reservaespecial : 1,
 			confirmado : 1,
 			precio : 0, 
-			idtiporeserva : 2
+			idtiporeserva : 2,
+			periodico : vm.tipoperiodico,
+			veces : vm.veces
 		}
 	}
 
