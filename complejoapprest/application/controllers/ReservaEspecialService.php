@@ -8,7 +8,8 @@ class ReservaEspecialService extends REST_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('reservaModel');		
+		$this->load->model('reservaModel');	
+		$this->load->model('reservaEspecialModel');	
 	}
 
 	public function guardar_post($idcampo) {
@@ -23,12 +24,16 @@ class ReservaEspecialService extends REST_Controller {
 		$existeReserva = $this->reservaModel->verificarReservaExistente($reserva);
 
 		if($existeReserva) {
-			$this->response(array('response'=>'Existe una reserva en estas horas'), 400);
+			$this->response(array('response'=>'Existe una reserva en estas horas'), 412);
 		} 
 
-		
+		$idreserva = $this->reservaEspecialModel->registrarReservaEspecial($reserva);
 
-		$this->response(array("response" => $reserva));
+		if(is_null($idreserva)) {
+			$this->response(array("response"=>"Error en los datos"), 400);
+		}
+
+		$this->response(array("response" => $idreserva), 201);
 	}
 
 }
