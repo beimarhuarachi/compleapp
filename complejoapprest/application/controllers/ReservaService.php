@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require APPPATH . 'libraries/REST_Controller.php';
 require APPPATH . "/libraries/Verificador.php";
+require APPPATH . "/libraries/VerificadorReservas.php";
 
 class ReservaService extends REST_Controller {
 
@@ -39,19 +40,20 @@ class ReservaService extends REST_Controller {
 		 */
 		$idfactura = 1;
 
-		$existeReserva = $this->reservaModel->verificarReservaExistente($reserva);
+		$reservas = VerificadorReservas::verificarYRetornarReservas($this, $reserva);
 
-		if($existeReserva) {
-			$this->response(array('response'=>'Existe una reserva en estas horas'), 400);
-		} 
+		$reservasids = array(); 
+		foreach ($reservas as $reserva) {
+			$idreserva = $this->reservaModel->registrarReserva($reserva, $idfactura);
 
-		$idreserva = $this->reservaModel->registrarReserva($reserva, $idfactura);
+			if(is_null($idreserva)) {
+				$this->response(array("response"=>"Error en los datos, no se pudo insertar"), 400);
+			}
 
-		if(is_null($idreserva)) {
-			$this->response(array("response"=>"Error en los datos"), 400);
+			array_push($reservasids, $idreserva);
 		}
 
-		$this->response(array("response"=>$idreserva), 201);
+		$this->response(array("response"=>$reservasids), 201);
 	}
 
 }

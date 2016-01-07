@@ -13,6 +13,18 @@ function ReservaController($scope, $log, reservaService, $state,
 	//Datos que necesita la directiva del calendario
 	$scope.complejo = $scope.complejo;
 	$scope.listo = true;
+
+	/**
+	 * campos para la reserva periodica
+	 */
+	$scope.reservaPeriodica = false;
+	$scope.veces = 1;
+	$scope.tipos = ['Diario', 'Semanal'];
+	$scope.tipoperiodico = $scope.tipos[0];
+	$scope.cambioEstado = function() {
+		$scope.tipoperiodico = $scope.tipos[0];
+		$scope.veces = 1;
+	}
 	
 	$scope.$on('clickCelda', function(event, data) {
 		//$log.debug(data);
@@ -43,15 +55,20 @@ function ReservaController($scope, $log, reservaService, $state,
 	});
 
 	function cancelar() {
+		$scope.reservaPeriodica = false;
+		$scope.tipoperiodico = $scope.tipos[0];
+		$scope.veces = 1;
+
 		$scope.listo = !$scope.listo;
 	}
 
-	function reservar(campo, clienteSeleccionado, horaFin) {
+	function reservar(campo, clienteSeleccionado, horaFin, tipoperiodico, veces) {
 		if(!clienteSeleccionado) {
 			return;
 		}
 		var precio = calcularPrecio($scope.inicio, horaFin, $scope.campo.precio);
 		var textoFecha = moment($scope.fechaReserva).format('YYYY-MM-DD'); 
+
 		var reserva = {
 			fecha : moment().format('YYYY-MM-DD'),
 			idcampo : $scope.campo.idcampo,
@@ -60,7 +77,9 @@ function ReservaController($scope, $log, reservaService, $state,
 			fin : textoFecha + " " + horaFin,
 			confirmado : 1,
 			precio : precio,
-			idtiporeserva : 1
+			idtiporeserva : 1,
+			periodico : tipoperiodico,
+			veces : veces
 		}
 
 		reservaService.save({id: reserva.idcampo},{reserva : reserva}, function(res) {
@@ -69,7 +88,7 @@ function ReservaController($scope, $log, reservaService, $state,
 			$scope.listo = !$scope.listo;
 		}, function(error) {
 			$log.error(error);
-			Notification.error({title: "Registro de Reserva", message : "Ha ocurrido un error en el proceso"});
+			Notification.error({title: "Registro de Reserva", message : error.data.response});
 		});
 
 	}

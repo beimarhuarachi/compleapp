@@ -16,7 +16,7 @@
 				<div class="row">
 					<div class="panel-body">
 						
-							<form novalidate name="reservaform" ng-submit="reservar(campo, clienteSeleccionado, horaFin)">
+							<form novalidate name="reservaform" ng-submit="reservar(campo, clienteSeleccionado, horaFin, tipoperiodico, veces)">
 								<div class="col-lg-6">
 									<div class="form-group">
 										<img class="img-rounded" alt="Cinque Terre" width="100%" height="120" ng-src="http://localhost/compleapp/complejoapprest/{{campo.foto}}">
@@ -24,7 +24,7 @@
 
 									<div class="form-group">
 										<label class="control-label">Cliente</label>
-										<input type="text" name="cliente" ng-model="clienteSeleccionado" uib-typeahead="cliente as cliente.Nombres for cliente in clientes | filter:$viewValue | limitTo:8" class="form-control">
+										<input type="text" name="cliente" required ng-model="clienteSeleccionado" uib-typeahead="cliente as cliente.Nombres for cliente in clientes | filter:$viewValue | limitTo:8" class="form-control">
 
 									</div>
 
@@ -63,6 +63,33 @@
 								      		<option ng-repeat="horaValida in horasValidas">{{horaValida | horaFilter}}</option>
 								    	</select>
 									</div>
+									
+									<!-- PARA LAS RESERVAS PERIODICAS -->
+									<div class="row">
+										<div class="col-lg-12">
+											<label class="checkbox-inline">
+												<input type="checkbox" ng-model="reservaPeriodica" ng-change="cambioEstado()"> Reserva Periodica
+											</label>
+										</div>
+
+										<div ng-show="reservaPeriodica" class="col-lg-6">
+											<div class="form-group">
+												<label class="control-label">Tipo</label>
+										    	<select class="form-control" name="tipo" required ng-model="tipoperiodico">
+										      		<option ng-repeat="tipo in tipos">{{tipo}}</option>
+										    	</select>
+											</div>
+										</div>
+
+										<div ng-show="reservaPeriodica" class="col-lg-6">
+											<div class="form-group">
+												<label class="control-label">Veces</label>
+												<input name="veces" required ng-model="veces" class="form-control" type="number" min="1" max="10">
+											</div>
+										</div>
+
+									</div>
+									<!-- FIN RESERVAS PERIODICAS  -->
 
 									<button ng-disabled="reservaform.$invalid" class="btn btn-primary">Realizar Reserva</button>
 									<button class="btn btn-danger" ng-click="cancelar()">Cancelar</button>

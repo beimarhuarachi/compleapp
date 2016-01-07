@@ -29,7 +29,7 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<label class="checkbox-inline">
-												<input type="checkbox" ng-model="vm.reservaPeriodica"ng-change="vm.cambioEstado()"> Reserva Periodica
+												<input type="checkbox" ng-model="vm.reservaPeriodica" ng-change="vm.cambioEstado()"> Reserva Periodica
 											</label>
 										</div>
 
@@ -45,7 +45,7 @@
 										<div ng-show="vm.reservaPeriodica" class="col-lg-6">
 											<div class="form-group">
 												<label class="control-label">Veces</label>
-												<input name="veces" ng-model="vm.veces" class="form-control" type="number" min="1" max="10">
+												<input name="veces" required ng-model="vm.veces" class="form-control" type="number" min="1" max="10">
 											</div>
 										</div>
 
