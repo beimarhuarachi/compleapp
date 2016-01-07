@@ -39,7 +39,7 @@ function cdCalendario($log, $rootScope, campoService, reservaService, calendario
 			//$log.debug(res.response);
 			$scope.campos = res.response;
 		}, function(error) {
-			$log.debug('Calendario directive Error: peticion de campos');
+			$log.debug('Calendario directive Error: ' + error.data.response);
 		});
 
 		function actualizarReservas(campo) {
