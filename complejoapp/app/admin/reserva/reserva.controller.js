@@ -63,6 +63,7 @@ function ReservaController($scope, $log, reservaService, $state,
 	}
 
 	function reservar(campo, clienteSeleccionado, horaFin, tipoperiodico, veces) {
+		//$log.debug(clienteSeleccionado);
 		if(!clienteSeleccionado) {
 			return;
 		}
@@ -85,7 +86,8 @@ function ReservaController($scope, $log, reservaService, $state,
 		reservaService.save({id: reserva.idcampo},{reserva : reserva}, function(res) {
 			$log.debug(res.response);
 			Notification.success({title: "Registro de Reserva", message : "Se ha registrado la Reserva Correctamente"});
-			$scope.listo = !$scope.listo;
+			//$scope.listo = !$scope.listo;
+			$state.go('app.admin.impresion-factura');
 		}, function(error) {
 			$log.error(error);
 			Notification.error({title: "Registro de Reserva", message : error.data.response});

@@ -11,6 +11,8 @@ class ReservaService extends REST_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('reservaModel');
+		$this->load->model('clienteModel');
+		$this->load->model('facturaModel');
 	}
 	//rutas antepuesto por /campos/1/reservas =>para el campo tal insetar reserva
 	public function index_get($idcampo) {
@@ -35,14 +37,25 @@ class ReservaService extends REST_Controller {
 			$this->response(array("response"=> "Debe enviarse una reserva"), 400);
 		}
 
+		
+		$idcliente = $reserva['idcliente'];//para revisar y controlar que se envie el id valido
+
+		if($this->clienteModel->verificarClientePorId($idcliente) == FALSE) {
+			$this->response(array("response"=> "No Existe ese cliente"), 412);
+		}
+
 		/**
 		 * id factura por defecto
 		 */
-		$idfactura = 1;
+		$idfactura = $this->facturaModel->crearFactura($idcliente, $reserva['fecha']);
+		if(is_null($idfactura)) {
+			$this->response(array("response"=> "No se pudo crear factura"), 412);
+		}
 
 		$reservas = VerificadorReservas::verificarYRetornarReservas($this, $reserva);
 
 		$reservasids = array(); 
+		array_push($reservasids, $idfactura);
 		foreach ($reservas as $reserva) {
 			$idreserva = $this->reservaModel->registrarReserva($reserva, $idfactura);
 
@@ -53,6 +66,10 @@ class ReservaService extends REST_Controller {
 			array_push($reservasids, $idreserva);
 		}
 
+		/**
+		 * El array que retorna contiene : Como primer elemento el ID de la factura 
+		 * y los demas IDs son de las reservas
+		 */
 		$this->response(array("response"=>$reservasids), 201);
 	}
 

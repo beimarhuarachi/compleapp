@@ -19,6 +19,19 @@ class ClienteModel extends CI_Model {
 
 	}
 
+	public function verificarClientePorId($id) {
+		$consulta = $this->db->select("*")
+							 ->from("cliente")
+							 ->where("IdCliente", $id)
+							 ->get();
+
+		if($consulta->num_rows() === 1) {
+			return TRUE;
+		}
+
+		return FALSE;		
+	}
+
 	public function existeCliente($cliente) {
 		$ci = $cliente['ci'];
 

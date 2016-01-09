@@ -11,7 +11,7 @@ class ReservaModel extends CI_Model {
 		$datos = array(
 				"FechaRegistro" => $reserva['fecha'],
 				"IdCampo" => $reserva['idcampo'],
-				"IdCliente" => $reserva['idcliente'],
+				//"IdCliente" => $reserva['idcliente'],
 				"Inicio" => $reserva['inicio'],
 				"Fin" => $reserva['fin'],
 				"IdFactura" => $idfactura,

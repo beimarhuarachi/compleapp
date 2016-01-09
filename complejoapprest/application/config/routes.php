@@ -96,7 +96,7 @@ $route['complejos/(:num)/campos']['get'] = 'campoService/index/$1';
 $route['complejos/(:num)/campos']['post'] = 'campoService/guardar/$1';
 
 /**
- * rutas para el servicio de clientes => para un complejo
+ * rutas para el servicio de clientes => para un complejo, para clientes de manera publica
  */
 $route['clientes']['get'] = 'clienteService/index';
 $route['clientes']['post'] = 'clienteService/guardar';
@@ -112,6 +112,12 @@ $route['campos/(:num)/reservas']['post'] = 'reservaService/guardar/$1';
  * rutas para el servico de reservas especiales
  */
 $route['campos/(:num)/reservasEspeciales']['post'] = 'reservaEspecialService/guardar/$1';
+
+/**
+ * rutas para el servicio de facturas
+ */
+$route['facturas/(:num)/clientes']['get'] = 'facturaService/getClientes/$1';
+$route['facturas/(:num)/reservas']['get'] = 'facturaService/getReservas/$1';
 
 
 

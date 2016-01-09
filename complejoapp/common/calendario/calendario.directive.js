@@ -38,6 +38,13 @@ function cdCalendario($log, $rootScope, campoService, reservaService, calendario
 		campoService.get({com : $scope.complejo.idcomplejo}, function(res) {
 			//$log.debug(res.response);
 			$scope.campos = res.response;
+
+			if($scope.campos.length >= 1) {
+				$scope.campoSeleccionado = $scope.campos[0];
+				
+				actualizarReservas($scope.campoSeleccionado);
+			}
+			
 		}, function(error) {
 			$log.debug('Calendario directive Error: ' + error.data.response);
 		});

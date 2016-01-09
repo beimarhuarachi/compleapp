@@ -37,11 +37,13 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 		 */
 		.state('app.admin.inicio', {
 			url : '/inicio',
-			template : 'Pagina de inicio de admin',
+			templateUrl : 'app/admin/inicio/admin-inicio.view.html',
 			data : {
 				nombrepagina : 'Inicio',
 				icono : 'fa fa-dashboard'
-			}
+			},
+			controller : 'InicioController',
+			controllerAs : 'vm'
 		})
 		/**
 		 * Estado para el registro de una nuevo campo
@@ -91,6 +93,56 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 			data : {
 				nombrepagina : 'Reserva Especial',
 				icono : 'fa fa-fw fa-tablet'
+			}
+		})
+		/*
+		 * Estado para impresion de facturas
+		 */
+		.state('app.admin.impresion-factura', {
+			url : '/imprimirFactura/:id',
+			templateUrl : 'app/admin/impresion-factura/impresion-factura.view.html',
+			controller : 'ImpresionFacturaController',
+			controllerAs : 'vm',
+			data : {
+				nombrepagina : 'Imprimir Factura',
+				icono : 'fa fa-fw fa-print'
+			},
+			resolve : {
+				cliente : ['$stateParams', '$q', 'facturaClienteService', '$state', 
+				function($stateParams, $q, facturaClienteService, $state) {
+					
+					var idfactura = $stateParams.id;
+
+					var defered = $q.defer();
+
+					facturaClienteService.get({id : idfactura}, function(res) {
+						//console.log(res.response);
+						defered.resolve(res.response);
+					}, function(error) {
+						defered.reject(error);
+						$state.go('app.admin.inicio');
+					});
+
+					return defered.promise;
+
+				}],
+				reservas : ['$stateParams', '$q', 'facturaReservaService', '$state', 
+				function($stateParams, $q, facturaReservaService, $state) {
+					
+					var idfactura = $stateParams.id;
+
+					var defered = $q.defer();
+
+					facturaReservaService.get({id : idfactura}, function(res) {
+						//console.log(res.response);
+						defered.resolve(res.response);
+					}, function(error) {
+						defered.reject(error);
+						$state.go('app.admin.inicio');
+					});
+
+					return defered.promise;
+				}]
 			}
 		})
 }
