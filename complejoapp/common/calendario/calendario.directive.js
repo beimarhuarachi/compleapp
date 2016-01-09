@@ -2,9 +2,9 @@ angular
 	.module('complejo.common')
 	.directive('cdCalendario', cdCalendario);
 
-cdCalendario.$inject = ['$log', '$rootScope', 'campoService', 'reservaService', 'calendarioService'];
+cdCalendario.$inject = ['$log', '$rootScope', 'campoService', 'reservaService'];
 
-function cdCalendario($log, $rootScope, campoService, reservaService, calendarioService) {
+function cdCalendario($log, $rootScope, campoService, reservaService) {
 	var directiva = {
 		restrict : 'EA',
 		replace : true,
@@ -19,7 +19,6 @@ function cdCalendario($log, $rootScope, campoService, reservaService, calendario
 	return directiva;
 
 	function controller($scope) { 
-		calendarioService.inicializarMoment();
 		//$log.log("Calendario directive controller : inicializado");
 		//lanzar el cambio de reservas desde aqui
 		$scope.campoSeleccionado = null;

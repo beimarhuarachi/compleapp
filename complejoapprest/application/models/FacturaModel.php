@@ -40,6 +40,7 @@ class FacturaModel extends CI_Model {
 		$consulta = $this->db->select("*")
 							 ->from("factura as f")
 							 ->join("reserva as r", "r.IdFactura = f.NumeroFactura")
+							 ->join("campo as c", "c.IdCampoDeportivo = r.IdCampo")
 							 ->where("NumeroFactura", $idfactura)
 							 ->get();
 

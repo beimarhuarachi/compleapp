@@ -99,12 +99,12 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 		 * Estado para impresion de facturas
 		 */
 		.state('app.admin.impresion-factura', {
-			url : '/imprimirFactura/:id',
+			url : '/imprimirRecibo/:id',
 			templateUrl : 'app/admin/impresion-factura/impresion-factura.view.html',
 			controller : 'ImpresionFacturaController',
 			controllerAs : 'vm',
 			data : {
-				nombrepagina : 'Imprimir Factura',
+				nombrepagina : 'Imprimir Recibo',
 				icono : 'fa fa-fw fa-print'
 			},
 			resolve : {
