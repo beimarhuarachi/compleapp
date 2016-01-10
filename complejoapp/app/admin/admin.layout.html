@@ -57,34 +57,8 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a ui-sref="app.admin.inicio" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
-                    </li>
-                    <li>
-                        <a href="" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-bar-chart-o"></i> Reportes</a>
-                    </li>
-                    <li>
-                        <a ui-sref="app.admin.reserva" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-table"></i> Realizar Reserva</a>
-                    </li>
-                    <li>
-                        <a ui-sref="app.admin.registrar-campo" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-edit"></i> Registrar Campo</a>
-                    </li>
-                    <li>
-                        <a ui-sref="app.admin.registrar-cliente" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-users"></i> Registro Clientes</a>
-                    </li>
-                    <li>
-                        <a ui-sref="app.admin.reserva-especial" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-fw fa-tablet"></i> Reserva Especial</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Reservas <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
-                            <li>
-                                <a href="">Eventos</a>
-                            </li>
-                            <li>
-                                <a href="">Reserva Especial</a>
-                            </li>
-                        </ul>
+                    <li ng-repeat="funcion in funciones">
+                        <a ui-sref={{funcion.estado}} data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class={{funcion.icono}}></i> {{funcion.nombre}}</a>
                     </li>
                     
                 </ul>

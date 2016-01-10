@@ -2,9 +2,10 @@ angular
 	.module('complejo.admin')
 	.controller('AdminLayoutController', AdminLayoutController);
 
-AdminLayoutController.$inject = ['$scope', '$log', 'autorizacionService', '$state', 'complejoService', 'complejo'];
+AdminLayoutController.$inject = ['$scope', '$log', 'autorizacionService', 
+				'$state', 'complejoService', 'complejo', 'funciones'];
 
-function AdminLayoutController($scope, $log, autorizacionService, $state, complejoService, complejo) {
+function AdminLayoutController($scope, $log, autorizacionService, $state, complejoService, complejo, funciones) {
 	$log.debug("AdminLayoutController : inicializado");
 	
 	$scope.usuario = autorizacionService.getUsuarioActual();
@@ -12,6 +13,8 @@ function AdminLayoutController($scope, $log, autorizacionService, $state, comple
 	$scope.complejo = complejo;
 
 	$scope.cerrarSesion = cerrarSesion;
+
+	$scope.funciones = funciones;
 
 	function cerrarSesion() {
 		autorizacionService.logout();

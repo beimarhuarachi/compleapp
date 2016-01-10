@@ -119,6 +119,10 @@ $route['campos/(:num)/reservasEspeciales']['post'] = 'reservaEspecialService/gua
 $route['facturas/(:num)/clientes']['get'] = 'facturaService/getClientes/$1';
 $route['facturas/(:num)/reservas']['get'] = 'facturaService/getReservas/$1';
 
+/**
+ * rutas para usuario, y funciones, num es el id del usario
+ */
+$route['usuarios/(:num)/funciones']['get'] = 'usuarioService/getFunciones/$1';
 
 
 

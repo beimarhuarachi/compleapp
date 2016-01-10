@@ -25,7 +25,21 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 					}, function(error) {
 						$log.debug('UI-router: Resolve ->admin :Error');
 						defered.reject(error);
-						$state.go('app.admin.inicio');
+						$state.go('app.visitante.inicio');
+					});
+
+					return defered.promise;
+				}],
+				funciones : ['usuarioFuncionService', '$q', '$log','autorizacionService', '$state',
+				function(usuarioFuncionService, $q, $log, autorizacionService) {
+					var defered = $q.defer();
+					usuarioFuncionService.get({id : autorizacionService.getIdUsuario()}, function(res) {
+						$log.debug('UI-router: Resolve ->admin(funciones) : exito');
+						defered.resolve(res.response);
+					}, function(error) {
+						$log.debug('UI-router: Resolve ->admin(funciones) :Error');
+						defered.reject(error);
+						$state.go('app.visitante.inicio');
 					});
 
 					return defered.promise;

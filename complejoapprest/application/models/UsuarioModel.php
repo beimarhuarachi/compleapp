@@ -39,7 +39,19 @@ class UsuarioModel extends CI_Model {
 		return NULL;
 
 	}
-			
+		
+	public function retornarFunciones($idusuario) {
+		$consulta = $this->db->select("f.NombreFuncion as nombre, f.Icono as icono, f.EstadoUrl as estado")
+							 ->from("usuario as u")
+							 ->join("rol as r", "r.IdRol = u.IdRol")
+							 ->join("funcion as f", "f.IdRol = r.IdRol")
+							 ->where("u.IdUsuario", $idusuario)
+							 ->order_by("f.IdFuncion", "ASC")
+							 ->get();
+
+		return $consulta->result_array();
+
+	}	
 
 }
 

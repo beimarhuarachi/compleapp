@@ -38,7 +38,9 @@ function LoginController($scope, $log, $state, autorizacionService, superficieSe
 					//analizar si permanece asi
 					if(rol == "Administrador") {
 						$state.go('app.admin.inicio');
-					}
+					} else if(rol == "Cliente") {
+						$state.go('app.cliente.inicio');
+					}	
 				}
 			}
 		}, function(error) {
