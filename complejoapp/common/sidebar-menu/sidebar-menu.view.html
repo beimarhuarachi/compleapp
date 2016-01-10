@@ -1,0 +1,8 @@
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+	<ul class="nav navbar-nav side-nav">
+	    <li ng-repeat="funcion in funciones">
+	        <a ui-sref={{funcion.estado}} data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class={{funcion.icono}}></i> {{funcion.nombre}}</a>
+	    </li>
+	    
+	</ul>
+</div>
