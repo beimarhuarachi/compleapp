@@ -47,6 +47,28 @@ function ConfiguracionRutasCliente($stateProvider) {
 			url : '/prereserva',
 			templateUrl : 'app/cliente/prereserva/prereserva.view.html',
 			controller : 'PrereservaController',
-			controllerAs : 'vm'
+			controllerAs : 'vm',
+			data : {
+				nombrepagina : 'Realizar Prereserva',
+				icono : 'fa fa-fw fa-table'
+			},
+			resolve : {
+				complejos : ['clienteComplejoService', '$q', '$stateParams', '$log', 'autorizacionService',
+				function(clienteComplejoService, $q, $stateParams, $log, autorizacionService) {
+					var idusuario = autorizacionService.getIdUsuario();
+
+					var defered = $q.defer();
+
+					clienteComplejoService.get({id : idusuario}, function(res) {
+						$log.debug("UI-Router :  cliente Prereserva : resolve(cliente) :  exito");
+						defered.resolve(res.response);
+					}, function(error) {
+						$log.debug("UI-Router :  cliente Prereserva : resolve(cliente) :  error");
+						defered.reject(error);
+					});
+
+					return defered.promise;
+				}]
+			}
 		})
 }

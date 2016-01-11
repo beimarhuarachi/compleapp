@@ -44,6 +44,17 @@ class ClienteService extends REST_Controller {
 		$this->response(array("response"=>$idcliente), 200);
 	}	
 
+	/**
+	 * Servicio que recupera los complejos en los cuales un cliente ha hecho por lo menos una reserva
+	 */
+	public function obtenerComplejos_get($idusuario) {
+		$idcliente = $this->clienteModel->getCliente($idusuario);
+
+		$complejos = $this->clienteModel->obtenerComplejos($idcliente->idcliente);
+
+		$this->response(array("response"=>$complejos), 200);
+	}
+
 }
 
 /* End of file clienteService.php */

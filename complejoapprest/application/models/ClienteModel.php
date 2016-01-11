@@ -65,6 +65,38 @@ class ClienteModel extends CI_Model {
 
 		return NULL;
 	}
+
+	public function getCliente($idusuario) {
+		$consulta = $this->db->select("IdCliente as idcliente, Nombres as nombres")
+							 ->from("cliente")
+							 ->where("IdUsuario", $idusuario)
+							 ->get();
+
+
+		if($consulta->num_rows() === 1) {
+			return $consulta->row();	
+		} 
+
+		return NULL;
+	}
+
+	/*
+     * Obtiene los complejos en los cuales el cliente algunar vez hizo una reserva
+	 */
+	public function obtenerComplejos($idcliente) {
+		$consulta = $this->db->select("com.NombreComplejo, com.Ciudad, com.Direccion, com.FotoPortada, 
+									   com.Telefono, com.IdComplejo as idcomplejo, com.ComoLlegar")
+							 ->from("cliente as c")
+							 ->join("factura as f", "f.IdCliente = c.IdCliente")
+							 ->join("reserva as r", "r.IdFactura = f.NumeroFactura")
+							 ->join("campo as cd", "cd.IdCampoDeportivo = r.IdCampo")
+							 ->join("complejo as com", "com.IdComplejo = cd.IdComplejo")
+							 ->where("c.IdCliente", $idcliente)
+							 ->group_by("com.IdComplejo")
+							 ->get();
+
+		return $consulta->result_array();
+	}
 }
 
 /* End of file clienteModel.php */

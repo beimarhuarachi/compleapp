@@ -101,6 +101,8 @@ $route['complejos/(:num)/campos']['post'] = 'campoService/guardar/$1';
 $route['clientes']['get'] = 'clienteService/index';
 $route['clientes']['post'] = 'clienteService/guardar';
 
+$route['clientes/(:num)/complejos']['get'] = 'clienteService/obtenerComplejos/$1';
+
 /**
  * rutas para el servicio de reservas
  * recibe dos parametro mas aparte de num, uno es inicio y el otro fin
@@ -123,6 +125,7 @@ $route['facturas/(:num)/reservas']['get'] = 'facturaService/getReservas/$1';
  * rutas para usuario, y funciones, num es el id del usario
  */
 $route['usuarios/(:num)/funciones']['get'] = 'usuarioService/getFunciones/$1';
+
 
 
 
