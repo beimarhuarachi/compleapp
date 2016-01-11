@@ -18,7 +18,7 @@
 							<form novalidate name="reservaform" ng-submit="vm.registrarReservaEspecial(vm.reservaEspecial)">
 								<div class="col-lg-6">
 									<div class="form-group">
-										<img class="img-rounded" alt="Cinque Terre" width="100%" height="120" ng-src="http://localhost/compleapp/complejoapprest/{{vm.data.campo.foto}}">
+										<img class="img-rounded" alt="Cinque Terre" width="100%" height="120" ng-src="{{vm.data.campo.foto | imagenFilter}}">
 									</div>
 
 									<div class="form-group">
