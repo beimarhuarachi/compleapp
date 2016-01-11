@@ -126,6 +126,11 @@ $route['facturas/(:num)/reservas']['get'] = 'facturaService/getReservas/$1';
  */
 $route['usuarios/(:num)/funciones']['get'] = 'usuarioService/getFunciones/$1';
 
+/**
+ * rutas para las prereservas
+ */
+$route['prereservas']['post'] = 'prereservaService/guardar';
+
 
 
 

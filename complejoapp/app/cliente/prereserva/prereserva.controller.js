@@ -2,9 +2,10 @@ angular
 	.module('complejo.cliente')
 	.controller('PrereservaController', PrereservaController);
 
-PrereservaController.$inject = ['$state', '$scope', 'complejos', '$log', '$filter', 'Notification'];
+PrereservaController.$inject = ['$state', '$scope', 'complejos', '$log', 
+								'$filter', 'Notification', 'prereservaService'];
 
-function PrereservaController($state, $scope, complejos, $log, $filter, Notification) {
+function PrereservaController($state, $scope, complejos, $log, $filter, Notification, prereservaService) {
 	var vm = this;
 
 	vm.datospagina = $state.current.data;
@@ -100,9 +101,26 @@ function PrereservaController($state, $scope, complejos, $log, $filter, Notifica
 			return;
 		}
 
-		
+		var fechaControl = moment().add(2, 'days');
+		//controlar que la fecha sea 48 horas antes
+		if(moment(prereserva.inicio).isBefore(fechaControl)) {
+			$log.debug('la fecha es antes, no puedes');
+			Notification.success({title: "Registro de PreReserva", message : "Una prereserva debe realizarse 48 horas antes"});
 
-		$log.debug(prereserva);
+			return;
+		}
+
+		vm.prereserva.expiracion = moment().add(1, 'days').format('YYYY-MM-DD HH:mm:ss');
+
+		prereservaService.save({}, {prereserva : vm.prereserva}).$promise
+			.then(function(res) {
+				//$log.debug(res.response);
+				Notification.success({title: "Registro de PreReserva", message : "Se ha registrado la Reserva Correctamente"});
+
+			}, function(error) {
+				//$log.debug(error.data.response);
+				Notification.error({title: "Registro de PreReserva", message : error.data.response});
+			});
 	}
 
 	function reset() {
