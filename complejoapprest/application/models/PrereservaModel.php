@@ -54,7 +54,7 @@ class PrereservaModel extends CI_Model {
 		$consulta = $this->db->select("cl.Nombres as nombres, cl.Apellidos as apellidos, cl.NumeroCI as ci
 				, r.Inicio as inicio, r.Fin as fin, f.NumeroFactura as numerofactura
 				, c.NombreCampo as nombrecampo, c.RutaFotoCampo as fotocampo, r.PrecioReserva as precio
-				, r.IdReserva as idreserva")
+				, r.IdReserva as idreserva, r.FechaRegistro as fecha")
 							 ->from("reserva as r")
 							 ->join("campo as c", "c.IdCampoDeportivo = r.IdCampo")
 							 ->join("complejo as com", "com.IdComplejo = c.IdComplejo")

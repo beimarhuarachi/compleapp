@@ -5,7 +5,8 @@ angular
 AdminLayoutController.$inject = ['$scope', '$log', 'autorizacionService', 
 				'$state', 'complejoService', 'complejo', 'funciones'];
 
-function AdminLayoutController($scope, $log, autorizacionService, $state, complejoService, complejo, funciones) {
+function AdminLayoutController($scope, $log, autorizacionService, $state, 
+			complejoService, complejo, funciones) {
 	$log.debug("AdminLayoutController : inicializado");
 	
 	$scope.usuario = autorizacionService.getUsuarioActual();
