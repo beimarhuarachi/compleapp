@@ -159,4 +159,35 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 				}]
 			}
 		})
+		/**
+		 * estado para confirmar prereservas
+		 */
+		.state('app.admin.prereserva', {
+			url: '/prereserva',
+			templateUrl : 'app/admin/confirmar-prereserva/prereserva.view.html', 
+			controller : 'PrereservaAdminController',
+			controllerAs : 'vm',
+			data : {
+				nombrepagina : 'Confirmar Prereserva',
+				icono : 'fa fa-fw fa-check'
+			},
+			resolve : {
+				prereservas : ['$stateParams', '$q', 'comPrereservaService','autorizacionService' ,'$state', 
+					function($stateParams, $q, comPrereservaService,autorizacionService ,$state) {
+						var defered = $q.defer();
+						$idcomplejo = 
+
+						comPrereservaService.get({id : autorizacionService.getIdUsuario()}, function(res) {
+							//console.log(res.response);
+							defered.resolve(res.response);
+						}, function(error) {
+							defered.reject(error);
+							$state.go('app.admin.inicio');
+						});
+
+						return defered.promise;
+					}]
+
+			}
+		})
 }

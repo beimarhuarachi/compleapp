@@ -1,0 +1,75 @@
+<cd-cabecera-pagina nombrecomplejo="{{complejo.nombre}}" datospagina="vm.datospagina"></cd-cabecera-pagina>
+
+
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-primary">
+			  <div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-fw fa-check"></i>Confirmar Prereserva</h3>
+			  </div>
+			  <div class="row">
+				  <div class="panel-body">
+						<form novalidate name="preform" ng-submit="vm.submit(vm.prereserva)">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label class="control-label">Buscar</label>
+									<input type="text" name="prereserva" required ng-model="vm.prereserva" uib-typeahead="prereserva as prereserva.nombres for prereserva in vm.prereservas | filter:$viewValue | limitTo:10" class="form-control">
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">Nombres</label>
+									<input type="text" class="form-control" ng-disabled="true" value="{{vm.prereserva.nombres}}">
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">Apellidos</label>
+									<input type="text" class="form-control" ng-disabled="true" value="{{vm.prereserva.apellidos}}">
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">Numero CI</label>
+									<input type="text" class="form-control" ng-disabled="true" value="{{vm.prereserva.ci}}">
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label">Campo Deportivo</label>
+									<input type="text" class="form-control" ng-disabled="true" value="{{vm.prereserva.nombrecampo}}">
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">Precio Total</label>
+									<input type="text" class="form-control" ng-disabled="true" value="{{vm.prereserva.precio}}">
+								</div>
+							</div>
+
+							<div class="col-lg-6">
+
+								<div class="form-group">
+											<img class="img-rounded" alt="Cinque Terre" width="100%" height="120" ng-src="{{vm.prereserva.fotocampo | imagenFilter}}">
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">Fecha</label>
+									<input type="text" class="form-control" ng-disabled="true" value="{{vm.prereserva.inicio}}">
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">Hora Inicio</label>
+									<input type="text" class="form-control" ng-disabled="true" value="{{vm.prereserva.inicio | horaFilter}}">
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">Hora Fin</label>
+									<input type="text" class="form-control" ng-disabled="true" value="{{vm.prereserva.fin | horaFilter}}">
+								</div>
+								<button type="submit" ng-disabled="preform.$invalid" class="btn btn-primary">Confirmar</button>
+								<button type="button" class="btn btn-danger" ng-click="vm.reset()">Cancelar</button>
+							</div>
+						
+						</form>
+				  </div>
+			  </div>
+		</div>
+	</div>
+</div>

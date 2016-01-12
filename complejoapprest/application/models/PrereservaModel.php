@@ -46,6 +46,23 @@ class PrereservaModel extends CI_Model {
 		return FALSE;
 	}
 
+	public function obtenerPrereservas($idcomplejo) {
+		$consulta = $this->db->select("cl.Nombres as nombres, cl.Apellidos as apellidos, cl.NumeroCI as ci
+				, r.Inicio as inicio, r.Fin as fin, f.NumeroFactura as numerofactura
+				, c.NombreCampo as nombrecampo, c.RutaFotoCampo as fotocampo, r.PrecioReserva as precio
+				, r.IdReserva as idreserva")
+							 ->from("reserva as r")
+							 ->join("campo as c", "c.IdCampoDeportivo = r.IdCampo")
+							 ->join("complejo as com", "com.IdComplejo = c.IdComplejo")
+							 ->join("factura as f", "f.NumeroFactura = r.IdFactura")
+							 ->join("cliente as cl", "cl.IdCliente = f.IdCliente")
+							 ->where("c.IdComplejo", $idcomplejo)
+							 ->where("r.Confirmado", 0)
+							 ->get();
+
+		return $consulta->result_array();
+	}
+
 }
 
 /* End of file prereservaModel.php */

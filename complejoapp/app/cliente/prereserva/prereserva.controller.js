@@ -74,7 +74,7 @@ function PrereservaController($state, $scope, complejos, $log, $filter, Notifica
 			precio : 0, 
 			idtiporeserva : 4
 		}
-		$log.debug(vm.prereserva);
+		//$log.debug(vm.prereserva);
 		vm.celdaSeleccionada = !vm.celdaSeleccionada;
 		vm.mostrarCalendario = !vm.mostrarCalendario;
 		$scope.$apply();
@@ -110,6 +110,8 @@ function PrereservaController($state, $scope, complejos, $log, $filter, Notifica
 			return;
 		}
 
+		vm.prereserva.precio = calcularPrecio(vm.prereserva.inicio, vm.prereserva.fin, vm.data.campo.precio);
+
 		vm.prereserva.expiracion = moment().add(1, 'days').format('YYYY-MM-DD HH:mm:ss');
 
 		prereservaService.save({}, {prereserva : vm.prereserva}).$promise
@@ -127,5 +129,18 @@ function PrereservaController($state, $scope, complejos, $log, $filter, Notifica
 		vm.estaSeleccionado = false;
 		vm.mostrarCalendario = false;
 		vm.celdaSeleccionada = false;	
+	}
+
+	function calcularPrecio(inicio, fin, precioHora) {
+		var precioTotal = 0;
+		// inicio = "2016-02-02 " + inicio;
+		// fin = "2016-02-02 " + fin;
+
+		while(moment(inicio).isBefore(fin)) {
+			inicio = moment(inicio).add(1, 'hours').format('YYYY-MM-DD HH:mm:ss');
+			precioTotal = precioTotal + parseInt(precioHora);
+		}
+
+		return precioTotal;
 	}
 }
