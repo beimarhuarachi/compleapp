@@ -13,6 +13,15 @@ class PrereservaService extends REST_Controller {
 		$this->load->model('prereservaModel');
 	}
 
+	public function getNumero_get() {
+		$fechaactual = $this->get('fechaactual');
+		$idcomplejo = $this->get('idcomplejo');
+
+		$numero = $this->prereservaModel->numeroPrereservas($idcomplejo, $fechaactual);
+
+		$this->response(array("response" => $numero), 200);
+	}
+
 	public function guardar_post() {
 		$usuario = Verificador::verificacionCompleta($this);
 

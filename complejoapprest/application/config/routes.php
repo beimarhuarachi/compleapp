@@ -130,6 +130,7 @@ $route['usuarios/(:num)/funciones']['get'] = 'usuarioService/getFunciones/$1';
  * rutas para las prereservas
  */
 $route['prereservas']['post'] = 'prereservaService/guardar';
+$route['prereservas']['get'] = 'prereservaService/getNumero';
 
 /**
  * rutas para servicio de prereservas de un complejo
