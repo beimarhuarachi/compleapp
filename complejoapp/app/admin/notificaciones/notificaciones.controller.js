@@ -22,7 +22,7 @@ function NotificacionesController($log, $scope, comPrereservaService, prereserva
 	/**
 	 * Periodo de intervalo para actualizacion de notificaciones
 	 */
-	vm.tiempoIntervalo = 2700;
+	vm.tiempoIntervalo = 3000;
 
 	/**
 	 * Funcion asincrona para enviar peticion de actualizacion
