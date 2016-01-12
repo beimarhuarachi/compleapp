@@ -177,7 +177,7 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 						var defered = $q.defer();
 						$idcomplejo = 
 
-						comPrereservaService.get({id : autorizacionService.getIdUsuario()}, function(res) {
+						comPrereservaService.get({id : autorizacionService.getIdUsuario(), fechaactual : moment().format("YYYY-MM-DD HH:mm:ss")}, function(res) {
 							//console.log(res.response);
 							defered.resolve(res.response);
 						}, function(error) {

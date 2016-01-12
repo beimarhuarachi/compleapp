@@ -114,10 +114,10 @@ function PrereservaController($state, $scope, complejos, $log, $filter, Notifica
 
 		vm.prereserva.expiracion = moment().add(1, 'days').format('YYYY-MM-DD HH:mm:ss');
 
-		prereservaService.save({}, {prereserva : vm.prereserva}).$promise
+		prereservaService.save({prereserva : vm.prereserva}).$promise
 			.then(function(res) {
 				//$log.debug(res.response);
-				Notification.success({title: "Registro de PreReserva", message : "Se ha registrado la Reserva Correctamente"});
+				Notification.success({title: "Registro de PreReserva", message : "Se ha registrado la Prereserva Correctamente"});
 
 			}, function(error) {
 				//$log.debug(error.data.response);

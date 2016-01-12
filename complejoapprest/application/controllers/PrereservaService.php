@@ -28,7 +28,7 @@ class PrereservaService extends REST_Controller {
 			$this->response(array("response"=> "No Existe ese cliente"), 412);
 		}
 
-		if($this->prereservaModel->tienePrereservas($idcliente)) {
+		if($this->prereservaModel->tienePrereservas($idcliente, $prereserva['fecha'])) {
 			$this->response(array("response"=> "Solo puede realizar una prereserva"), 412);
 		}
 

@@ -136,6 +136,8 @@ $route['prereservas']['post'] = 'prereservaService/guardar';
  * num es el id del usuario
  */
 $route['complejos/(:num)/prereservas']['get'] = 'complejoService/obtenerPrereservas/$1';
+//num el id del complejo
+$route['complejos/(:num)/prereservas']['put'] = 'complejoService/confirmarPrereserva/$1';
 
 
 
