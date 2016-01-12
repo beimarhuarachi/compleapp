@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-01-11 11:07:15
+Date: 2016-01-12 11:00:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -141,28 +141,13 @@ CREATE TABLE `factura` (
   PRIMARY KEY (`NumeroFactura`),
   KEY `IdCliente` (`IdCliente`),
   CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`IdCliente`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of factura
 -- ----------------------------
-INSERT INTO `factura` VALUES ('1', '2015-12-28', null, '1');
-INSERT INTO `factura` VALUES ('2', '2015-12-28', null, '2');
-INSERT INTO `factura` VALUES ('4', '2016-01-08', null, '2');
-INSERT INTO `factura` VALUES ('5', '2016-01-08', null, '5');
-INSERT INTO `factura` VALUES ('6', '2016-01-08', null, '6');
-INSERT INTO `factura` VALUES ('7', '2016-01-08', null, '7');
-INSERT INTO `factura` VALUES ('8', '2016-01-08', null, '5');
-INSERT INTO `factura` VALUES ('9', '2016-01-09', null, '2');
-INSERT INTO `factura` VALUES ('10', '2016-01-09', null, '6');
-INSERT INTO `factura` VALUES ('11', '2016-01-09', null, '5');
-INSERT INTO `factura` VALUES ('12', '2016-01-09', null, '8');
-INSERT INTO `factura` VALUES ('13', '2016-01-09', null, '3');
-INSERT INTO `factura` VALUES ('14', '2016-01-09', null, '3');
-INSERT INTO `factura` VALUES ('18', '2016-01-11', null, '1');
-INSERT INTO `factura` VALUES ('19', '2016-01-11', null, '2');
-INSERT INTO `factura` VALUES ('20', '2016-01-11', null, '2');
-INSERT INTO `factura` VALUES ('21', '2016-01-11', null, '2');
+INSERT INTO `factura` VALUES ('30', '2016-01-12', null, '2');
+INSERT INTO `factura` VALUES ('31', '2016-01-12', null, '2');
 
 -- ----------------------------
 -- Table structure for funcion
@@ -177,7 +162,7 @@ CREATE TABLE `funcion` (
   PRIMARY KEY (`IdFuncion`),
   KEY `IdRol_FK_Funcion` (`IdRol`),
   CONSTRAINT `IdRol_FK_Funcion` FOREIGN KEY (`IdRol`) REFERENCES `rol` (`IdRol`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of funcion
@@ -189,6 +174,7 @@ INSERT INTO `funcion` VALUES ('4', 'Registrar Cliente', 'app.admin.registrar-cli
 INSERT INTO `funcion` VALUES ('5', 'Reserva Especial', 'app.admin.reserva-especial', '1', 'fa fa-fw fa-tablet');
 INSERT INTO `funcion` VALUES ('6', 'Reportes', 'app.admin.reportes', '1', 'fa fa-fw fa-bar-chart-o');
 INSERT INTO `funcion` VALUES ('7', 'Realizar Prereserva', 'app.cliente.prereserva', '2', 'fa fa-fw fa-table');
+INSERT INTO `funcion` VALUES ('8', 'Confirmar Prereserva', 'app.admin.prereserva', '1', 'fa fa-fw fa-check');
 
 -- ----------------------------
 -- Table structure for horario
@@ -233,51 +219,13 @@ CREATE TABLE `reserva` (
   CONSTRAINT `IdCampo_FK_Reserva` FOREIGN KEY (`IdCampo`) REFERENCES `campo` (`IdCampoDeportivo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `IdTipoReserva_FKReserva` FOREIGN KEY (`IdTipoReserva`) REFERENCES `tiporeserva` (`IdTipo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`IdFactura`) REFERENCES `factura` (`NumeroFactura`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of reserva
 -- ----------------------------
-INSERT INTO `reserva` VALUES ('92', '2016-01-08', '1', '2016-01-09 18:00:00', '2016-01-09 19:00:00', null, '1', '1', null, '0', '2');
-INSERT INTO `reserva` VALUES ('93', '2016-01-08', '1', '2016-01-09 14:00:00', '2016-01-09 15:00:00', '1', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('94', '2016-01-08', '1', '2016-01-10 14:00:00', '2016-01-10 15:00:00', '1', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('95', '2016-01-08', '1', '2016-01-09 10:00:00', '2016-01-09 12:00:00', '1', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('96', '2016-01-08', '1', '2016-01-09 13:00:00', '2016-01-09 14:00:00', '1', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('97', '2016-01-08', '1', '2016-01-09 08:00:00', '2016-01-09 09:00:00', '1', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('98', '2016-01-08', '1', '2016-01-10 09:00:00', '2016-01-10 10:00:00', '4', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('99', '2016-01-08', '1', '2016-01-09 20:00:00', '2016-01-09 21:00:00', '5', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('100', '2016-01-08', '1', '2016-01-08 21:00:00', '2016-01-08 22:00:00', '6', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('101', '2016-01-08', '1', '2016-01-09 21:00:00', '2016-01-09 22:00:00', '6', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('102', '2016-01-08', '1', '2016-01-10 21:00:00', '2016-01-10 22:00:00', '6', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('103', '2016-01-08', '1', '2016-01-08 17:00:00', '2016-01-08 18:00:00', '7', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('104', '2016-01-08', '1', '2016-01-09 17:00:00', '2016-01-09 18:00:00', '7', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('105', '2016-01-08', '1', '2016-01-10 17:00:00', '2016-01-10 18:00:00', '7', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('106', '2016-01-08', '1', '2016-01-09 15:00:00', '2016-01-09 16:00:00', null, '1', '1', null, '0', '2');
-INSERT INTO `reserva` VALUES ('107', '2016-01-08', '1', '2016-01-12 14:00:00', '2016-01-12 15:00:00', '8', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('108', '2016-01-09', '1', '2016-01-10 11:00:00', '2016-01-10 13:00:00', '9', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('109', '2016-01-09', '1', '2016-01-11 11:00:00', '2016-01-11 13:00:00', '9', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('110', '2016-01-09', '1', '2016-01-10 19:00:00', '2016-01-10 20:00:00', '10', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('111', '2016-01-09', '1', '2016-01-10 16:00:00', '2016-01-10 17:00:00', '11', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('112', '2016-01-09', '1', '2016-01-11 17:00:00', '2016-01-11 19:00:00', '12', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('113', '2016-01-09', '1', '2016-01-12 17:00:00', '2016-01-12 19:00:00', '12', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('114', '2016-01-09', '1', '2016-01-13 17:00:00', '2016-01-13 19:00:00', '12', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('115', '2016-01-09', '1', '2016-01-14 17:00:00', '2016-01-14 19:00:00', '12', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('116', '2016-01-09', '1', '2016-01-15 17:00:00', '2016-01-15 19:00:00', '12', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('117', '2016-01-09', '1', '2016-01-16 17:00:00', '2016-01-16 19:00:00', '12', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('118', '2016-01-09', '1', '2016-01-17 17:00:00', '2016-01-17 19:00:00', '12', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('119', '2016-01-09', '1', '2016-01-18 17:00:00', '2016-01-18 19:00:00', '12', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('120', '2016-01-09', '1', '2016-01-19 17:00:00', '2016-01-19 19:00:00', '12', '0', '1', null, '200', '1');
-INSERT INTO `reserva` VALUES ('121', '2016-01-09', '4', '2016-01-12 09:00:00', '2016-01-12 12:00:00', '13', '0', '1', null, '240', '1');
-INSERT INTO `reserva` VALUES ('122', '2016-01-09', '4', '2016-01-13 09:00:00', '2016-01-13 12:00:00', '13', '0', '1', null, '240', '1');
-INSERT INTO `reserva` VALUES ('123', '2016-01-09', '4', '2016-01-14 09:00:00', '2016-01-14 12:00:00', '13', '0', '1', null, '240', '1');
-INSERT INTO `reserva` VALUES ('124', '2016-01-09', '4', '2016-01-15 09:00:00', '2016-01-15 12:00:00', '13', '0', '1', null, '240', '1');
-INSERT INTO `reserva` VALUES ('125', '2016-01-09', '4', '2016-01-16 09:00:00', '2016-01-16 12:00:00', '13', '0', '1', null, '240', '1');
-INSERT INTO `reserva` VALUES ('126', '2016-01-09', '1', '2016-01-15 13:00:00', '2016-01-15 14:00:00', '14', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('127', '2016-01-11', '1', '2016-01-14 09:00:00', '2016-01-14 10:00:00', '18', '0', '0', '2016-01-12 10:30:32', '0', '4');
-INSERT INTO `reserva` VALUES ('128', '2016-01-11', '1', '2016-01-15 09:00:00', '2016-01-15 12:00:00', '19', '0', '0', '2016-01-12 10:48:47', '0', '4');
-INSERT INTO `reserva` VALUES ('129', '2016-01-11', '1', '2016-01-12 09:00:00', '2016-01-12 10:00:00', '20', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('130', '2016-01-11', '29', '2016-01-12 10:00:00', '2016-01-12 11:00:00', '21', '0', '1', null, '70', '1');
-INSERT INTO `reserva` VALUES ('131', '2016-01-11', '1', '2016-01-13 12:00:00', '2016-01-13 14:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('142', '2016-01-12', '1', '2016-01-14 09:00:00', '2016-01-14 11:00:00', '30', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('143', '2016-01-12', '1', '2016-01-16 10:00:00', '2016-01-16 11:00:00', '31', '0', '1', '2016-01-13 10:44:14', '100', '4');
 
 -- ----------------------------
 -- Table structure for rol

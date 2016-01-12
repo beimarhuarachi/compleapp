@@ -19,11 +19,15 @@ function PrereservaAdminController($log, $state, $scope, prereservas, comPrerese
 
 	function reset() {
 		$log.debug("fdsa");
-
 	}
 
 	function submit(prereserva) {
-		$log.debug(prereserva);
+		//$log.debug(prereserva);
+		
+		if(prereserva.nombres == null) {
+			return;
+		}
+
 		prereserva.fecha = moment().format("YYYY-MM-DD HH:mm:ss");
 
 		comPrereservaService.update({id: $scope.complejo.idcomplejo}, {prereserva : prereserva}, function(res) {

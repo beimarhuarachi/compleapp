@@ -118,7 +118,7 @@ function PrereservaController($state, $scope, complejos, $log, $filter, Notifica
 			.then(function(res) {
 				//$log.debug(res.response);
 				Notification.success({title: "Registro de PreReserva", message : "Se ha registrado la Prereserva Correctamente"});
-
+				reset();
 			}, function(error) {
 				//$log.debug(error.data.response);
 				Notification.error({title: "Registro de PreReserva", message : error.data.response});

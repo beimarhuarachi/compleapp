@@ -51,12 +51,15 @@ class FacturaModel extends CI_Model {
 		return NULL;
 	}
 
+	/**
+	 * hay un bicho
+	 */
 	public function confirmarFactura($idfactura, $fecha) {
 		$consulta = $this->db->set('fecha', $fecha)
 							 ->where('NumeroFactura', $idfactura)
 							 ->update('factura');
 
-		if($this->db->affected_rows() === 1) {
+		if($this->db->affected_rows() >= 0) {
 			return TRUE;
 		}
 
