@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require APPPATH . "/libraries/REST_Controller.php";
 require APPPATH . "/libraries/Verificador.php";
+require APPPATH . '/libraries/Uploader.php';
 
 class CampoService extends REST_Controller {
 
@@ -27,6 +28,20 @@ class CampoService extends REST_Controller {
 		$this->response(array("response"=>$campos), 200);
 	}
 
+	public function getCampo_get($idcomplejo, $idcampo) {
+		$campo = $this->campoModel->retornarCampoPorId($idcampo);
+
+		if(is_null($idcampo)) {
+			$this->response(array("response" => "La peticion tiene errores"), 400);
+		}
+
+		if($campo === false) {
+			$this->response(array("response" => "No se encontro ese campo deportivo"), 404);
+		}
+
+		$this->response(array("response" => $campo), 200);
+	}
+
 	public function guardar_post($idcomplejo) {
 
 		$usuario = Verificador::verificacionCompleta($this);
@@ -40,24 +55,7 @@ class CampoService extends REST_Controller {
 		$idhorario = $this->post('idhorario');
 
 
-		$config['upload_path']          = './uploads/';
-		$config['allowed_types']        = 'gif|jpg|png|pdf';
-		$config['max_size']             = 2048;
-		$config['max_width']            = 1024;
-		$config['max_height']           = 768;
-		$config['file_name']           = $nombre;
-
-		$this->load->library('upload', $config);
-		$nombrearchivo = "uploads/imagen001.jpg";
-
-		if ( !$this->upload->do_upload('imagen')) {
-			$error = array('error' => $this->upload->display_errors());
-		} else {
-			$datos = $this->upload->data();
-			$nombrearchivo = "uploads/".$datos['file_name'];
-		}
-
-		
+		$nombrearchivo = Uploader::subirArchivo($nombre, $this);
 
 		$campoId = $this->campoModel->guardarCampoDeComplejo($usuario->idusuario, $idcomplejo, $nombre, 
 					$precio, $nombrearchivo, $disciplina, $superficie, $idhorario);
@@ -75,6 +73,27 @@ class CampoService extends REST_Controller {
 
 	}
 
+	public function actualizarCampo_post($idcomplejo, $idcampo) {
+		$usuario = Verificador::verificacionCompleta($this);
+
+		$nombre = $this->post('nombre');
+		$precio = $this->post('precio');
+		$disciplina = $this->post('disciplina');
+		$superficie = $this->post('superficie');
+		$imagen = $this->post('imagen');
+		$idhorario = $this->post('idhorario');
+		
+		$nombrearchivo = Uploader::subirArchivo($nombre, $this);
+
+		$actualizado = $this->campoModel->actualizarCampo($idcampo, $nombre, $precio, $disciplina, 
+			$nombrearchivo,$superficie, $idhorario);
+
+		if(is_null($actualizado)) {
+			$this->response(array('response' => 'No se actualizo ningun dato'), 412);
+		}
+
+		$this->response(array("response" => $idcampo), 200);
+	}
 
 }
 

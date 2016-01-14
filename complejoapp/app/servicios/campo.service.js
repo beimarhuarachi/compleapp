@@ -7,7 +7,7 @@ campoService.$inject = ['$resource', 'REST_API'];
 function campoService($resource, REST_API) {
 	var nombreservicio = 'complejo/';
 
-	var servicio = $resource(REST_API + "complejos/:com/campos", {com : "@_com"}, {
+	var servicio = $resource(REST_API + "complejos/:com/campos/:id", {com : "@_com", id: '@_id'}, {
 		save : {
 			method : 'POST',
 			params : {com : "@_com"},
@@ -18,8 +18,8 @@ function campoService($resource, REST_API) {
 			headers: { 'Content-Type': undefined }
 		},
 		update : {
-			method : 'PUT',
-			params : {com : '@_com'},
+			method : 'POST',
+			params : {com : '@_com', id : '@_id'},
 			transformRequest : angular.identity,
 			headers : {'Content-Type' : undefined}
 		}

@@ -5,12 +5,12 @@
 		<div class="col-lg-12">
 			<div class="panel panel-green">
 				<div class="panel-heading">
-					<h3 class="panel-title"><i class="fa fa-fw fa-edit"></i>Registro de Campo Deportivo</h3>
+					<h3 class="panel-title"><i class="fa fa-fw fa-edit"></i>Campo Deportivo</h3>
 				</div>
 				<div class="row">
 					<div class="panel-body">
 						<div class="col-lg-6">
-							<form novalidate name="campoform" ng-submit="registrar(campo)">
+							<form novalidate name="campoform" ng-submit="submit(campo)">
 
 								<div class="form-group" ng-class="{'has-error': campoform.nombre.$invalid && !campoform.nombre.$pristine, 'has-success' : campoform.nombre.$valid}">
 									<label class="control-label">Nombre Campo</label>
@@ -46,7 +46,7 @@
 							    	</select>
 								</div>
 							
-								<button ng-disabled="campoform.$invalid" class="btn btn-success">Registrar Campo</button>
+								<button ng-disabled="campoform.$invalid" class="btn btn-success">Guardar</button>
 							</form>
 						</div>
 						<div class="col-lg-6">

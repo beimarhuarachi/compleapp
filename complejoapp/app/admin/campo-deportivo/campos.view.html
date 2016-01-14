@@ -1,0 +1,22 @@
+<cd-cabecera-pagina nombrecomplejo="{{complejo.nombre}}" datospagina="vm.datospagina"></cd-cabecera-pagina>
+
+<div class="row">
+	<div ng-repeat="campo in vm.campos" class="col-lg-6" style="margin-bottom : 15px">
+		<div class="row">
+		   	<div class="col-lg-7">
+	            <a href="">
+	                <img class="img-responsive img-circle" style="width : 100%; height: 250px;" ng-src="{{campo.foto | imagenFilter}}" alt="">
+	            </a>
+	        </div>
+	        <div class="col-lg-5">
+	            <h3>{{campo.nombre}}</h3>
+	            <h4>{{campo.precio | currency}} por hora</h4>
+	            <p> <strong>Disciplina :</strong>  {{campo.disciplina}}</p>
+	            <p> <strong>Superficie : </strong>  {{campo.superficie}}</p>
+	            <p> <strong>Horario : </strong>  {{campo.inicio}} - {{campo.fin}}</p>
+	            <a class="btn btn-success" ui-sref="app.admin.editar-campo({id : campo.idcampo})">Editar <span class="glyphicon glyphicon-chevron-right"></span></a>
+	        </div>
+	        
+	    </div>
+    </div>
+</div>

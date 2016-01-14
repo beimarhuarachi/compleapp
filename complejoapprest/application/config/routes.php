@@ -93,6 +93,11 @@ $route['complejos/(:num)']['get'] = 'complejoService/retornarComplejo/$1';
  * rutas para el servicio de campos=> para un complejo
  */
 $route['complejos/(:num)/campos']['get'] = 'campoService/index/$1';
+
+$route['complejos/(:num)/campos/(:num)']['get'] = 'campoService/getCampo/$1/$2';
+
+$route['complejos/(:num)/campos/(:num)']['post'] = 'campoService/actualizarCampo/$1/$2';
+
 $route['complejos/(:num)/campos']['post'] = 'campoService/guardar/$1';
 
 /**

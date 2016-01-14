@@ -190,4 +190,29 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 
 			}
 		})
+		/**
+		 * Estado para los campos deportivos
+		 */
+		.state('app.admin.campos', {
+			url : '/camposDeportivos',
+			templateUrl : 'app/admin/campo-deportivo/campos.view.html',
+			controller : 'CampoController',
+			controllerAs : 'vm',
+			data : {
+				nombrepagina : 'Campos Deportivos',
+				icono : 'fa fa-fw fa-soccer-ball-o'
+			}
+		})
+		/**
+		 * Estado para el registro de una nuevo campo
+		 */
+		.state('app.admin.editar-campo', {
+			url : '/editarCampo/:id',
+			templateUrl : 'app/admin/registro-campo/registro-campo.view.html',
+			controller : 'RegistroCampoController',
+			data : {
+				nombrepagina : 'Editar Cancha',
+				icono : 'fa fa-fw fa-edit'
+			}
+		})
 }
