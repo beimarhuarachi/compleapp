@@ -141,6 +141,12 @@ $route['complejos/(:num)/prereservas']['get'] = 'complejoService/obtenerPrereser
 $route['complejos/(:num)/prereservas']['put'] = 'complejoService/confirmarPrereserva/$1';
 
 
+/**
+ * rutas para los horarios
+ */
+$route['horarios']['get'] = 'horariosService/obtener';
+
+
 
 
 

@@ -37,6 +37,7 @@ class CampoService extends REST_Controller {
 		$disciplina = $this->post('disciplina');
 		$superficie = $this->post('superficie');
 		$imagen = $this->post('imagen');
+		$idhorario = $this->post('idhorario');
 
 
 		$config['upload_path']          = './uploads/';
@@ -56,13 +57,10 @@ class CampoService extends REST_Controller {
 			$nombrearchivo = "uploads/".$datos['file_name'];
 		}
 
-		/**
-		 * Es el id del horario(Cambiar por uno nuevo) es el por defecto
-		 * @var integer
-		 */
-		$idHorario = 1;
+		
 
-		$campoId = $this->campoModel->guardarCampoDeComplejo($usuario->idusuario, $idcomplejo, $nombre, $precio, $nombrearchivo, $disciplina, $superficie, $idHorario);
+		$campoId = $this->campoModel->guardarCampoDeComplejo($usuario->idusuario, $idcomplejo, $nombre, 
+					$precio, $nombrearchivo, $disciplina, $superficie, $idhorario);
 
 		$usuario->iat = time();
 		$usuario->exp = time() + 300;

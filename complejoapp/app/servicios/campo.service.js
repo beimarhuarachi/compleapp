@@ -16,7 +16,14 @@ function campoService($resource, REST_API) {
 			//El content type lo seteamos porque por defecto envia datos json
 			//(con undefined podemos enviar en formato de FormData)
 			headers: { 'Content-Type': undefined }
+		},
+		update : {
+			method : 'PUT',
+			params : {com : '@_com'},
+			transformRequest : angular.identity,
+			headers : {'Content-Type' : undefined}
 		}
+
 	});
 
 	return servicio;

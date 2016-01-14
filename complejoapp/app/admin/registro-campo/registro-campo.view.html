@@ -38,6 +38,13 @@
 							      		<option ng-repeat="superficie in superficies" value="{{superficie.id}}">{{superficie.nombre}}</option>
 							    	</select>
 								</div>
+
+								<div class="form-group" ng-class="{'has-success': campoform.horario.$valid}">
+									<label class="control-label"> Horario </label>
+							    	<select class="form-control" name="horario" required ng-model="campo.idhorario">
+							      		<option ng-repeat="horario in horarios" value="{{horario.idhorario}}">{{horario.inicio}} - {{horario.fin}}</option>
+							    	</select>
+								</div>
 							
 								<button ng-disabled="campoform.$invalid" class="btn btn-success">Registrar Campo</button>
 							</form>
@@ -46,7 +53,7 @@
 							<cd-subir-archivo></cs-subir-archivo>
 						</div>
 					</div>	
-					{{clienteSeleccionado}}
+					
 				</div>	
 				
 			</div>	

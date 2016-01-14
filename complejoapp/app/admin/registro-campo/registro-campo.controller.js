@@ -3,11 +3,11 @@ angular
 	.controller('RegistroCampoController', RegistroCampoController);
 
 RegistroCampoController.$inject = ['$scope', '$log', '$state', 
-					'autorizacionService', 'complejoService', 
+					'autorizacionService', 'horarioService',
 					'campoService', 'superficieService', 'disciplinaService', 'Notification'];
 
 function RegistroCampoController($scope, $log, $state, autorizacionService, 
-	complejoService, campoService, superficieService, disciplinaService, Notification) {
+	horarioService, campoService, superficieService, disciplinaService, Notification) {
 	$log.info("RegistroCampoController : inicio de controlador");
 	
 	$scope.datospagina = $state.current.data;
@@ -16,6 +16,7 @@ function RegistroCampoController($scope, $log, $state, autorizacionService,
 
 	$scope.disciplinas = [];
 	$scope.superficies = [];
+	$scope.horarios = [];
 	$scope.registrar = registrarCampo;
 
 	disciplinaService.query(function(res) {
@@ -26,12 +27,17 @@ function RegistroCampoController($scope, $log, $state, autorizacionService,
 		$scope.superficies = res.response;
 	});
 
+	horarioService.get(function(res) {
+		$scope.horarios = res.response;
+	});
+
 	function registrarCampo(campo) {
 		var formData = new FormData();
 		formData.append('nombre', campo.nombre);
 		formData.append('precio', campo.precio);
 		formData.append('disciplina', campo.disciplina);
 		formData.append('superficie', campo.superficie);
+		formData.append('idhorario', campo.idhorario);
 		formData.append('imagen', campo.imagen);
 
 		campoService.save({com : $scope.complejo.idcomplejo}, formData , function(res) {
@@ -44,12 +50,6 @@ function RegistroCampoController($scope, $log, $state, autorizacionService,
 			Notification.error({title: "Registro de Campo", message : "Ha ocurrido un error"});
 			$log.debug(error);
 		});
-		$log.debug(formData);
+		$log.debug(campo);
 	}
-
-	complejoService.query({id : autorizacionService.getIdUsuario()}, function(res) {
-		$scope.complejo = res.response;
-	}, function(error) {
-		$log.error("RegistroCampoController : complejo service error");
-	});
 }
