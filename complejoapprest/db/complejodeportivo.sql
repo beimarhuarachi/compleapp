@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-01-12 18:39:44
+Date: 2016-01-14 16:54:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,14 +37,15 @@ CREATE TABLE `campo` (
   CONSTRAINT `IdDisciplina_FKCampo` FOREIGN KEY (`IdDisciplina`) REFERENCES `disciplina` (`IdDisciplina`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `IdHorario_FkCampo` FOREIGN KEY (`IdHorario`) REFERENCES `horario` (`IdHorario`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `IdSuperficie_FKCampo` FOREIGN KEY (`IdSuperficie`) REFERENCES `superficie` (`IdSuperficie`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of campo
 -- ----------------------------
-INSERT INTO `campo` VALUES ('1', '1', 'CanchaFutbol1', '100', 'uploads/imagen001.jpg', '1', '3', '4');
-INSERT INTO `campo` VALUES ('4', '1', 'CanchaBacket', '80', 'uploads/imagen001.jpg', '5', '2', '1');
+INSERT INTO `campo` VALUES ('1', '1', 'CanchaFutbol1', '100', 'uploads/futbol.jpg', '1', '3', '4');
+INSERT INTO `campo` VALUES ('4', '1', 'CanchaBacket', '80', 'uploads/bascket.jpg', '5', '2', '1');
 INSERT INTO `campo` VALUES ('29', '4', 'CanchaFrontron1', '70', 'uploads/imagen001.jpg', '6', '1', '1');
+INSERT INTO `campo` VALUES ('30', '1', 'CanchaTenis', '90', 'uploads/CanchaTenis.jpg', '7', '1', '7');
 
 -- ----------------------------
 -- Table structure for cliente
@@ -141,7 +142,7 @@ CREATE TABLE `factura` (
   PRIMARY KEY (`NumeroFactura`),
   KEY `IdCliente` (`IdCliente`),
   CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`IdCliente`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of factura
@@ -155,6 +156,7 @@ INSERT INTO `factura` VALUES ('35', '2016-01-12', null, '3');
 INSERT INTO `factura` VALUES ('36', '2016-01-12', null, '3');
 INSERT INTO `factura` VALUES ('37', '2016-01-12', null, '5');
 INSERT INTO `factura` VALUES ('38', '2016-01-12', null, '5');
+INSERT INTO `factura` VALUES ('39', '2016-01-14', null, '5');
 
 -- ----------------------------
 -- Table structure for funcion
@@ -169,7 +171,7 @@ CREATE TABLE `funcion` (
   PRIMARY KEY (`IdFuncion`),
   KEY `IdRol_FK_Funcion` (`IdRol`),
   CONSTRAINT `IdRol_FK_Funcion` FOREIGN KEY (`IdRol`) REFERENCES `rol` (`IdRol`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of funcion
@@ -182,6 +184,7 @@ INSERT INTO `funcion` VALUES ('5', 'Reserva Especial', 'app.admin.reserva-especi
 INSERT INTO `funcion` VALUES ('6', 'Reportes', 'app.admin.reportes', '1', 'fa fa-fw fa-bar-chart-o');
 INSERT INTO `funcion` VALUES ('7', 'Realizar Prereserva', 'app.cliente.prereserva', '2', 'fa fa-fw fa-table');
 INSERT INTO `funcion` VALUES ('8', 'Confirmar Prereserva', 'app.admin.prereserva', '1', 'fa fa-fw fa-check');
+INSERT INTO `funcion` VALUES ('9', 'Canchas', 'app.admin.campos', '1', 'fa fa-fw fa-soccer-ball-o');
 
 -- ----------------------------
 -- Table structure for horario
@@ -199,6 +202,7 @@ CREATE TABLE `horario` (
 -- ----------------------------
 INSERT INTO `horario` VALUES ('1', '08:00:00', '21:00:00');
 INSERT INTO `horario` VALUES ('2', '06:00:00', '18:00:00');
+INSERT INTO `horario` VALUES ('3', '08:00:00', '12:00:00');
 INSERT INTO `horario` VALUES ('4', '08:00:00', '22:00:00');
 INSERT INTO `horario` VALUES ('6', '13:00:00', '18:00:00');
 INSERT INTO `horario` VALUES ('7', '08:00:00', '20:00:00');
@@ -226,7 +230,7 @@ CREATE TABLE `reserva` (
   CONSTRAINT `IdCampo_FK_Reserva` FOREIGN KEY (`IdCampo`) REFERENCES `campo` (`IdCampoDeportivo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `IdTipoReserva_FKReserva` FOREIGN KEY (`IdTipoReserva`) REFERENCES `tiporeserva` (`IdTipo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`IdFactura`) REFERENCES `factura` (`NumeroFactura`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of reserva
@@ -240,6 +244,8 @@ INSERT INTO `reserva` VALUES ('147', '2016-01-12', '1', '2016-01-14 15:00:00', '
 INSERT INTO `reserva` VALUES ('148', '2016-01-12', '4', '2016-01-16 11:00:00', '2016-01-16 14:00:00', '36', '0', '0', '2016-01-13 18:01:15', '240', '4');
 INSERT INTO `reserva` VALUES ('149', '2016-01-12', '1', '2016-01-15 16:00:00', '2016-01-15 17:00:00', '37', '0', '1', null, '100', '1');
 INSERT INTO `reserva` VALUES ('150', '2016-01-12', '1', '2016-01-16 18:00:00', '2016-01-16 19:00:00', '38', '0', '0', '2016-01-13 18:33:30', '100', '4');
+INSERT INTO `reserva` VALUES ('151', '2016-01-14', '4', '2016-01-17 15:00:00', '2016-01-17 17:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('152', '2016-01-14', '4', '2016-01-17 10:00:00', '2016-01-17 12:00:00', '39', '0', '1', null, '160', '1');
 
 -- ----------------------------
 -- Table structure for rol
