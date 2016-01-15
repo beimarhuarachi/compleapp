@@ -215,4 +215,17 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 				icono : 'fa fa-fw fa-edit'
 			}
 		})
+		/**
+		 * Estado para los reportes
+		 */
+		.state('app.admin.reportes', {
+			url : '/reportes',
+			templateUrl : 'app/admin/reportes/reportes.view.html',
+			controller : 'ReportesController',
+			controllerAs : 'vm',
+			data : {
+				nombrepagina : 'Reportes',
+				icono : 'fa fa-fw fa-bar-chart-o'
+			}
+		})
 }

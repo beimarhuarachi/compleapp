@@ -7,6 +7,7 @@ angular
 		'complejo.common',
 		'ui.router',
 		'ui-notification',
-		'ui.bootstrap'
+		'ui.bootstrap',
+		'angular.morris-chart'
 		]);
 

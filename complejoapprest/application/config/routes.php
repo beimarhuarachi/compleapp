@@ -151,6 +151,14 @@ $route['complejos/(:num)/prereservas']['put'] = 'complejoService/confirmarPreres
  */
 $route['horarios']['get'] = 'horariosService/obtener';
 
+/**
+ * rutas para los reportes
+ * Solo contiene metodos GET, pero requieren permisos
+ */
+$route['reportes/(:num)']['get'] = 'reportesService/camposPopulares/$1';
+
+$route['complejos/(:num)/gestiones']['get'] = 'reportesService/gestiones/$1';
+
 
 
 
