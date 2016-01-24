@@ -14,20 +14,11 @@ function ReportesController($log, $state, reportesService, $scope, $http, REST_A
 
     vm.gestion = null;
 
-    vm.gestiones = [2015, 2016, 2017];
+    vm.gestiones = [];
    
     vm.listo = false;
 
     vm.cambiarGestion = cambiarGestion;
-
-    // reportesService.getCamposPopulares({id : $scope.complejo.idcomplejo}, function(res) {
-    //    //$log.debug(res.response); 
-    //    vm.reportes = res.response;
-
-    //    convertirAReporte(res.response);
-
-    //    vm.listo = !vm.listo;
-    // });
 
     obtenerGestiones();
 
@@ -50,7 +41,7 @@ function ReportesController($log, $state, reportesService, $scope, $http, REST_A
                 obtenerReporte($scope.complejo.idcomplejo, vm.gestion);
             }
             
-            $log.debug(vm.gestiones);
+            //$log.debug(vm.gestiones);
         });
     }
 

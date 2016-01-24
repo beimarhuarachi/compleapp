@@ -157,6 +157,8 @@ $route['horarios']['get'] = 'horariosService/obtener';
  */
 $route['reportes/(:num)']['get'] = 'reportesService/camposPopulares/$1';
 
+$route['reportes/ganancias/(:num)']['get'] = 'reportesService/ganancias/$1';
+
 $route['complejos/(:num)/gestiones']['get'] = 'reportesService/gestiones/$1';
 
 

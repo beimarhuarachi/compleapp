@@ -35,6 +35,16 @@ class ReportesService extends REST_Controller {
 		$this->response(array("response"=>$gestiones), 200);
 	}
 
+	public function ganancias_get($idcomplejo) {
+		$usuario = Verificador::verificacionCompleta($this);
+
+ 		$gestion = $this->get('gestion');
+
+ 		$ganancias = $this->reportesModel->ganancias($idcomplejo, $gestion);
+
+		$this->response(array("response"=>$ganancias), 200);
+	}
+
 }
 
 /* End of file reportesService.php */
