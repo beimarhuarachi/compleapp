@@ -20,7 +20,7 @@ function ConfiguracionRutas($stateProvider, $urlRouterProvider, jwtInterceptorPr
 		.state('app', {
 			abstract : true,
 			template : '<ui-view/>'
-		})
+		});
 
 	/**
 	 * Interceptor para enviar el token en cada peticion, pero no enviara el token cuando 

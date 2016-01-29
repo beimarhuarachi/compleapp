@@ -11,15 +11,17 @@ function ConfiguracionRutasVisitante ($stateProvider) {
 		 */
 		.state('app.visitante', {
 			abstract : true,
-			template : '<ui-view/>'
+			templateUrl : 'app/visitante/visitante.layout.html'
 		})
 		.state('app.visitante.inicio',{
 			url : '/inicio',
-			template : 'Esta es la pagina de inicio <a ui-sref="app.visitante.iniciosesion">Iniciar Sesion</a>'
+			templateUrl : 'app/visitante/inicio/inicio.view.html',
+			controller : 'InicioController',
+			controllerAs : 'vm'
 		})
 		.state('app.visitante.iniciosesion', {
 			url : '/iniciarsesion',
 			templateUrl : 'app/visitante/login/login.html',
 			controller : 'LoginController'
-		})
+		});
 }
