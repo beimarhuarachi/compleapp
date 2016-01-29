@@ -1,0 +1,236 @@
+body {
+    overflow-x:hidden;
+    font-family:"Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+.text-muted {
+    color:#777
+}
+.text-primary {
+    color:#34B5A7
+}
+p {
+    font-size:14px;
+    line-height:1.75
+}
+p.large {
+    font-size:16px
+}
+a, a:hover, a:focus, a:active, a.active {
+    outline:0
+}
+a {
+    color:#34B5A7
+}
+a:hover, a:focus, a:active, a.active {
+    color:#34B5A7
+}
+.btn-xl {
+    color:#fff;
+    background-color:#34B5A7;
+    border-color:#34B5A7;
+    font-family:Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform:uppercase;
+    font-weight:700;
+    border-radius:3px;
+    font-size:18px;
+    padding:20px 40px
+}
+.btn-xl:hover, .btn-xl:focus, .btn-xl:active, .btn-xl.active, .open .dropdown-toggle.btn-xl {
+    color:#fff;
+    background-color:#34B5A7;
+    border-color:#f6bf01
+}
+.btn-xl:active, .btn-xl.active, .open .dropdown-toggle.btn-xl {
+    background-image:none
+}
+.btn-xl.disabled, .btn-xl[disabled], fieldset[disabled] .btn-xl, .btn-xl.disabled:hover, .btn-xl[disabled]:hover, fieldset[disabled] .btn-xl:hover, .btn-xl.disabled:focus, .btn-xl[disabled]:focus, fieldset[disabled] .btn-xl:focus, .btn-xl.disabled:active, .btn-xl[disabled]:active, fieldset[disabled] .btn-xl:active, .btn-xl.disabled.active, .btn-xl[disabled].active, fieldset[disabled] .btn-xl.active {
+    background-color:#34B5A7;
+    border-color:#34B5A7
+}
+.btn-xl .badge {
+    color:#34B5A7;
+    background-color:#fff
+}
+.navbar-default {
+    background-color:#222;
+    border-color:transparent
+}
+.navbar-default .navbar-brand {
+    color:#FCF8E3;
+    font-family:"Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:active, .navbar-default .navbar-brand.active {
+    color:#FCF8E3
+}
+.navbar-default .navbar-collapse {
+    border-color:rgba(255, 255, 255, .02)
+}
+.navbar-default .navbar-toggle {
+    background-color:#34B5A7;
+    border-color:#34B5A7
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color:#fff
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color:#34B5A7
+}
+.navbar-default .nav li a {
+    font-family:Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform:uppercase;
+    font-weight:400;
+    letter-spacing:1px;
+    color:#fff
+}
+.navbar-default .nav li a:hover, .navbar-default .nav li a:focus {
+    color:#34B5A7;
+    outline:0
+}
+.navbar-default .navbar-nav>.active>a {
+    border-radius:0;
+    color:#fff;
+    background-color:#34B5A7
+}
+.navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color:#fff;
+    background-color:#34B5A7
+}
+@media (min-width:768px) {
+    .navbar-default {
+        background-color:transparent;
+        padding:25px 0;
+        -webkit-transition:padding .3s;
+        -moz-transition:padding .3s;
+        transition:padding .3s;
+        border:0
+    }
+    .navbar-default .navbar-brand {
+        font-size:2em;
+        -webkit-transition:all .3s;
+        -moz-transition:all .3s;
+        transition:all .3s
+    }
+    .navbar-default .navbar-nav>.active>a {
+        border-radius:3px
+    }
+    .navbar-default.navbar-shrink {
+        background-color:#222;
+        padding:10px 0
+    }
+    .navbar-default.navbar-shrink .navbar-brand {
+        font-size:1.5em
+    }
+}
+header {
+    background-image:url(../img/intro-bg.jpg);
+    background-repeat:none;
+    background-attachment:scroll;
+    background-position:center center;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    background-size:cover;
+    -o-background-size:cover;
+    text-align:center;
+    color:#fff
+}
+header .intro-text {
+    padding-top:100px;
+    padding-bottom:50px
+}
+header .intro-text .intro-lead-in {
+    font-family:"Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style:italic;
+    font-size:22px;
+    line-height:22px;
+    margin-bottom:25px
+}
+header .intro-text .intro-heading {
+    font-family:Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform:uppercase;
+    font-weight:700;
+    font-size:50px;
+    line-height:50px;
+    margin-bottom:25px
+}
+@media (min-width:768px) {
+    header .intro-text {
+        padding-top:300px;
+        padding-bottom:200px
+    }
+    header .intro-text .intro-lead-in {
+        font-family:"Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-style:italic;
+        font-size:40px;
+        line-height:40px;
+        margin-bottom:25px
+    }
+    header .intro-text .intro-heading {
+        font-family:Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-transform:uppercase;
+        font-weight:700;
+        font-size:75px;
+        line-height:75px;
+        margin-bottom:50px
+    }
+}
+aside.clients img {
+    margin:50px auto
+}
+
+footer {
+    padding:25px 0;
+    text-align:center
+}
+footer span.copyright {
+    line-height:40px;
+    font-family:Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform:uppercase;
+    text-transform:none
+}
+footer ul.quicklinks {
+    margin-bottom:0;
+    line-height:40px;
+    font-family:Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform:uppercase;
+    text-transform:none
+}
+ul.social-buttons {
+    margin-bottom:0
+}
+ul.social-buttons li a {
+    display:block;
+    background-color:#222;
+    height:40px;
+    width:40px;
+    border-radius:100%;
+    font-size:20px;
+    line-height:40px;
+    color:#fff;
+    outline:0;
+    -webkit-transition:all .3s;
+    -moz-transition:all .3s;
+    transition:all .3s
+}
+ul.social-buttons li a:hover, ul.social-buttons li a:focus, ul.social-buttons li a:active {
+    background-color:#34B5A7
+}
+.btn:focus, .btn:active, .btn.active, .btn:active:focus {
+    outline:0
+}
+::-moz-selection {
+    text-shadow:none;
+    background:#34B5A7
+}
+::selection {
+    text-shadow:none;
+    background:#34B5A7
+}
+img::selection {
+    background:0 0
+}
+img::-moz-selection {
+    background:0 0
+}
+body {
+    webkit-tap-highlight-color:#34B5A7
+}
