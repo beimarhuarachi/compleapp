@@ -4,6 +4,18 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+
+/*
+ * Estilos arreglados para el calendario semanal
+ */
+.ec-day-header {
+    overflow: hidden; 
+}
+
+.ec-event {
+    overflow: hidden;
+}
+
 /* Global Styles */
 
 body {
