@@ -7,13 +7,20 @@ class BusquedaService extends REST_Controller {
 
 	public function __construct() {
 		parent::__construct();
+		$this->load->model('busquedaModel');
 	}
 
 	public function realizarBusqueda_get() {
 		$tipo = $this->get('tipobusqueda');
 		$textobusqueda = $this->get('textobusqueda');
 
-		$this->response(array("response"=>'=='.$tipo.'=='.$textobusqueda), 200);
+		$complejos = $this->busquedaModel->obtenerResultados($textobusqueda, $tipo);
+
+		if($complejos === NULL) {
+			$this->response(array("response"=>"Hay un error en la consulta"), 412);
+		}
+
+		$this->response(array("response"=>$complejos), 200);
 	}
 }
 
