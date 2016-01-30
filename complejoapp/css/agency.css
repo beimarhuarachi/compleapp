@@ -234,3 +234,23 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color:#34B5A7
 }
+
+section {
+    padding:70px 0
+}
+section h2.section-heading {
+    font-size:40px;
+    margin-top:0;
+    margin-bottom:0px;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+section h3.section-subheading {
+    font-size:16px;
+    font-family:"Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform:none;
+    font-style:italic;
+    font-weight:400;
+    margin-bottom:0px; 
+}

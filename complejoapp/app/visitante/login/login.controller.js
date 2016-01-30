@@ -2,9 +2,9 @@ angular
 	.module('complejo.visitante')
 	.controller('LoginController', LoginController);
 
-LoginController.$inject = ['$scope', '$log', '$state', 'autorizacionService', 'superficieService'];
+LoginController.$inject = ['$scope', '$log', '$state', 'autorizacionService', 'superficieService', 'Notification'];
 
-function LoginController($scope, $log, $state, autorizacionService, superficieService) {
+function LoginController($scope, $log, $state, autorizacionService, superficieService, Notification) {
 	$log.info("Login Controller : inicio de controlador");
 
 	$scope.user = {};
@@ -16,11 +16,7 @@ function LoginController($scope, $log, $state, autorizacionService, superficieSe
 	 * @return {[type]} [description]
 	 */
 	$scope.salir = function() {
-		superficieService.query(function(data) {
-			$log.debug(data);
-		}, function(error) {
-			$log.debug(error);
-		})
+		$state.go('app.visitante.inicio');
 	}
 
 	/**
@@ -29,7 +25,7 @@ function LoginController($scope, $log, $state, autorizacionService, superficieSe
 	 * @return {void}  no retorna valores
 	 */
 	function submitLogin(user) {
-		$log.debug($scope.user);
+		//$log.debug($scope.user);
 		autorizacionService.login(user).then(function(res) {
 			if(res.data && res.status === 200) {
 				$log.debug("Login Controller : esta retornando un token bueno");
@@ -44,10 +40,11 @@ function LoginController($scope, $log, $state, autorizacionService, superficieSe
 				}
 			}
 		}, function(error) {
-			if(error.status == 401) {
+			if(error.status == 404) {
 				$log.debug("Login Controller : No tienes autorizacion");
 				$scope.user = {};
 				$scope.loginForm.$setPristine();
+				Notification.error({title: "Inicio Sesion", message : "Hay un Error en la contrasena o en el nombre de usuario"});
 			} else if(error.status == 400) {
 				$log.debug("Login Controller : La peticion tiene errores");
 			}
