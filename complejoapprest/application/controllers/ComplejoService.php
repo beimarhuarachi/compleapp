@@ -12,6 +12,18 @@ class ComplejoService extends REST_Controller {
 
 	}
 
+	public function obtenerComplejoDeportivo_get() {
+		$idcomplejo = $this->get('id');
+
+		$complejo = $this->complejoModel->obtenerComplejoPorId($idcomplejo);
+
+		if($complejo === false) {
+			$this->response(array("response"=>"No existe este complejo"), 404);
+		}
+
+		$this->response(array("response"=>$complejo), 200);
+	}
+
 	public function index_get() {
 		$this->response(array("response"=> "complejos varios"), 200);
 	}

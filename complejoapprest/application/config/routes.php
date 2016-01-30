@@ -145,6 +145,8 @@ $route['complejos/(:num)/prereservas']['get'] = 'complejoService/obtenerPrereser
 //num el id del complejo
 $route['complejos/(:num)/prereservas']['put'] = 'complejoService/confirmarPrereserva/$1';
 
+$route['complejos']['get'] = 'complejoService/obtenerComplejoDeportivo';
+
 
 /**
  * rutas para los horarios

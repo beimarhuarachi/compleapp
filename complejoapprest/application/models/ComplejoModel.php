@@ -7,6 +7,19 @@ class ComplejoModel extends CI_Model {
 		parent::__construct();
 	}
 
+	public function obtenerComplejoPorId($idcomplejo) {
+		$consulta = $this->db->select("IdComplejo as idcomplejo, NombreComplejo as nombre, 
+			Direccion as direccion, Telefono as telefono, Ciudad as ciudad, FotoPortada as foto, ComoLlegar as comollegar")
+		->from("complejo")
+		->where("IdComplejo", $idcomplejo)
+		->get();
+
+		if($consulta->num_rows() === 1) {
+			return $consulta->row();
+		}
+		return false;
+	}
+
 	public function obtenerComplejoPublico($idusuario) {
 		$consulta = $this->db->select("IdComplejo as idcomplejo, NombreComplejo as nombre, 
 			Direccion as direccion, Telefono as telefono, Ciudad as ciudad, FotoPortada as foto, ComoLlegar as comollegar")

@@ -28,7 +28,7 @@
 			//$log.debug(textobusqueda+ vm.busqueda);
 			busquedaService.buscar(textobusqueda, vm.busqueda)
 				.then(function(res) {
-					$log.debug(res.response);
+					//$log.debug(res.response);
 					var complejos = intercalar(res.response);
 					vm.complejos = complejos;
 				})
