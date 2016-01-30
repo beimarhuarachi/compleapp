@@ -161,6 +161,11 @@ $route['reportes/ganancias/(:num)']['get'] = 'reportesService/ganancias/$1';
 
 $route['complejos/(:num)/gestiones']['get'] = 'reportesService/gestiones/$1';
 
+/**
+ * rutas para el servicio de busquedas
+ */
+$route['busqueda']['get'] = 'busquedaService/realizarBusqueda';
+
 
 
 

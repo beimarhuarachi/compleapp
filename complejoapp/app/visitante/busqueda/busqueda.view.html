@@ -9,7 +9,7 @@
     
     <div class="row" style="margin-bottom : 40px; margin-top : 0px">
         <div class="col-md-6 col-md-offset-3">
-            <form class="form-inline text-center">
+            <form novalidate class="form-inline text-center" name="busquedaform" ng-submit="vm.buscar(vm.textobusqueda)">
                 <div class="form-group">
                     <div class="radio">
                         <label>
@@ -27,9 +27,9 @@
                 
                 <div class="input-group">
 
-                   <input type="text" class="form-control input-lg" placeholder= "inserte el nombre">
+                   <input type="text" name="textobusqueda" ng-model="vm.textobusqueda" class="form-control input-lg" placeholder= "inserte el nombre" required>
                    <span class="input-group-btn">
-                        <button class="btn btn-default input-lg" type="button">Buscar</button>
+                        <button ng-disabled= "busquedaform.textobusqueda.$invalid" class="btn btn-default input-lg" type="submit">Buscar</button>
                    </span>
                 </div>
 
@@ -37,13 +37,8 @@
             </form>
         </div>
     </div>
-  <!-- SECCION PARA LA BUSQUEDA POR DISCIPLINA -->
-  <div class="row">
 
-  </div>
-
-
-  <!-- SECCION PARA LA BUSQUEDA POR  COMPLEJO	-->
+  <!-- SECCION PARA LOS RESULTADOS DE LA BUSQUEDA	-->
   <div class="row">
       <div class="col-lg-12">
         <ul class="timeline">
@@ -68,7 +63,7 @@
                         <br>de la
                         <br>aplicacion!</h4>
                     </div>
-                </li>
+            </li>
             </ul>
         </div>
     </div>
