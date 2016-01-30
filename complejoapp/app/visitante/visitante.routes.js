@@ -23,5 +23,11 @@ function ConfiguracionRutasVisitante ($stateProvider) {
 			url : '/iniciarsesion',
 			templateUrl : 'app/visitante/login/login.html',
 			controller : 'LoginController'
+		})
+		.state('app.visitante.busqueda', {
+			url : '/buscarCancha',
+			templateUrl : 'app/visitante/busqueda/busqueda.view.html',
+			controller : 'BusquedaController',
+			controllerAs : 'vm'
 		});
 }

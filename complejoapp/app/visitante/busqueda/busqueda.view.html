@@ -1,0 +1,75 @@
+<div class="container">
+	<!--  CABECERA PARA LA BUSQUEDA DE CAMPOS-->
+	<section class="row" style="margin: 0px;">
+		<div class="col-lg-12 text-center" style="margin: 0px">
+          <h2 class="section-heading" >busqueda de canchas</h2>
+          <h3 class="section-subheading text-muted">Formulario de busqueda de campos.</h3>
+        </div>
+    </section>
+    
+    <div class="row" style="margin-bottom : 40px; margin-top : 0px">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="form-inline text-center">
+                <div class="form-group">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="porcomplejo" value="complejo" ng-model="vm.busqueda" ng-change="vm.onchange()">
+                            Por Complejo
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="pordisciplina" value="disciplina" ng-model="vm.busqueda" ng-change="vm.onchange()">
+                            Por Disciplina
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+
+                   <input type="text" class="form-control input-lg" placeholder= "inserte el nombre">
+                   <span class="input-group-btn">
+                        <button class="btn btn-default input-lg" type="button">Buscar</button>
+                   </span>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+  <!-- SECCION PARA LA BUSQUEDA POR DISCIPLINA -->
+  <div class="row">
+
+  </div>
+
+
+  <!-- SECCION PARA LA BUSQUEDA POR  COMPLEJO	-->
+  <div class="row">
+      <div class="col-lg-12">
+        <ul class="timeline">
+            <li>
+                <div class="timeline-image">
+                    <img class="img-circle img-responsive" src="img/3.jpg" alt="">
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>2009-2011</h4>
+                        <h4 class="subheading">Our Humble Beginnings</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                    </div>
+                </div>
+            </li>
+
+            <li class="timeline-inverted">
+                <div class="timeline-image">
+                    <h4>Se Parte
+                        <br>de la
+                        <br>aplicacion!</h4>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
