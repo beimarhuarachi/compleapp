@@ -27,6 +27,6 @@
 			//$log.debug(vm.campos);
 		});	
 
-		$log.debug(complejo);
+		//$log.debug(complejo);
 	}
 })();

@@ -11,6 +11,17 @@ class ReportesService extends REST_Controller {
 		$this->load->model('reportesModel');
 	}
 
+	public function reporteDiario_get() {
+		$usuario = Verificador::verificacionCompleta($this);
+		
+		$fechaactual = $this->get('fechaactual');
+		$idcomplejo = $this->get('idcomplejo');
+
+		$reporte = $this->reportesModel->reporteDiario($idcomplejo, $fechaactual);
+
+		$this->response(array("response"=>$reporte), 200);
+	}
+
 	public function camposPopulares_get($idcomplejo) {
 		$usuario = Verificador::verificacionCompleta($this);
 

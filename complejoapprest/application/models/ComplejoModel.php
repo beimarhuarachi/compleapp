@@ -20,9 +20,15 @@ class ComplejoModel extends CI_Model {
 		return false;
 	}
 
+	/**
+	 * ESTA RETORNANDO EL NOMBRE DE ADMINISTRADOR Y SU CI(TODO)
+	 * @param  [type] $idusuario [description]
+	 * @return [type]            [description]
+	 */
 	public function obtenerComplejoPublico($idusuario) {
-		$consulta = $this->db->select("IdComplejo as idcomplejo, NombreComplejo as nombre, 
-			Direccion as direccion, Telefono as telefono, Ciudad as ciudad, FotoPortada as foto, ComoLlegar as comollegar")
+		$consulta = $this->db->select("IdComplejo as idcomplejo, NombreComplejo as nombre, Direccion as direccion
+						, Telefono as telefono, Ciudad as ciudad, FotoPortada as foto, ComoLlegar as comollegar
+						, NombreAdministrador as nombreadmin, NumeroCI as numeroci, ApellidosAdministrador as apellidos")
 		->from("complejo")
 		->where("IdUsuario = ".$idusuario)
 		->get();
