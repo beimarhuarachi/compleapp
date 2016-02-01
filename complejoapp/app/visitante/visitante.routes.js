@@ -56,5 +56,11 @@ function ConfiguracionRutasVisitante ($stateProvider) {
 					return defered.promise;
 				}]
 			}
+		})
+		.state('app.visitante.registro', {
+			url : '/registro',
+			templateUrl : 'app/visitante/registro/registro.view.html',
+			controller : 'RegistroController',
+			controllerAs : 'vm'
 		});
 }
