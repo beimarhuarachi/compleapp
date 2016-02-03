@@ -28,21 +28,26 @@
 		function getDatos(lat, lng) {
 			var defered = $q.defer();
 			var urlcompleta = getUrlCompleta(lat, lng);
-			
+			// https://freegeoip.net/json/  (para obterner ip, timezone, ubicacion ciudad, pais mediante(pero la ubicacion actual))
 			$http.get(urlcompleta)
 				.success(function(response) {
 					if(response.status === 'OK') {
+						var ciudad = buscarpropiedad("administrative_area_level_1", response.results);
+						var pais = buscarpropiedad("country", response.results);
+						var direccion = buscarpropiedad("route", response.results);
+
+
 						var datos = {
 							url : urlcompleta,
-							direccion : response.results[0].address_components[0].long_name,
-							provincia : response.results[0].address_components[3].long_name,
-							ciudad : response.results[0].address_components[2].long_name,
-							pais : response.results[0].address_components[5].long_name
+							direccion : direccion,
+							ciudad : ciudad,
+							pais : pais
 						}
 						defered.resolve(datos);	
 					} else {
 						defered.resolve(null);	
 					}
+					// console.log(response);
 					
 				}).error(function(response) {
 					defered.reject(response);
@@ -51,12 +56,25 @@
 			return defered.promise;
 		}
 
+		function buscarpropiedad(nombrepropiedad, results) {
+			var valorpropiedad = null; 
+			 for (var i=0; i<results[0].address_components.length; i++) {
+	            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+	            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+	                if (results[0].address_components[i].types[b] == nombrepropiedad) {
+	                    //this is the object you are looking for
+	                    valorpropiedad= results[0].address_components[i];
+	                    break;
+	                }
+	            }
+        	}
+        	return valorpropiedad.long_name;
+		}
+
 		//metodo privado
 		function getUrlCompleta(lat, lng) {
-			latitud = '' + latitud + lat;
-			longitud = '' + longitud + lng;
-
-			return GOOGLEMAPS_API + latitud + longitud + sensor;
+			return GOOGLEMAPS_API + latitud + lat + longitud + lng + sensor;
 		}
 
 	}

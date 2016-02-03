@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
 	<div class="row">
 		<h1>{{vm.titulo | uppercase}}</h1>
 		<div class="col-lg-6">
@@ -9,5 +9,104 @@
 			</div>
 			
 		</div>
+	</div>
+</div> -->
+
+<div class="container">
+	<section class="row">
+		<div class="col-lg-12 text-center">
+		    <h2 class="section-heading">Registro</h2>
+		    <h3 class="section-subheading text-muted">Formulario de registro para complejos.</h3>
+		</div>
+		
+	</section>
+
+	<div class="row">
+		<form name="registroForm" novalidate ng-submit="vm.submit(vm.complejo)">
+			<div class="col-md-6">
+				<!-- NOMBRE  -->
+				<div class="form-group" ng-class="{'has-error' : registroForm.nombre.$invalid && !registroForm.nombre.$pristine}">
+					<input type="text" name="nombre" class="form-control input-lg" required ng-model="vm.complejo.nombre" placeholder="Nombre de Complejo" maxlength="60">
+					
+					<p ng-show="registroForm.nombre.$error.required && !registroForm.nombre.$pristine" class="help-block">El nombre de complejo es requerido</p>
+				</div>
+				
+				<!-- CORREO -->
+				<div class="form-group" ng-class="{'has-error' : registroForm.correo.$invalid && !registroForm.correo.$pristine}">
+					<input type="email" name="correo" class="form-control input-lg" required ng-model="vm.complejo.correo" placeholder="Correo electronico" maxlength="70">
+					
+					<p ng-show="registroForm.correo.$error.required && !registroForm.correo.$pristine" class="help-block">El correo es requerido</p>
+					<p ng-show="registroForm.correo.$error.email && !registroForm.correo.$pristine" class="help-block">Debe introducir un formato de correo valido</p>
+				</div>
+	
+				<!-- NOMBRES -->
+				<div class="form-group" ng-class="{'has-error' : registroForm.nombreadmin.$invalid && !registroForm.nombreadmin.$pristine}">
+					<input type="text" name="nombreadmin" class="form-control input-lg" required ng-model="vm.complejo.nombreadmin" placeholder="Nombres de Administrador" pattern="^[a-zA-Z]{0,30}\s?[a-zA-Z]{2,30}$" maxlength="60">
+					
+					<p ng-show="registroForm.nombreadmin.$error.required && !registroForm.nombreadmin.$pristine" class="help-block">El nombre de administrador es requerido</p>
+
+					<p ng-show="registroForm.nombreadmin.$error.pattern && !registroForm.nombreadmin.$pristine" class="help-block">Los nombres deben tener al menos un caracter. No son permitidos numeros y simbolos</p>
+				</div>
+				
+				<!-- APELLIDOS -->
+				<div class="form-group" ng-class="{'has-error' : registroForm.apellidosadmin.$invalid && !registroForm.apellidosadmin.$pristine}">
+					<input type="text" name="apellidosadmin" class="form-control input-lg" required ng-model="vm.complejo.apellidosadmin" placeholder="Apellidos de Administrador" pattern="^[a-zA-Z]{0,30}\s?[a-zA-Z]{2,30}$" maxlength="60">
+					
+					<p ng-show="registroForm.apellidosadmin.$error.required && !registroForm.apellidosadmin.$pristine" class="help-block">El apellido de administrador es requerido</p>
+					<p ng-show="registroForm.apellidosadmin.$error.pattern && !registroForm.apellidosadmin.$pristine" class="help-block">Los apellidos deben tener al menos un caracter. No son permitidos numeros y  simbolos</p>
+				</div>
+				
+				<!-- NUMERO CI -->
+				<div class="form-group" ng-class="{'has-error' : registroForm.numeroci.$invalid && !registroForm.numeroci.$pristine}">
+					<input type="number" min="100" name="numeroci" class="form-control input-lg" required ng-model="vm.complejo.numeroci" placeholder="Numero de C.I.">
+					
+					<p ng-show="registroForm.numeroci.$error.required && !registroForm.numeroci.$pristine" class="help-block">El numero de Carnet es requerido</p>
+				</div>
+				
+				<!-- FOTO PORTADA -->
+				<cd-subir-archivo></cs-subir-archivo>
+			</div>
+
+			<div class="col-md-6">
+				<div class="alert alert-info" style="margin-bottom : 0px">
+				    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				    <strong>Busque la ubicacion de su complejo</strong> una vez localizado su "ubicacion", presione sobre este
+				</div>
+
+				<cd-mapa lat="vm.complejo.latitud" lng="vm.complejo.longitud"></cd-mapa>
+				
+				<div class="alert alert-success" ng-show="vm.complejo.latitud">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<strong>Ubicacion Elegida Latitud :</strong>  {{vm.complejo.latitud}} <strong>Longitud :</strong>  {{vm.complejo.longitud}}
+				</div>
+
+				<!-- TELEFONO -->
+				<div class="form-group" ng-class="{'has-error' : registroForm.telefono.$invalid && !registroForm.telefono.$pristine}" style="margin-top: 10px">
+					<input type="number" min="100" name="telefono" class="form-control input-lg" required ng-model="vm.complejo.telefono" placeholder="Telefono / Celular" pattern="^[3|2|4|6|7][0-9]{6,7}$">
+					
+					<p ng-show="registroForm.telefono.$error.required && !registroForm.telefono.$pristine" class="help-block">El telefono es requerido</p>
+					<p ng-show="registroForm.telefono.$error.pattern && !registroForm.telefono.$pristine" class="help-block">El numero de telefono debe contener 7 o 8 digitos</p>
+				</div>
+
+				<!-- DIRECCION -->
+				<div class="form-group" ng-class="{'has-error' : registroForm.direccion.$invalid && !registroForm.direccion.$pristine}">
+					<input type="text" name="direccion" class="form-control input-lg" required ng-model="vm.complejo.direccion" placeholder="Direccion" maxlength="100">
+					
+					<p ng-show="registroForm.direccion.$error.required && !registroForm.direccion.$pristine" class="help-block">El apellido de administrador es requerido</p>
+					<p ng-show="registroForm.direccion.$error.pattern && !registroForm.direccion.$pristine" class="help-block">Los apellidos deben tener al menos un caracter. No son permitidos numeros y  simbolos</p>
+				</div>
+				
+				<!-- COMO LLEGAR -->
+				<textarea name="" class="form-control" rows="3" required="required" placeholder="Descripcion de como llegar al complejo..." maxlength="300" ng-model="vm.complejo.comollegar"></textarea>				
+
+				<!-- BOTONES DE CONTROL DEL FORMULARIO -->
+				<div class="form-group" style="margin-top: 10px">
+					<button ng-disabled="registroForm.$invalid" type="submit" class="btn btn-primary btn-lg">Registrar</button>
+					<button type="reset" class="btn btn-danger btn-lg">Cancelar</button>
+					
+				</div>
+
+			</div>		
+		</form>
 	</div>
 </div>
