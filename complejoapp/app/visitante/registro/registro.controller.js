@@ -5,9 +5,9 @@
 		.module('complejo.visitante')
 		.controller('RegistroController', RegistroController);
 
-	RegistroController.$inject = ['$log', '$scope', 'complejoService', 'Notification'];
+	RegistroController.$inject = ['$log', '$scope', 'complejoService', 'Notification', 'complejos'];
 
-	function RegistroController($log, $scope, complejoService, Notification) {
+	function RegistroController($log, $scope, complejoService, Notification, complejos) {
 		var vm = this;
 
 		vm.complejo = {};
@@ -17,6 +17,8 @@
 		vm.complejo.latitud = null;
 
 		vm.complejo.longitud = null;
+
+		vm.complejos = complejos;
 
 		vm.complejo.ubicacion = {};
 

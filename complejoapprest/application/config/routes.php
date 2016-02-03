@@ -86,7 +86,7 @@ $route['superficies']['get'] = 'superficieController/index';
  * rutas para el servicio de complejos
  */
 
-$route['complejos']['get'] = 'complejoService/index';
+$route['complejosdeportivos']['get'] = 'complejoService/index';
 $route['complejos/(:num)']['get'] = 'complejoService/retornarComplejo/$1';
 $route['complejos']['post'] = 'complejoService/registrar';
 

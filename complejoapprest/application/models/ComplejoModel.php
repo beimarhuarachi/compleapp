@@ -66,6 +66,21 @@ class ComplejoModel extends CI_Model {
 		return false;
 	}
 
+	public function obtenerComplejos() {
+		$consulta = $this->db->select("IdComplejo as idcomplejo, NombreComplejo as nombre, Direccion as direccion
+						, Telefono as telefono, Ciudad as ciudad, FotoPortada as foto, ComoLlegar as comollegar
+						, NombreAdministrador as nombreadmin, NumeroCI as numeroci, ApellidosAdministrador as apellidos
+						, Latitud as latitud, Longitud as longitud")
+							 ->from("complejo")
+							 ->get();
+
+		if($consulta->num_rows() >= 1) {
+			return $consulta->result_array();
+		}
+
+		return false;
+	}
+
 }
 
 /* End of file complejoModel.php */

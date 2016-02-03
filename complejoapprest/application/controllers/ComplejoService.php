@@ -73,7 +73,9 @@ class ComplejoService extends REST_Controller {
 	}
 
 	public function index_get() {
-		$this->response(array("response"=> "complejos varios"), 200);
+		$complejos = $this->complejoModel->obtenerComplejos();
+
+		$this->response(array("response"=> $complejos), 200);
 	}
 
 	//id del usuario

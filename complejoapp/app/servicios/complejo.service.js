@@ -20,6 +20,10 @@ function complejoService($resource, REST_API) {
 			//El content type lo seteamos porque por defecto envia datos json
 			//(con undefined podemos enviar en formato de FormData)
 			headers: { 'Content-Type': undefined }
+		},
+		getComplejos : {
+			method : 'GET',
+			skipAuthorization : true
 		}
 	}); 
 
