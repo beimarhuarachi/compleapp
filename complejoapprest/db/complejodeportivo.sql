@@ -10,13 +10,13 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-01-14 16:54:44
+Date: 2016-02-03 02:08:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for campo
+-- Table structure for `campo`
 -- ----------------------------
 DROP TABLE IF EXISTS `campo`;
 CREATE TABLE `campo` (
@@ -42,13 +42,13 @@ CREATE TABLE `campo` (
 -- ----------------------------
 -- Records of campo
 -- ----------------------------
-INSERT INTO `campo` VALUES ('1', '1', 'CanchaFutbol1', '100', 'uploads/futbol.jpg', '1', '3', '4');
+INSERT INTO `campo` VALUES ('1', '1', 'CanchaFutbol1', '200', 'uploads/imagen001.jpg', '1', '3', '4');
 INSERT INTO `campo` VALUES ('4', '1', 'CanchaBacket', '80', 'uploads/bascket.jpg', '5', '2', '1');
 INSERT INTO `campo` VALUES ('29', '4', 'CanchaFrontron1', '70', 'uploads/imagen001.jpg', '6', '1', '1');
 INSERT INTO `campo` VALUES ('30', '1', 'CanchaTenis', '90', 'uploads/CanchaTenis.jpg', '7', '1', '7');
 
 -- ----------------------------
--- Table structure for cliente
+-- Table structure for `cliente`
 -- ----------------------------
 DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE `cliente` (
@@ -79,10 +79,12 @@ INSERT INTO `cliente` VALUES ('7', '4', '9', 'Herminia', 'Zapata', '444447', '45
 INSERT INTO `cliente` VALUES ('8', '1', '10', 'Beimar Huarachi', 'mamani', '456789', '4567891');
 
 -- ----------------------------
--- Table structure for complejo
+-- Table structure for `complejo`
 -- ----------------------------
 DROP TABLE IF EXISTS `complejo`;
 CREATE TABLE `complejo` (
+  `Longitud` double DEFAULT NULL,
+  `Latitud` double DEFAULT NULL,
   `IdComplejo` int(11) NOT NULL AUTO_INCREMENT,
   `IdUsuario` int(11) NOT NULL,
   `Direccion` varchar(255) DEFAULT NULL,
@@ -94,19 +96,20 @@ CREATE TABLE `complejo` (
   `ComoLlegar` varchar(255) DEFAULT NULL,
   `FotoPortada` varchar(255) DEFAULT NULL,
   `NombreComplejo` varchar(255) DEFAULT NULL,
+  `Pais` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`IdComplejo`),
   UNIQUE KEY `IdUsuario_FKComplejo` (`IdUsuario`) USING BTREE,
   CONSTRAINT `IdUsuario_FKComplejo` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of complejo
 -- ----------------------------
-INSERT INTO `complejo` VALUES ('1', '1', 'Calle Quebracho #34 - Zona alto Cbba. ', '4567891', 'Beimar', 'Huarachi Mamani', '8674461', 'Cochabamba', 'Tomar la linea Linea 03 o la linea J', 'uploads/complejoportada.jpg', 'Complejo San Simon');
-INSERT INTO `complejo` VALUES ('4', '2', 'Avenida Oquendo', '4562134', 'Jorge', 'Huarachi Mamani', '46578125', 'La Paz', 'Linea 01', 'uploads/complejoportada.jpg', 'Complejo Unideportivo Chaski');
+INSERT INTO `complejo` VALUES (null, null, '1', '1', 'Av Pdte Manuel Isidoro Belzu entre Sucre y Guillermo Urquidi', '4567891', 'Beimar Eninfo', 'Huarachi Mamani', '8674461', 'Cochabamba', 'Tomar la linea Linea 03 o la linea J', 'uploads/complejoportada.jpg', 'Complejo San Simon', null);
+INSERT INTO `complejo` VALUES (null, null, '4', '2', 'Avenida Oquendo', '4562134', 'Jorge', 'Huarachi Mamani', '46578125', 'La Paz', 'Linea 01', 'uploads/complejoportada.jpg', 'Complejo Unideportivo Chaski', null);
 
 -- ----------------------------
--- Table structure for disciplina
+-- Table structure for `disciplina`
 -- ----------------------------
 DROP TABLE IF EXISTS `disciplina`;
 CREATE TABLE `disciplina` (
@@ -131,7 +134,7 @@ INSERT INTO `disciplina` VALUES ('9', 'Esgrima', '50');
 INSERT INTO `disciplina` VALUES ('10', 'Karate', '30');
 
 -- ----------------------------
--- Table structure for factura
+-- Table structure for `factura`
 -- ----------------------------
 DROP TABLE IF EXISTS `factura`;
 CREATE TABLE `factura` (
@@ -142,14 +145,14 @@ CREATE TABLE `factura` (
   PRIMARY KEY (`NumeroFactura`),
   KEY `IdCliente` (`IdCliente`),
   CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`IdCliente`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of factura
 -- ----------------------------
 INSERT INTO `factura` VALUES ('30', '2016-01-12', null, '2');
 INSERT INTO `factura` VALUES ('31', '2016-01-12', null, '2');
-INSERT INTO `factura` VALUES ('32', '2016-01-12', null, '2');
+INSERT INTO `factura` VALUES ('32', '2016-01-15', null, '2');
 INSERT INTO `factura` VALUES ('33', '2016-01-12', null, '6');
 INSERT INTO `factura` VALUES ('34', '2016-01-12', null, '6');
 INSERT INTO `factura` VALUES ('35', '2016-01-12', null, '3');
@@ -157,9 +160,45 @@ INSERT INTO `factura` VALUES ('36', '2016-01-12', null, '3');
 INSERT INTO `factura` VALUES ('37', '2016-01-12', null, '5');
 INSERT INTO `factura` VALUES ('38', '2016-01-12', null, '5');
 INSERT INTO `factura` VALUES ('39', '2016-01-14', null, '5');
+INSERT INTO `factura` VALUES ('40', '2016-01-14', null, '6');
+INSERT INTO `factura` VALUES ('41', '2016-01-20', null, '6');
+INSERT INTO `factura` VALUES ('42', '2016-01-20', null, '7');
+INSERT INTO `factura` VALUES ('43', '2016-01-20', null, '2');
+INSERT INTO `factura` VALUES ('44', '2016-01-20', null, '3');
+INSERT INTO `factura` VALUES ('45', '2016-01-20', null, '6');
+INSERT INTO `factura` VALUES ('46', '2016-01-20', null, '4');
+INSERT INTO `factura` VALUES ('47', '2016-01-24', null, '4');
+INSERT INTO `factura` VALUES ('48', '2016-01-24', null, '8');
+INSERT INTO `factura` VALUES ('49', '2016-01-26', null, '2');
+INSERT INTO `factura` VALUES ('50', '2016-01-26', null, '5');
+INSERT INTO `factura` VALUES ('51', '2016-01-26', null, '7');
+INSERT INTO `factura` VALUES ('52', '2016-01-26', null, '3');
+INSERT INTO `factura` VALUES ('53', '2016-01-26', null, '7');
+INSERT INTO `factura` VALUES ('54', '2016-01-26', null, '2');
+INSERT INTO `factura` VALUES ('55', '2016-01-26', null, '1');
+INSERT INTO `factura` VALUES ('56', '2016-01-29', null, '2');
+INSERT INTO `factura` VALUES ('57', '2016-01-29', null, '1');
+INSERT INTO `factura` VALUES ('58', '2016-01-29', null, '1');
+INSERT INTO `factura` VALUES ('59', '2016-01-30', null, '1');
+INSERT INTO `factura` VALUES ('60', '2016-01-30', null, '2');
+INSERT INTO `factura` VALUES ('61', '2016-01-31', null, '2');
+INSERT INTO `factura` VALUES ('62', '2016-01-31', null, '6');
+INSERT INTO `factura` VALUES ('63', '2016-01-31', null, '4');
+INSERT INTO `factura` VALUES ('64', '2016-01-31', null, '4');
+INSERT INTO `factura` VALUES ('65', '2016-01-31', null, '6');
+INSERT INTO `factura` VALUES ('66', '2016-01-31', null, '5');
+INSERT INTO `factura` VALUES ('67', '2016-01-31', null, '1');
+INSERT INTO `factura` VALUES ('68', '2016-01-31', null, '8');
+INSERT INTO `factura` VALUES ('69', '2016-01-31', null, '3');
+INSERT INTO `factura` VALUES ('70', '2016-01-31', null, '7');
+INSERT INTO `factura` VALUES ('71', '2016-01-31', null, '6');
+INSERT INTO `factura` VALUES ('72', '2016-01-31', null, '6');
+INSERT INTO `factura` VALUES ('73', '2016-01-31', null, '6');
+INSERT INTO `factura` VALUES ('74', '2016-02-01', null, '2');
+INSERT INTO `factura` VALUES ('75', '2016-02-03', null, '4');
 
 -- ----------------------------
--- Table structure for funcion
+-- Table structure for `funcion`
 -- ----------------------------
 DROP TABLE IF EXISTS `funcion`;
 CREATE TABLE `funcion` (
@@ -171,7 +210,7 @@ CREATE TABLE `funcion` (
   PRIMARY KEY (`IdFuncion`),
   KEY `IdRol_FK_Funcion` (`IdRol`),
   CONSTRAINT `IdRol_FK_Funcion` FOREIGN KEY (`IdRol`) REFERENCES `rol` (`IdRol`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of funcion
@@ -187,7 +226,7 @@ INSERT INTO `funcion` VALUES ('8', 'Confirmar Prereserva', 'app.admin.prereserva
 INSERT INTO `funcion` VALUES ('9', 'Canchas', 'app.admin.campos', '1', 'fa fa-fw fa-soccer-ball-o');
 
 -- ----------------------------
--- Table structure for horario
+-- Table structure for `horario`
 -- ----------------------------
 DROP TABLE IF EXISTS `horario`;
 CREATE TABLE `horario` (
@@ -195,7 +234,7 @@ CREATE TABLE `horario` (
   `HoraInicio` time NOT NULL,
   `HoraFin` time NOT NULL,
   PRIMARY KEY (`IdHorario`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of horario
@@ -206,9 +245,10 @@ INSERT INTO `horario` VALUES ('3', '08:00:00', '12:00:00');
 INSERT INTO `horario` VALUES ('4', '08:00:00', '22:00:00');
 INSERT INTO `horario` VALUES ('6', '13:00:00', '18:00:00');
 INSERT INTO `horario` VALUES ('7', '08:00:00', '20:00:00');
+INSERT INTO `horario` VALUES ('8', '07:00:00', '18:00:00');
 
 -- ----------------------------
--- Table structure for reserva
+-- Table structure for `reserva`
 -- ----------------------------
 DROP TABLE IF EXISTS `reserva`;
 CREATE TABLE `reserva` (
@@ -230,25 +270,96 @@ CREATE TABLE `reserva` (
   CONSTRAINT `IdCampo_FK_Reserva` FOREIGN KEY (`IdCampo`) REFERENCES `campo` (`IdCampoDeportivo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `IdTipoReserva_FKReserva` FOREIGN KEY (`IdTipoReserva`) REFERENCES `tiporeserva` (`IdTipo`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`IdFactura`) REFERENCES `factura` (`NumeroFactura`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=228 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of reserva
 -- ----------------------------
 INSERT INTO `reserva` VALUES ('142', '2016-01-12', '1', '2016-01-14 09:00:00', '2016-01-14 11:00:00', '30', '0', '1', null, '200', '1');
 INSERT INTO `reserva` VALUES ('143', '2016-01-12', '1', '2016-01-16 10:00:00', '2016-01-16 11:00:00', '31', '0', '1', '2016-01-13 10:44:14', '100', '4');
-INSERT INTO `reserva` VALUES ('144', '2016-01-12', '1', '2016-01-17 12:00:00', '2016-01-17 14:00:00', '32', '0', '0', '2016-01-13 17:52:12', '200', '4');
+INSERT INTO `reserva` VALUES ('144', '2016-01-12', '1', '2016-01-17 12:00:00', '2016-01-17 14:00:00', '32', '0', '1', '2016-01-13 17:52:12', '200', '4');
 INSERT INTO `reserva` VALUES ('145', '2016-01-12', '1', '2016-01-14 13:00:00', '2016-01-14 14:00:00', '33', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('146', '2016-01-12', '1', '2016-01-17 15:00:00', '2016-01-17 16:00:00', '34', '0', '0', '2016-01-13 17:58:48', '100', '4');
 INSERT INTO `reserva` VALUES ('147', '2016-01-12', '1', '2016-01-14 15:00:00', '2016-01-14 16:00:00', '35', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('148', '2016-01-12', '4', '2016-01-16 11:00:00', '2016-01-16 14:00:00', '36', '0', '0', '2016-01-13 18:01:15', '240', '4');
 INSERT INTO `reserva` VALUES ('149', '2016-01-12', '1', '2016-01-15 16:00:00', '2016-01-15 17:00:00', '37', '0', '1', null, '100', '1');
-INSERT INTO `reserva` VALUES ('150', '2016-01-12', '1', '2016-01-16 18:00:00', '2016-01-16 19:00:00', '38', '0', '0', '2016-01-13 18:33:30', '100', '4');
 INSERT INTO `reserva` VALUES ('151', '2016-01-14', '4', '2016-01-17 15:00:00', '2016-01-17 17:00:00', null, '1', '1', null, '0', '2');
 INSERT INTO `reserva` VALUES ('152', '2016-01-14', '4', '2016-01-17 10:00:00', '2016-01-17 12:00:00', '39', '0', '1', null, '160', '1');
+INSERT INTO `reserva` VALUES ('153', '2016-01-14', '30', '2016-01-17 10:00:00', '2016-01-17 13:00:00', '40', '0', '1', null, '270', '1');
+INSERT INTO `reserva` VALUES ('154', '2016-01-20', '1', '2016-01-21 09:00:00', '2016-01-21 10:00:00', '41', '0', '1', null, '100', '1');
+INSERT INTO `reserva` VALUES ('155', '2016-01-20', '1', '2016-01-22 09:00:00', '2016-01-22 10:00:00', '41', '0', '1', null, '100', '1');
+INSERT INTO `reserva` VALUES ('156', '2016-01-20', '1', '2016-01-22 11:00:00', '2016-01-22 13:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('157', '2016-01-20', '1', '2016-01-24 09:00:00', '2016-01-24 11:00:00', '42', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('158', '2016-01-20', '1', '2016-01-23 08:00:00', '2016-01-23 09:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('159', '2016-01-20', '1', '2016-01-23 10:00:00', '2016-01-23 12:00:00', '43', '0', '1', '2016-01-21 14:08:58', '200', '4');
+INSERT INTO `reserva` VALUES ('160', '2016-01-20', '1', '2016-01-24 14:00:00', '2016-01-24 16:00:00', '44', '0', '1', '2016-01-21 14:11:06', '200', '4');
+INSERT INTO `reserva` VALUES ('161', '2016-01-20', '1', '2016-01-23 13:00:00', '2016-01-23 14:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('162', '2016-01-20', '1', '2016-01-23 18:00:00', '2016-01-23 19:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('163', '2016-01-20', '1', '2016-01-24 18:00:00', '2016-01-24 19:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('164', '2016-01-20', '1', '2016-01-22 16:00:00', '2016-01-22 17:00:00', '45', '0', '1', null, '100', '1');
+INSERT INTO `reserva` VALUES ('165', '2016-01-20', '1', '2016-01-23 16:00:00', '2016-01-23 17:00:00', '45', '0', '1', null, '100', '1');
+INSERT INTO `reserva` VALUES ('166', '2016-01-20', '1', '2016-01-24 16:00:00', '2016-01-24 17:00:00', '45', '0', '1', null, '100', '1');
+INSERT INTO `reserva` VALUES ('167', '2016-01-20', '1', '2016-01-22 19:00:00', '2016-01-22 20:00:00', '46', '0', '1', null, '100', '1');
+INSERT INTO `reserva` VALUES ('168', '2016-01-24', '1', '2016-02-05 09:00:00', '2016-02-05 10:00:00', '47', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('169', '2016-01-24', '1', '2016-01-24 21:00:00', '2016-01-24 22:00:00', '48', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('170', '2016-01-26', '1', '2016-01-27 09:00:00', '2016-01-27 10:00:00', '49', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('171', '2016-01-26', '1', '2016-03-04 10:00:00', '2016-03-04 12:00:00', '50', '0', '1', null, '400', '1');
+INSERT INTO `reserva` VALUES ('172', '2016-01-26', '1', '2016-03-05 10:00:00', '2016-03-05 12:00:00', '50', '0', '1', null, '400', '1');
+INSERT INTO `reserva` VALUES ('173', '2016-01-26', '1', '2016-03-06 10:00:00', '2016-03-06 12:00:00', '50', '0', '1', null, '400', '1');
+INSERT INTO `reserva` VALUES ('174', '2016-01-26', '1', '2016-04-13 09:00:00', '2016-04-13 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('175', '2016-01-26', '1', '2016-04-20 09:00:00', '2016-04-20 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('176', '2016-01-26', '1', '2016-04-27 09:00:00', '2016-04-27 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('177', '2016-01-26', '1', '2016-05-04 09:00:00', '2016-05-04 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('178', '2016-01-26', '1', '2016-05-11 09:00:00', '2016-05-11 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('179', '2016-01-26', '1', '2016-05-18 09:00:00', '2016-05-18 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('180', '2016-01-26', '1', '2016-05-25 09:00:00', '2016-05-25 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('181', '2016-01-26', '1', '2016-06-01 09:00:00', '2016-06-01 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('182', '2016-01-26', '1', '2016-06-08 09:00:00', '2016-06-08 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('183', '2016-01-26', '1', '2016-06-15 09:00:00', '2016-06-15 10:00:00', '51', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('184', '2016-01-26', '1', '2016-06-29 10:00:00', '2016-06-29 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('185', '2016-01-26', '1', '2016-07-06 10:00:00', '2016-07-06 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('186', '2016-01-26', '1', '2016-07-13 10:00:00', '2016-07-13 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('187', '2016-01-26', '1', '2016-07-20 10:00:00', '2016-07-20 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('188', '2016-01-26', '1', '2016-07-27 10:00:00', '2016-07-27 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('189', '2016-01-26', '1', '2016-08-03 10:00:00', '2016-08-03 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('190', '2016-01-26', '1', '2016-08-10 10:00:00', '2016-08-10 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('191', '2016-01-26', '1', '2016-08-17 10:00:00', '2016-08-17 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('192', '2016-01-26', '1', '2016-08-24 10:00:00', '2016-08-24 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('193', '2016-01-26', '1', '2016-08-31 10:00:00', '2016-08-31 11:00:00', '52', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('194', '2016-01-26', '1', '2016-01-30 10:00:00', '2016-01-30 11:00:00', '53', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('195', '2016-01-26', '1', '2016-01-31 10:00:00', '2016-01-31 11:00:00', '53', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('196', '2016-01-26', '1', '2016-02-01 10:00:00', '2016-02-01 11:00:00', '53', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('198', '2016-01-26', '1', '2016-01-31 13:00:00', '2016-01-31 14:00:00', '55', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('199', '2016-01-29', '1', '2016-01-30 16:00:00', '2016-01-30 17:00:00', '56', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('200', '2016-01-29', '1', '2016-01-30 12:00:00', '2016-01-30 13:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('201', '2016-01-29', '1', '2016-01-31 08:00:00', '2016-01-31 09:00:00', '57', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('202', '2016-01-29', '1', '2016-01-31 18:00:00', '2016-01-31 19:00:00', '58', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('203', '2016-01-29', '1', '2016-01-31 15:00:00', '2016-01-31 16:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('204', '2016-01-29', '1', '2016-01-29 08:00:00', '2016-01-29 11:00:00', null, '1', '1', null, '0', '2');
+INSERT INTO `reserva` VALUES ('205', '2016-01-30', '1', '2016-02-03 12:00:00', '2016-02-03 13:00:00', '59', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('206', '2016-01-30', '1', '2016-02-04 12:00:00', '2016-02-04 13:00:00', '59', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('207', '2016-01-30', '1', '2016-02-05 12:00:00', '2016-02-05 13:00:00', '59', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('208', '2016-01-30', '1', '2016-02-06 12:00:00', '2016-02-06 13:00:00', '59', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('209', '2016-01-30', '1', '2016-02-07 12:00:00', '2016-02-07 13:00:00', '59', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('210', '2016-01-30', '1', '2016-02-08 12:00:00', '2016-02-08 13:00:00', '59', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('211', '2016-01-30', '1', '2016-02-04 15:00:00', '2016-02-04 17:00:00', '60', '0', '1', '2016-01-31 18:43:38', '400', '4');
+INSERT INTO `reserva` VALUES ('212', '2016-01-31', '1', '2016-01-31 16:00:00', '2016-01-31 17:00:00', '61', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('213', '2016-01-31', '1', '2016-01-31 17:00:00', '2016-01-31 18:00:00', '62', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('214', '2016-01-31', '4', '2016-01-31 15:00:00', '2016-01-31 18:00:00', '63', '0', '1', null, '240', '1');
+INSERT INTO `reserva` VALUES ('215', '2016-01-31', '30', '2016-01-31 17:00:00', '2016-01-31 19:00:00', '64', '0', '1', null, '180', '1');
+INSERT INTO `reserva` VALUES ('216', '2016-01-31', '30', '2016-02-01 17:00:00', '2016-02-01 19:00:00', '64', '0', '1', null, '180', '1');
+INSERT INTO `reserva` VALUES ('217', '2016-01-31', '30', '2016-01-31 19:00:00', '2016-01-31 20:00:00', '65', '0', '1', null, '90', '1');
+INSERT INTO `reserva` VALUES ('218', '2016-01-31', '1', '2016-01-31 19:00:00', '2016-01-31 20:00:00', '66', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('219', '2016-01-31', '1', '2016-01-31 20:00:00', '2016-01-31 21:00:00', '67', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('220', '2016-01-31', '1', '2016-01-31 21:00:00', '2016-01-31 22:00:00', '68', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('221', '2016-01-31', '4', '2016-01-31 18:00:00', '2016-01-31 19:00:00', '69', '0', '1', null, '80', '1');
+INSERT INTO `reserva` VALUES ('222', '2016-01-31', '4', '2016-01-31 19:00:00', '2016-01-31 20:00:00', '70', '0', '1', null, '80', '1');
+INSERT INTO `reserva` VALUES ('223', '2016-01-31', '4', '2016-01-31 20:00:00', '2016-01-31 21:00:00', '71', '0', '1', null, '80', '1');
+INSERT INTO `reserva` VALUES ('224', '2016-01-31', '30', '2016-01-31 16:00:00', '2016-01-31 17:00:00', '72', '0', '1', null, '90', '1');
+INSERT INTO `reserva` VALUES ('225', '2016-01-31', '30', '2016-01-31 15:00:00', '2016-01-31 16:00:00', '73', '0', '1', null, '90', '1');
+INSERT INTO `reserva` VALUES ('226', '2016-02-01', '1', '2016-02-03 10:00:00', '2016-02-03 11:00:00', '74', '0', '1', null, '200', '1');
+INSERT INTO `reserva` VALUES ('227', '2016-02-03', '1', '2016-02-06 15:00:00', '2016-02-06 16:00:00', '75', '0', '1', null, '200', '1');
 
 -- ----------------------------
--- Table structure for rol
+-- Table structure for `rol`
 -- ----------------------------
 DROP TABLE IF EXISTS `rol`;
 CREATE TABLE `rol` (
@@ -265,7 +376,7 @@ INSERT INTO `rol` VALUES ('2', 'Cliente');
 INSERT INTO `rol` VALUES ('3', 'SuperAdmin');
 
 -- ----------------------------
--- Table structure for servicio
+-- Table structure for `servicio`
 -- ----------------------------
 DROP TABLE IF EXISTS `servicio`;
 CREATE TABLE `servicio` (
@@ -284,7 +395,7 @@ INSERT INTO `servicio` VALUES ('4', 'Asistencia Medica');
 INSERT INTO `servicio` VALUES ('5', 'Snack');
 
 -- ----------------------------
--- Table structure for servicio_complejo
+-- Table structure for `servicio_complejo`
 -- ----------------------------
 DROP TABLE IF EXISTS `servicio_complejo`;
 CREATE TABLE `servicio_complejo` (
@@ -301,7 +412,7 @@ CREATE TABLE `servicio_complejo` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for superficie
+-- Table structure for `superficie`
 -- ----------------------------
 DROP TABLE IF EXISTS `superficie`;
 CREATE TABLE `superficie` (
@@ -322,7 +433,7 @@ INSERT INTO `superficie` VALUES ('6', 'Colchoneta');
 INSERT INTO `superficie` VALUES ('7', 'Arena');
 
 -- ----------------------------
--- Table structure for tiporeserva
+-- Table structure for `tiporeserva`
 -- ----------------------------
 DROP TABLE IF EXISTS `tiporeserva`;
 CREATE TABLE `tiporeserva` (
@@ -340,7 +451,7 @@ INSERT INTO `tiporeserva` VALUES ('3', 'Evento');
 INSERT INTO `tiporeserva` VALUES ('4', 'Prereserva');
 
 -- ----------------------------
--- Table structure for usuario
+-- Table structure for `usuario`
 -- ----------------------------
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
@@ -352,7 +463,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`IdUsuario`),
   KEY `IdRol_FK_Usuario` (`IdRol`),
   CONSTRAINT `IdRol_FK_Usuario` FOREIGN KEY (`IdRol`) REFERENCES `rol` (`IdRol`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of usuario
