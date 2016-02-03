@@ -12,7 +12,7 @@
 		var directiva = {
 			restrict : 'EA',
 			replace : true,
-			template : '<div><div id="map" style="width: 100%;height: 350px;display: block"></div></div>',
+			template : '<div><div id="map" style="width: 100%;height: 350px;display: block;border:2px solid #34B5A7"></div></div>',
 			scope : {
 				lat : '=',
 				lng : '=',
@@ -39,11 +39,11 @@
 
 			var mapa = mapsService.crearMapa(mapDiv, options);
 
-			if($scope.lat === null || $scope.lng === null)  {
+			if($scope.lat == null || $scope.lng == null)  {
 				$timeout(function() {
 					var marker = new google.maps.Marker();
 					marcadorRegistro(mapa, $scope, ubicacionService, marker);
-
+					// $log.debug("dibujando marcadores");
 					mapsService.cargarComplejos(mapa, $scope.complejos);
 					
 				}, 2500);
@@ -56,7 +56,7 @@
 						title: 'Complejo San Simon',
 						icon: REST_API + 'uploads/marcador.png'
 					});
-
+					// $log.debug("sin dibujar");
 					mapa.setCenter(marker.position);
 					
 				}, 2500);

@@ -17,7 +17,26 @@ function ConfiguracionRutasVisitante ($stateProvider) {
 			url : '/inicio',
 			templateUrl : 'app/visitante/inicio/inicio.view.html',
 			controller : 'InicioController',
-			controllerAs : 'vm'
+			controllerAs : 'vm',
+			resolve : {
+				complejos : ['$log', '$resource', '$q' , 'REST_API', '$state',
+				function($log, $resource, $q, REST_API, $state) {
+					
+					var defered = $q.defer();
+
+					$resource(REST_API + 'complejosdeportivos').get().$promise
+						.then(function(res) {
+							$log.debug('UI-router: Resolve ->visitante->registro : exito');
+							defered.resolve(res.response);
+						}, function(error) {
+							$log.debug('UI-router: Resolve ->visitante->registro :Error');
+							defered.reject(error);
+							$state.go('app.visitante.inicio');
+						});
+
+					return defered.promise;
+				}]
+			}
 		})
 		.state('app.visitante.iniciosesion', {
 			url : '/iniciarsesion',
