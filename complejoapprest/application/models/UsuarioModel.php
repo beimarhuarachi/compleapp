@@ -7,8 +7,8 @@ class UsuarioModel extends CI_Model {
 		parent::__construct();
 	}
 
-	public function existeUsuario($cliente) {
-		$correo = $cliente['email'];
+	public function existeUsuario($usuario) {
+		$correo = $usuario['email'];
 
 		$consulta = $this->db->select("*")
 							 ->from("usuario")

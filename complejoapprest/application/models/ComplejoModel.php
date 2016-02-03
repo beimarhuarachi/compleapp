@@ -7,6 +7,33 @@ class ComplejoModel extends CI_Model {
 		parent::__construct();
 	}
 
+	public function registrarComplejo($idusuario, $direccion, $telefono, $nombreadmin, $apellidosadministrador
+		, $numeroci, $ciudad, $comollegar, $imagen, $nombre, $longitud, $latitud, $pais) {
+		$datos = array(
+				"IdUsuario" => $idusuario,
+				"Direccion" => $direccion,
+				"Telefono" => $telefono,
+				"NombreAdministrador" => $nombreadmin,
+				"ApellidosAdministrador" => $apellidosadministrador,
+				"NumeroCI" => $numeroci,
+				"Ciudad" => $ciudad,
+				"ComoLlegar" => $comollegar,
+				"FotoPortada" => $imagen,
+				"NombreComplejo" => $nombre,
+				"Longitud" => $longitud,
+				"Latitud" => $latitud,
+				"Pais" => $pais 
+			);
+
+		$this->db->insert("complejo", $datos);
+
+		if($this->db->affected_rows() === 1) {
+			return $this->db->insert_id();
+		}
+
+		return NULL;
+	}
+
 	public function obtenerComplejoPorId($idcomplejo) {
 		$consulta = $this->db->select("IdComplejo as idcomplejo, NombreComplejo as nombre, 
 			Direccion as direccion, Telefono as telefono, Ciudad as ciudad, FotoPortada as foto, ComoLlegar as comollegar")

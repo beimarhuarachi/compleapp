@@ -12,6 +12,14 @@ function complejoService($resource, REST_API) {
 			method : 'GET',
 			skipAuthorization : true,
 			params : {id : '@_id'}
+		},
+		save : {
+			method : 'POST',
+			//skipAuthorization :true,
+			transformRequest: angular.identity,
+			//El content type lo seteamos porque por defecto envia datos json
+			//(con undefined podemos enviar en formato de FormData)
+			headers: { 'Content-Type': undefined }
 		}
 	}); 
 

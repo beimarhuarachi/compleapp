@@ -5,7 +5,7 @@ class Uploader {
 
 	public static function subirArchivo($nombre, $controller) {
 		$config['upload_path']          = './uploads/';
-		$config['allowed_types']        = 'gif|jpg|png|pdf';
+		$config['allowed_types']        = 'gif|jpg|jpeg|png|pdf';
 		$config['max_size']             = 2048;
 		$config['max_width']            = 1024;
 		$config['max_height']           = 768;
