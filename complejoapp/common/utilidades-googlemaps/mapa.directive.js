@@ -15,7 +15,8 @@
 			template : '<div><div id="map" style="width: 100%;height: 350px;display: block"></div></div>',
 			scope : {
 				lat : '=',
-				lng : '='
+				lng : '=',
+				ubicacion : '='
 			},
 			link : link
 		};
@@ -66,10 +67,11 @@
 					map : mapa,
 					title : "Cambiado"
 				});
-				
+
 			   ubicacionService.getDatos(event.latLng.lat(), event.latLng.lng())
 			   .then(function(datos) {
 			   		console.log(datos);
+					   $scope.ubicacion = datos;
 			   });
 
 			   $scope.$apply(function(argument) {

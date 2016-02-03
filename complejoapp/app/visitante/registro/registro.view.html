@@ -64,7 +64,7 @@
 				</div>
 				
 				<!-- FOTO PORTADA -->
-				<cd-subir-archivo></cs-subir-archivo>
+				<cd-subir-imagen titulo="Foto de portada" imagen="vm.complejo.imagen"></cs-subir-imagen>
 			</div>
 
 			<div class="col-md-6">
@@ -73,7 +73,7 @@
 				    <strong>Busque la ubicacion de su complejo</strong> una vez localizado su "ubicacion", presione sobre este
 				</div>
 
-				<cd-mapa lat="vm.complejo.latitud" lng="vm.complejo.longitud"></cd-mapa>
+				<cd-mapa lat="vm.complejo.latitud" lng="vm.complejo.longitud" ubicacion="vm.complejo.ubicacion"></cd-mapa>
 				
 				<div class="alert alert-success" ng-show="vm.complejo.latitud">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

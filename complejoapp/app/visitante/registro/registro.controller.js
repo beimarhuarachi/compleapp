@@ -10,8 +10,6 @@
 	function RegistroController($log, $scope) {
 		var vm = this;
 
-		$scope.campo = {};
-
 		vm.complejo = {};
 
 		vm.submit = submit;
@@ -22,7 +20,6 @@
 
 		function submit(complejo) {
 			$log.debug(complejo);
-			$log.debug(campo.imagen);
 		}
 	}
 })();
