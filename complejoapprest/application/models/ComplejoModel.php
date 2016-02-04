@@ -36,7 +36,8 @@ class ComplejoModel extends CI_Model {
 
 	public function obtenerComplejoPorId($idcomplejo) {
 		$consulta = $this->db->select("IdComplejo as idcomplejo, NombreComplejo as nombre, 
-			Direccion as direccion, Telefono as telefono, Ciudad as ciudad, FotoPortada as foto, ComoLlegar as comollegar")
+			Direccion as direccion, Telefono as telefono, Ciudad as ciudad, FotoPortada as foto
+			, ComoLlegar as comollegar, Latitud as latitud, Longitud as longitud")
 		->from("complejo")
 		->where("IdComplejo", $idcomplejo)
 		->get();
@@ -55,7 +56,8 @@ class ComplejoModel extends CI_Model {
 	public function obtenerComplejoPublico($idusuario) {
 		$consulta = $this->db->select("IdComplejo as idcomplejo, NombreComplejo as nombre, Direccion as direccion
 						, Telefono as telefono, Ciudad as ciudad, FotoPortada as foto, ComoLlegar as comollegar
-						, NombreAdministrador as nombreadmin, NumeroCI as numeroci, ApellidosAdministrador as apellidos")
+						, NombreAdministrador as nombreadmin, NumeroCI as numeroci, ApellidosAdministrador as apellidos
+						, Latitud as latitud, Longitud as longitud")
 		->from("complejo")
 		->where("IdUsuario = ".$idusuario)
 		->get();

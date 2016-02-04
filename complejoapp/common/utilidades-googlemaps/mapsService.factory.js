@@ -52,7 +52,7 @@
 				markers.push(marker);
 
 				var infowindow = new google.maps.InfoWindow({
-					content:'<h3>' + complejo.nombre + '</h3><img class="img img-rounded" src="'+ REST_API + complejo.foto +'" width="200px" height="200px" />'
+					content:'<h3>' + complejo.nombre + '</h3><div style="margin-bottom : 5px"><a href="#/complejo/'+ complejo.idcomplejo + '" class="btn btn-info">Ir >></a></div><img class="img img-rounded" src="'+ REST_API + complejo.foto +'" width="200px" height="100px" />'
 				});
 
 				google.maps.event.addListener(marker, 'click', function() { 

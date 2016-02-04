@@ -48,7 +48,7 @@
 			if($scope.lat == null || $scope.lng == null)  {
 				$timeout(function() {
 					var marker = new google.maps.Marker();
-
+					console.log("fsjdklfjklasdjlfjalks");
 					marcadorRegistro(mapa, $scope, ubicacionService, marker);
 
 					mapsService.cargarComplejos(mapa, $scope.complejos, markers);
@@ -60,10 +60,11 @@
 					var marker = new google.maps.Marker({
 						position: new google.maps.LatLng($scope.lat,$scope.lng),
 						map: mapa,
-						animation : google.maps.Animation.BOUNCE,
+						animation : google.maps.Animation.DROP,
 						//title: 'Complejo San Simon',
 						icon: REST_API + 'uploads/marcador.png'
 					});
+					mapa.setZoom(15);
 					// $log.debug("sin dibujar");
 					mapa.setCenter(marker.position);
 					

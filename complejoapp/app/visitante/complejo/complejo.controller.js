@@ -10,6 +10,7 @@
 	function ComplejoController($log, $scope, complejo, campoService) {
 		var vm = this;
 		vm.complejo = complejo;
+		$log.debug(vm.complejo);
 
 		vm.campos = [];
 

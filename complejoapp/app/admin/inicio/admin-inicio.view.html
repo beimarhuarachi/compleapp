@@ -1,2 +1,14 @@
-<h1>Pagina de iniico administrador</h1>
 
+<cd-cabecera-pagina nombrecomplejo="{{complejo.nombre}}" datospagina="vm.datospagina"></cd-cabecera-pagina>
+
+<div class="row">
+	<div class="col-md-6">
+		<cd-mapa lat="complejo.latitud" lng="complejo.longitud"></cd-mapa>
+	</div>
+	<div style="margin-top: 10px" class="visible-sm">
+		
+	</div>
+	<div class="col-md-6" >
+		 <img class="img-responsive img-rounded" style="width : 100%; height: 350px;" ng-src="{{complejo.foto | imagenFilter}}" alt="">
+	</div>
+</div>

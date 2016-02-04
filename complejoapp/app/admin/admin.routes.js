@@ -56,7 +56,7 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 				nombrepagina : 'Inicio',
 				icono : 'fa fa-dashboard'
 			},
-			controller : 'InicioController',
+			controller : 'InicioControllerAdmin',
 			controllerAs : 'vm'
 		})
 		/**

@@ -20,17 +20,18 @@
         <div class="row">
             <div class="col-md-6">
                 
-                <h3>{{vm.complejo.nombre}}</h3>
-                <h4>Ciudad : {{vm.complejo.ciudad}}</h4>
+                <h2><strong>{{vm.complejo.nombre}}</strong></h2>
+
+                <p><strong>Ciudad : </strong>{{vm.complejo.ciudad}}</p>
                 <p><strong>Como Llegar : </strong>{{vm.complejo.comollegar}}</p>
                 
+                <p ><strong>Direccion : </strong>{{vm.complejo.direccion}}</p>
+                <p><strong>Telefono : </strong>{{vm.complejo.telefono}}</p>
             
             </div>
 
             <div class="col-md-6" style="margin-top : 20px">
-
-                <p ><strong>Direccion : </strong>{{vm.complejo.direccion}}</p>
-                <p><strong>Telefono : </strong>{{vm.complejo.telefono}}</p>
+                <cd-mapa lat="vm.complejo.latitud" lng="vm.complejo.longitud"></cd-mapa>
             </div>
         </div>
         <!-- /.row -->

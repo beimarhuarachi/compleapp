@@ -6,8 +6,8 @@
                  {{nombrecomplejo}} <small>{{datospagina.nombrepagina}}</small>
             </h1>
             <ol class="breadcrumb">
-                <li>
-                    <i class="fa fa-dashboard"></i>  <a ui-sref="app.admin.inicio">Inicio</a>
+                <li ng-if="datospagina.nombrepagina != 'Inicio'">
+                    <i class="fa fa-dashboard"></i>  <a ui-sref="app.admin.inicio">Inicio1</a>
                 </li>
                 <li class="active">
                     <i class="{{datospagina.icono}}"></i> {{datospagina.nombrepagina}}

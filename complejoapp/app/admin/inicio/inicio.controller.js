@@ -1,11 +1,20 @@
-angular
-	.module('complejo.admin')
-	.controller('InicioController', InicioController);
+(function() {
+	'use strict';
 
-InicioController.$inject = ['$scope', '$log'];
+	angular
+		.module('complejo.admin')
+		.controller('InicioControllerAdmin', InicioController);
 
-function InicioController($scope, $log) {
-	var vm = this;
+	InicioController.$inject = ['$scope', '$log', '$state'];
 
-	vm.complejo = $scope.complejo;
-}
+	function InicioController($scope, $log, $state) {
+		var vm = this;
+
+		vm.complejo = $scope.complejo;
+
+		vm.datospagina = $state.current.data;
+
+		//$log.debug(vm.complejo);
+	}
+	
+})();
