@@ -13,15 +13,34 @@
 		var objeto = {
 			crearMapa : crearMapa,
 			obtenerEstilo : obtenerEstilo,
-			cargarComplejos : cargarComplejos
+			cargarComplejos : cargarComplejos,
+			centrarMapa : centrarMapa
 		}
 
 		return objeto;
 
-		function cargarComplejos(mapa, complejos) {
+		function centrarMapa(map, markers) {
+			//var markers = [];//some array
+			if(markers.length > 0) {
+				var bounds = new google.maps.LatLngBounds();
+				for (var i = 0; i < markers.length; i++) {
+				 	bounds.extend(markers[i].getPosition());
+				}
+
+				map.fitBounds(bounds);		
+			} else {
+				return;
+			}
+		}
+
+		function cargarComplejos(mapa, complejos, markers) {
 			//BOUNCE, DROP
 
 			_.each(complejos, function(complejo, indice, complejos) {
+				if(complejo.latitud == 0 && complejo.longitud == 0) {
+					return;
+				}
+
 				var marker = new google.maps.Marker({
 					position: new google.maps.LatLng(complejo.latitud, complejo.longitud),
 					map: mapa,
@@ -29,6 +48,8 @@
 					title: complejo.nombre,
 					icon: REST_API + 'uploads/marcador.png'
 				});
+
+				markers.push(marker);
 
 				var infowindow = new google.maps.InfoWindow({
 					content:'<h3>' + complejo.nombre + '</h3><img class="img img-rounded" src="'+ REST_API + complejo.foto +'" width="200px" height="200px" />'

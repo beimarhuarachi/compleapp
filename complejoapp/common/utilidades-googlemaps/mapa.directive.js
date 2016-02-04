@@ -37,15 +37,23 @@
 	            }
 			};
 
+			var markers = [];
+
 			var mapa = mapsService.crearMapa(mapDiv, options);
+
+			if (typeof google === 'object' && typeof google.maps === 'object') {
+				$log.debug('google maps is ready');
+			}
 
 			if($scope.lat == null || $scope.lng == null)  {
 				$timeout(function() {
 					var marker = new google.maps.Marker();
+
 					marcadorRegistro(mapa, $scope, ubicacionService, marker);
-					// $log.debug("dibujando marcadores");
-					mapsService.cargarComplejos(mapa, $scope.complejos);
-					
+
+					mapsService.cargarComplejos(mapa, $scope.complejos, markers);
+
+					mapsService.centrarMapa(mapa, markers);
 				}, 2500);
 			} else {
 				$timeout(function() {
@@ -53,7 +61,7 @@
 						position: new google.maps.LatLng($scope.lat,$scope.lng),
 						map: mapa,
 						animation : google.maps.Animation.BOUNCE,
-						title: 'Complejo San Simon',
+						//title: 'Complejo San Simon',
 						icon: REST_API + 'uploads/marcador.png'
 					});
 					// $log.debug("sin dibujar");
