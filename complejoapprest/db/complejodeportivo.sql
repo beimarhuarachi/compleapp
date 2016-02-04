@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-02-03 02:08:04
+Date: 2016-02-03 23:28:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -100,13 +100,16 @@ CREATE TABLE `complejo` (
   PRIMARY KEY (`IdComplejo`),
   UNIQUE KEY `IdUsuario_FKComplejo` (`IdUsuario`) USING BTREE,
   CONSTRAINT `IdUsuario_FKComplejo` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of complejo
 -- ----------------------------
-INSERT INTO `complejo` VALUES (null, null, '1', '1', 'Av Pdte Manuel Isidoro Belzu entre Sucre y Guillermo Urquidi', '4567891', 'Beimar Eninfo', 'Huarachi Mamani', '8674461', 'Cochabamba', 'Tomar la linea Linea 03 o la linea J', 'uploads/complejoportada.jpg', 'Complejo San Simon', null);
-INSERT INTO `complejo` VALUES (null, null, '4', '2', 'Avenida Oquendo', '4562134', 'Jorge', 'Huarachi Mamani', '46578125', 'La Paz', 'Linea 01', 'uploads/complejoportada.jpg', 'Complejo Unideportivo Chaski', null);
+INSERT INTO `complejo` VALUES ('-66.14277005195618', '-17.394278821541874', '1', '1', 'Av Pdte Manuel Isidoro Belzu entre Sucre y Guillermo Urquidi', '4567891', 'Beimar Eninfo', 'Huarachi Mamani', '8674461', 'Cochabamba', 'Tomar la linea Linea 03 o la linea J', 'uploads/complejoportada.jpg', 'Complejo San Simon', 'Bolivia');
+INSERT INTO `complejo` VALUES ('-68.12462210655212', '-16.497529785498504', '4', '2', 'Avenida Saavedra esquina casimiro corrales', '4562134', 'Jorge', 'Huarachi Mamani', '46578125', 'Departamento Autónomo de La Paz', 'Linea 01', 'uploads/complejoportada.jpg', 'Complejo Unideportivo Chaski', 'Bolivia');
+INSERT INTO `complejo` VALUES ('-66.13065719604492', '-17.40830462902467', '21', '28', 'CIRCUITO BOLIVIA', '4561321', 'nombres', 'apellidos', '4567890', 'Cochabamba', 'LLEGAR A PIE', 'uploads/imagen001.jpg', 'Club Aurora', 'Bolivia');
+INSERT INTO `complejo` VALUES ('-63.180248737335205', '-17.77132869123981', '22', '29', 'Av Cristóbal De Mendoza entre Av Beni y Cristo Redentor', '3523245', 'Geman', 'Torrico Vega', '4657891', 'Santa Cruz', 'Llegar temprano por el micro \"C\"', 'uploads/imagen001.jpg', 'Academia Tauichi', 'Bolivia');
+INSERT INTO `complejo` VALUES ('0', '0', '23', '30', 'calle orinoca', '4561317', 'ultimos', 'ultimos', '456789', null, 'fadfdadfs', 'uploads/imagen001.jpg', 'ultimo', null);
 
 -- ----------------------------
 -- Table structure for `disciplina`
@@ -463,7 +466,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`IdUsuario`),
   KEY `IdRol_FK_Usuario` (`IdRol`),
   CONSTRAINT `IdRol_FK_Usuario` FOREIGN KEY (`IdRol`) REFERENCES `rol` (`IdRol`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of usuario
@@ -478,3 +481,6 @@ INSERT INTO `usuario` VALUES ('7', 'samuel@hotmail.com', '7845613', '2', 'samuel
 INSERT INTO `usuario` VALUES ('8', 'be@jfdks', '789455', '2', 'be@jfdks');
 INSERT INTO `usuario` VALUES ('9', 'herminica@gmail.com', '444447', '2', 'herminica@gmail.com');
 INSERT INTO `usuario` VALUES ('10', 'beim@fjskld.com', '456789', '2', 'beim@fjskld.com');
+INSERT INTO `usuario` VALUES ('28', 'aurora@gmail.com', '4567890', '1', 'aurora@gmail.com');
+INSERT INTO `usuario` VALUES ('29', 'academia@gmail.com', '4657891', '1', 'academia@gmail.com');
+INSERT INTO `usuario` VALUES ('30', 'ultimos@ultimo', '456789', '1', 'ultimos@ultimo');
