@@ -35,16 +35,16 @@
 							<table class="table table-hover table-bordered">
 								<thead>
 									<tr>
-										<th>Campo Deportivo</th>
-										<th>Total Generado</th>
-										<th>Numero Reservas</th>
+										<th style="text-align:center">Campo Deportivo</th>
+										<th style="text-align:center">Total Generado</th>
+										<th style="text-align:center">Numero Reservas</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="reporte in vm.reportes">
-										<td>{{reporte.nombrecampo}}</td>
-										<td>{{reporte.totalgenerado | currency}}</td>
-										<td>{{reporte.numeroreservas}}</td>
+										<td align="center">{{reporte.nombrecampo}}</td>
+										<td align="right">{{reporte.totalgenerado | currency}}</td>
+										<td align="right">{{reporte.numeroreservas}}</td>
 									</tr>
 								</tbody>
 							</table>

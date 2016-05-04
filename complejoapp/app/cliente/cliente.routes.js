@@ -38,7 +38,32 @@ function ConfiguracionRutasCliente($stateProvider) {
 		 */
 		.state('app.cliente.inicio', {
 			url : '/inicio',
-			template : 'Esta es la pagina de inicio de Cliente 132'
+			templateUrl : 'app/cliente/inicio/inicio.view.html',
+			controller : 'InicioControllerCliente',
+			controllerAs : 'vm',
+			data : {
+				nombrepagina : 'Inicio',
+				icono : 'fa fa-fw fa-table'
+			},
+			resolve : {
+				complejos : ['$log', '$resource', '$q' , 'REST_API', '$state',
+				function($log, $resource, $q, REST_API, $state) {
+					
+					var defered = $q.defer();
+
+					$resource(REST_API + 'complejosdeportivos').get().$promise
+						.then(function(res) {
+							$log.debug('UI-router: Resolve ->cliente->registro : exito');
+							defered.resolve(res.response);
+						}, function(error) {
+							$log.debug('UI-router: Resolve ->cliente->registro :Error');
+							defered.reject(error);
+							$state.go('app.visitante.inicio');
+						});
+
+					return defered.promise;
+				}]
+			}
 		}) 
 		/**
 		 * Estado para la realizacion de Prereservas

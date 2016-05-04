@@ -14,6 +14,8 @@ function RegistroCampoController($scope, $log, $state, autorizacionService,
 
 	$scope.campo = {};
 
+	$scope.mostrar = $state.current.name == 'app.admin.editar-campo';
+
 	$scope.disciplinas = [];
 	$scope.superficies = [];
 	$scope.horarios = [];

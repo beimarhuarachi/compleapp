@@ -100,12 +100,12 @@ function ConfiguracionRutasAdmin ($stateProvider) {
 		 * Estado para reservas especiales
 		 */
 		.state('app.admin.reserva-especial', {
-			url :'/reservaEspecial',
+			url :'/reservaAdministrativa',
 			templateUrl : 'app/admin/reserva-especial/reserva-especial.view.html',
 			controller : 'ReservaEspecialController',
 			controllerAs : 'vm',
 			data : {
-				nombrepagina : 'Reserva Especial',
+				nombrepagina : 'Reserva Administrativa',
 				icono : 'fa fa-fw fa-tablet'
 			}
 		})

@@ -35,16 +35,16 @@
 							<table class="table table-hover table-bordered">
 								<thead>
 									<tr>
-										<th>Mes</th>
-										<th>Total Ingresos</th>
-										<th>Total Reservas</th>
+										<th style="text-align:center">Mes</th>
+										<th style="text-align:center">Total Ingresos</th>
+										<th style="text-align:center">Total Reservas</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="ganancia in vm.reporteGanancia">
-										<td>{{ganancia.mes | textoMes}}</td>
-										<td>{{ganancia.generado | currency}}</td>
-										<td>{{ganancia.numeroreservas}}</td>
+										<td align="center">{{ganancia.mes | textoMes}}</td>
+										<td align="right">{{ganancia.generado | currency}}</td>
+										<td align="right">{{ganancia.numeroreservas}}</td>
 									</tr>
 								</tbody>
 							</table>

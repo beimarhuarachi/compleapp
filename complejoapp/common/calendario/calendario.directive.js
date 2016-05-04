@@ -135,7 +135,7 @@ function cdCalendario($log, $rootScope, campoService, reservaService) {
 				case "Normal" : 
 					color = "#34B5A7";
 					break;
-				case "Especial" : 
+				case "Administrativa" : 
 					color = "#284269";
 					break;
 				case "Evento" :

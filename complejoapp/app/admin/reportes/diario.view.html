@@ -25,18 +25,18 @@
 						<table class="table table-hover table-bordered">
 							<thead>
 								<tr>
-									<th>Campo Deportivo</th>
-									<th>Cliente</th>
-									<th>C.I. Cliente</th> 
-									<th>Precio Reserva</th>
+									<th style="text-align:center">Campo Deportivo</th>
+									<th style="text-align:center">Cliente</th>
+									<th style="text-align:center">C.I. Cliente</th> 
+									<th style="text-align:center">Precio Reserva</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr ng-repeat="reserva in vm.reporte">
-									<td>{{reserva.nombrecampo}}</td>
-									<td>{{reserva.nombres}} {{reserva.apellidos}}</td>
-									<td>{{reserva.numeroci}}</td>
-									<td>{{reserva.totalprecio}}</td>
+									<td align="center">{{reserva.nombrecampo}}</td>
+									<td align="center">{{reserva.nombres}} {{reserva.apellidos}}</td>
+									<td align="center">{{reserva.numeroci}}</td>
+									<td align="right">{{reserva.totalprecio}}</td>
 								</tr>
 							</tbody>
 						</table>

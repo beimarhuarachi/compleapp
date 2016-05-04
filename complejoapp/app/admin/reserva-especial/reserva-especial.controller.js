@@ -62,12 +62,12 @@ function ReservaEspecialController($log, $state, $scope, reservaEspecialService,
 
 		reservaEspecialService.save({id: 12}, {reserva : reservaEspecial}).$promise
 			.then(function(res) {
-				Notification.success({title: "Reserva Especial", message : "Se ha registrado la Reserva Correctamente"});
+				Notification.success({title: "Reserva Admnistrativa", message : "Se ha registrado la Reserva Correctamente"});
 				vm.cancelar();
 				$log.debug(res.response);
 			}, function(error) {
 				$log.debug(error);
-				Notification.error({title: "Reserva Especial", message : error.data.response});
+				Notification.error({title: "Reserva Admnistrativa", message : error.data.response});
 			});
 	}
 
